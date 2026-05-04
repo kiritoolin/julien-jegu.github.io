@@ -1,306 +1,351 @@
-<!DOCTYPE html>
+with open('/home/claude/img_data_url.txt', 'r') as f:
+    img_data = f.read().strip()
+
+# Build the HTML with the cyberpunk theme
+html_parts = []
+
+html_parts.append('''<!DOCTYPE html>
 <html lang="fr">
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Julien Jegu — Portfolio BTS SIO</title>
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet"/>
+<title>Julien Jegu — Portfolio BTS SIO // CYBERPUNK</title>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Share+Tech+Mono&family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
 <style>
 :root{
-  --bg:#f8faff;--bg2:#eef2fb;--bg3:#e4eaf7;
-  --card:rgba(255,255,255,.85);--card-h:rgba(255,255,255,1);
-  --border:rgba(0,0,0,.07);--border-h:rgba(79,142,255,.45);
-  --blue:#2563eb;--blue-dim:rgba(37,99,235,.1);--blue-glow:rgba(37,99,235,.18);--blue2:#3b82f6;
-  --txt:#0f172a;--txt2:#475569;--txt3:#94a3b8;
-  --green:#059669;--purple:#7c3aed;--red:#dc2626;
-  --font:'Plus Jakarta Sans',sans-serif;--mono:'Fira Code',monospace;
-  --r:12px;--r-lg:18px;--shadow:0 8px 32px rgba(0,0,0,.1);
+  --bg:#030712;--bg2:#060d1a;--bg3:#0a1628;
+  --card:rgba(0,20,40,.7);--card-h:rgba(0,30,60,.9);
+  --border:rgba(0,200,255,.12);--border-h:rgba(0,200,255,.5);
+  --cyan:#00e5ff;--cyan-dim:rgba(0,229,255,.08);--cyan-glow:rgba(0,229,255,.3);
+  --magenta:#ff0090;--magenta-dim:rgba(255,0,144,.08);--magenta-glow:rgba(255,0,144,.3);
+  --yellow:#ffe600;
+  --txt:#c8e8ff;--txt2:#7ab3d4;--txt3:#3a6a8a;
+  --green:#00ff9d;--red:#ff3060;
+  --font:'Rajdhani',sans-serif;--mono:'Share Tech Mono',monospace;--display:'Orbitron',sans-serif;
+  --r:6px;--r-lg:8px;--shadow:0 0 40px rgba(0,229,255,.15);
 }
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
-body{font-family:var(--font);background:#f8faff;color:#0f172a;line-height:1.7;overflow-x:hidden}
+body{font-family:var(--font);background:var(--bg);color:var(--txt);line-height:1.7;overflow-x:hidden}
 a{color:inherit;text-decoration:none}
 ul{list-style:none}
 button{font-family:var(--font);cursor:pointer;border:none;background:none}
-::selection{background:var(--blue);color:#fff}
-::-webkit-scrollbar{width:5px}
-::-webkit-scrollbar-track{background:var(--bg3)}
-::-webkit-scrollbar-thumb{background:var(--blue);border-radius:3px}
+::selection{background:var(--cyan);color:#000}
+::-webkit-scrollbar{width:4px}
+::-webkit-scrollbar-track{background:#000}
+::-webkit-scrollbar-thumb{background:var(--cyan);border-radius:2px}
+body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:9999;background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,0,0,.06) 2px,rgba(0,0,0,.06) 4px)}
 .wrap{max-width:1120px;margin:0 auto;padding:0 28px}
 section{padding:100px 0}
 .bg-alt{background:var(--bg2)}
-.btn-p{display:inline-flex;align-items:center;gap:8px;padding:13px 26px;border-radius:10px;background:var(--blue);color:#fff;font-weight:700;font-size:.9rem;transition:.25s}
-.btn-p:hover{background:var(--blue2);transform:translateY(-2px);box-shadow:0 8px 24px var(--blue-glow)}
-.btn-s{display:inline-flex;align-items:center;gap:8px;padding:13px 26px;border-radius:10px;border:1.5px solid var(--border);color:var(--txt2);font-weight:600;font-size:.9rem;transition:.25s}
-.btn-s:hover{border-color:var(--blue);color:var(--blue);transform:translateY(-2px)}
-.reveal{opacity:1;transform:none;transition:opacity .7s ease,transform .7s ease}
-.reveal.in{opacity:1;transform:none}
+.btn-p{display:inline-flex;align-items:center;gap:8px;padding:12px 28px;border:1px solid var(--cyan);color:#000;font-weight:700;font-size:.85rem;font-family:var(--display);letter-spacing:.1em;text-transform:uppercase;background:var(--cyan);position:relative;overflow:hidden;transition:.2s;clip-path:polygon(8px 0%,100% 0%,calc(100% - 8px) 100%,0% 100%)}
+.btn-p:hover{box-shadow:0 0 30px var(--cyan-glow),0 0 60px var(--cyan-glow);transform:translateY(-2px)}
+.btn-s{display:inline-flex;align-items:center;gap:8px;padding:12px 28px;border:1px solid var(--border-h);color:var(--cyan);font-weight:600;font-size:.85rem;font-family:var(--display);letter-spacing:.1em;text-transform:uppercase;clip-path:polygon(8px 0%,100% 0%,calc(100% - 8px) 100%,0% 100%);transition:.2s;background:transparent}
+.btn-s:hover{border-color:var(--magenta);color:var(--magenta);box-shadow:0 0 20px var(--magenta-glow);transform:translateY(-2px)}
 .sec-head{margin-bottom:56px}
-.sec-num{font-family:var(--mono);font-size:.72rem;color:var(--blue);letter-spacing:.18em;text-transform:uppercase;margin-bottom:8px;display:flex;align-items:center;gap:8px}
-.sec-num::before{content:'//';opacity:.4}
-.sec-title{font-size:clamp(1.8rem,3.5vw,2.6rem);font-weight:800;letter-spacing:-.025em;position:relative;display:inline-block}
-.sec-title::after{content:'';position:absolute;bottom:-8px;left:0;width:44px;height:3px;background:linear-gradient(90deg,var(--blue),var(--purple));border-radius:2px}
-.sec-desc{margin-top:22px;color:var(--txt2);font-size:.97rem;max-width:500px}
-#nav{position:fixed;top:0;left:0;right:0;z-index:200;height:64px;background:rgba(248,250,255,.85);backdrop-filter:blur(20px);border-bottom:1px solid transparent;transition:.3s}
-#nav.scrolled{border-bottom-color:var(--border);box-shadow:0 4px 24px rgba(0,0,0,.4)}
+.sec-num{font-family:var(--mono);font-size:.72rem;color:var(--cyan);letter-spacing:.18em;text-transform:uppercase;margin-bottom:8px;display:flex;align-items:center;gap:8px}
+.sec-num::before{content:'//>>';opacity:.6}
+.sec-title{font-family:var(--display);font-size:clamp(1.6rem,3.5vw,2.4rem);font-weight:800;letter-spacing:.05em;text-transform:uppercase;position:relative;display:inline-block;color:var(--txt)}
+.sec-title::after{content:'';position:absolute;bottom:-8px;left:0;width:60px;height:2px;background:linear-gradient(90deg,var(--cyan),var(--magenta));box-shadow:0 0 10px var(--cyan-glow)}
+.sec-desc{margin-top:22px;color:var(--txt2);font-size:.97rem;max-width:500px;font-family:var(--mono)}
+.reveal{opacity:0;transform:translateY(20px);transition:opacity .7s ease,transform .7s ease}
+.reveal.in{opacity:1;transform:none}
+
+/* NAV */
+#nav{position:fixed;top:0;left:0;right:0;z-index:200;height:64px;background:rgba(3,7,18,.9);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);transition:.3s}
+#nav.scrolled{border-bottom-color:var(--cyan);box-shadow:0 0 20px var(--cyan-glow)}
 .nav-in{max-width:1120px;margin:0 auto;padding:0 28px;height:64px;display:flex;align-items:center;gap:16px}
-.nav-logo{font-family:var(--mono);font-weight:500;font-size:.95rem;color:var(--txt);transition:.2s}
-.nav-logo:hover{color:var(--blue)}
+.nav-logo{font-family:var(--display);font-weight:700;font-size:.88rem;color:var(--cyan);letter-spacing:.15em;text-transform:uppercase;transition:.2s}
+.nav-logo:hover{text-shadow:0 0 20px var(--cyan)}
 .nav-links{display:flex;gap:4px;margin-left:auto}
-.nav-links a{font-size:.82rem;font-weight:500;color:var(--txt2);padding:6px 14px;border-radius:8px;transition:.2s}
-.nav-links a:hover,.nav-links a.on{color:var(--txt);background:var(--card-h)}
-.nav-burger{display:none;flex-direction:column;gap:5px;width:36px;height:36px;border-radius:8px;border:1px solid var(--border);align-items:center;justify-content:center}
-.nav-burger span{display:block;width:16px;height:1.5px;background:var(--txt2);border-radius:2px}
-@media(max-width:700px){
-  .nav-burger{display:flex}
-  .nav-links{position:fixed;top:64px;left:0;right:0;background:var(--bg2);border-bottom:1px solid var(--border);flex-direction:column;padding:16px 28px 24px;transform:translateY(-110%);opacity:0;transition:.3s;pointer-events:none}
-  .nav-links.open{transform:none;opacity:1;pointer-events:all}
-  .nav-links a{padding:12px 4px;border-bottom:1px solid var(--border);border-radius:0}
-  .nav-links li:last-child a{border-bottom:none}
-}
+.nav-links a{font-family:var(--display);font-size:.65rem;font-weight:600;color:var(--txt2);padding:5px 12px;letter-spacing:.1em;text-transform:uppercase;transition:.2s;border:1px solid transparent}
+.nav-links a:hover,.nav-links a.on{color:var(--cyan);border-color:var(--cyan);box-shadow:0 0 10px var(--cyan-glow),inset 0 0 10px rgba(0,229,255,.05)}
+.nav-burger{display:none;flex-direction:column;gap:5px;width:36px;height:36px;border:1px solid var(--border);align-items:center;justify-content:center}
+.nav-burger span{display:block;width:16px;height:1px;background:var(--cyan)}
+@media(max-width:700px){.nav-burger{display:flex}.nav-links{position:fixed;top:64px;left:0;right:0;background:rgba(3,7,18,.98);border-bottom:1px solid var(--border);flex-direction:column;padding:16px 28px 24px;transform:translateY(-110%);opacity:0;transition:.3s;pointer-events:none}.nav-links.open{transform:none;opacity:1;pointer-events:all}.nav-links a{padding:12px 4px;border-bottom:1px solid var(--border);border-left:none;border-right:none;border-top:none}}
+
+/* HERO */
 #hero{min-height:100vh;display:flex;align-items:center;padding:80px 0 60px;position:relative;overflow:hidden}
 .hero-bg{position:absolute;inset:0;pointer-events:none;z-index:0}
-.orb{position:absolute;border-radius:50%;filter:blur(90px)}
-.orb1{width:500px;height:500px;background:rgba(37,99,235,.06);top:-120px;left:-120px}
-.orb2{width:380px;height:380px;background:rgba(124,58,237,.05);bottom:-80px;right:-80px}
-.grid-bg{position:absolute;inset:0;background-image:radial-gradient(rgba(0,0,0,.05) 1px,transparent 1px);background-size:36px 36px}
+.grid-bg{position:absolute;inset:0;background-image:linear-gradient(rgba(0,229,255,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(0,229,255,.04) 1px,transparent 1px);background-size:60px 60px;animation:gridMove 20s linear infinite}
+@keyframes gridMove{0%{background-position:0 0}100%{background-position:60px 60px}}
+.scanline-h{position:absolute;width:100%;height:2px;background:linear-gradient(90deg,transparent,var(--cyan),transparent);opacity:.3;animation:scanH 8s linear infinite}
+@keyframes scanH{0%{top:-5px}100%{top:100%}}
+.orb1{position:absolute;width:600px;height:600px;border-radius:50%;background:radial-gradient(circle,rgba(0,229,255,.06),transparent 70%);top:-150px;left:-200px}
+.orb2{position:absolute;width:400px;height:400px;border-radius:50%;background:radial-gradient(circle,rgba(255,0,144,.04),transparent 70%);bottom:-100px;right:-100px}
+.corner{position:absolute;width:80px;height:80px;opacity:.4}
+.corner-tl{top:80px;left:28px;border-top:2px solid var(--cyan);border-left:2px solid var(--cyan)}
+.corner-tr{top:80px;right:28px;border-top:2px solid var(--magenta);border-right:2px solid var(--magenta)}
+.corner-bl{bottom:30px;left:28px;border-bottom:2px solid var(--magenta);border-left:2px solid var(--magenta)}
+.corner-br{bottom:30px;right:28px;border-bottom:2px solid var(--cyan);border-right:2px solid var(--cyan)}
 .hero-wrap{position:relative;z-index:1;display:grid;grid-template-columns:1fr auto;gap:60px;align-items:center}
-.hero-badge{display:inline-flex;align-items:center;gap:8px;font-size:.78rem;font-weight:600;color:var(--blue);background:var(--blue-dim);border:1px solid rgba(79,142,255,.3);padding:5px 14px;border-radius:20px;margin-bottom:24px;letter-spacing:.04em;text-transform:uppercase}
-.hero-badge::before{content:'●';font-size:.45rem;animation:pulse 2s infinite}
-@keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
-.hero-name{font-size:clamp(2.6rem,6vw,4.8rem);font-weight:800;letter-spacing:-.03em;line-height:1.05;margin-bottom:14px}
-.hero-greet{font-size:.42em;font-weight:400;color:#475569;display:block;margin-bottom:4px}
-.name-w{color:#0f172a}
-.name-b{background:linear-gradient(135deg,var(--blue),var(--purple));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
-.hero-title{font-size:1.05rem;color:var(--txt2);margin-bottom:18px}
+.hero-badge{display:inline-flex;align-items:center;gap:8px;font-size:.72rem;font-weight:600;color:var(--green);border:1px solid rgba(0,255,157,.3);padding:5px 16px;margin-bottom:24px;font-family:var(--mono);letter-spacing:.08em;background:rgba(0,255,157,.05);clip-path:polygon(6px 0%,100% 0%,calc(100% - 6px) 100%,0% 100%)}
+.hero-badge::before{content:'●';font-size:.4rem;animation:blink 1s infinite;color:var(--green)}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:0}}
+.hero-name{font-family:var(--display);font-size:clamp(2.2rem,5vw,4rem);font-weight:900;letter-spacing:.05em;line-height:1.1;margin-bottom:14px;text-transform:uppercase}
+.hero-greet{font-family:var(--mono);font-size:.38em;font-weight:400;color:var(--txt3);display:block;margin-bottom:4px;letter-spacing:.2em}
+.name-w{color:var(--txt)}
+.name-b{color:var(--cyan);text-shadow:0 0 30px var(--cyan-glow),0 0 60px var(--cyan-glow)}
+.hero-title{font-family:var(--mono);font-size:.95rem;color:var(--magenta);margin-bottom:18px;letter-spacing:.08em}
+.hero-title::before{content:'> '}
 .hero-desc{font-size:.97rem;color:var(--txt2);max-width:480px;margin-bottom:36px;line-height:1.8}
 .hero-actions{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:52px}
 .hero-stats{display:flex;gap:36px;flex-wrap:wrap}
-.stat-val{font-family:var(--mono);font-size:1.6rem;font-weight:700;color:var(--txt);display:block}
-.stat-lbl{font-size:.74rem;color:var(--txt3)}
-.id-card{width:265px;flex-shrink:0;background:linear-gradient(145deg,rgba(255,255,255,.95),rgba(230,238,255,.7));border:1px solid var(--border);border-radius:20px;padding:26px;backdrop-filter:blur(12px);position:relative;overflow:hidden;animation:float 5s ease-in-out infinite;box-shadow:0 8px 32px rgba(37,99,235,.1)}
+.stat-val{font-family:var(--display);font-size:1.5rem;font-weight:700;color:var(--cyan);display:block;text-shadow:0 0 15px var(--cyan-glow)}
+.stat-lbl{font-family:var(--mono);font-size:.65rem;color:var(--txt3);letter-spacing:.08em}
+.id-card{width:265px;flex-shrink:0;background:rgba(0,10,25,.85);border:1px solid var(--cyan);padding:26px;position:relative;overflow:hidden;animation:float 5s ease-in-out infinite;box-shadow:0 0 30px var(--cyan-glow),inset 0 0 30px rgba(0,229,255,.03);clip-path:polygon(0 0,calc(100% - 20px) 0,100% 20px,100% 100%,20px 100%,0 calc(100% - 20px))}
+.id-card::before{content:'';position:absolute;top:0;right:0;width:20px;height:20px;border-left:1px solid var(--cyan);border-bottom:1px solid var(--cyan);background:var(--bg)}
 @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
-.idc-shine{position:absolute;top:-80px;left:-80px;width:220px;height:220px;border-radius:50%;background:radial-gradient(circle,rgba(79,142,255,.12),transparent 70%);pointer-events:none}
-.idc-top{display:flex;align-items:center;gap:14px;margin-bottom:18px}
-.idc-av{width:52px;height:52px;border-radius:50%;flex-shrink:0;background:linear-gradient(135deg,var(--blue),var(--purple));display:flex;align-items:center;justify-content:center;font-weight:800;font-size:1.1rem;color:#fff}
-.idc-nm{font-weight:700;font-size:.95rem;color:var(--txt)}
-.idc-sb{font-size:.72rem;color:var(--txt2);margin-top:2px}
-.idc-div{height:1px;background:var(--border);margin-bottom:16px}
-.idc-row{display:flex;align-items:center;gap:10px;font-size:.78rem;color:var(--txt2);margin-bottom:9px}
-.idc-dot{width:7px;height:7px;border-radius:50%;background:var(--green);box-shadow:0 0 6px var(--green);flex-shrink:0}
+.idc-scan{position:absolute;width:100%;height:1px;background:linear-gradient(90deg,transparent,var(--cyan),transparent);opacity:.6;animation:scanCard 3s linear infinite}
+@keyframes scanCard{0%{top:0}100%{top:100%}}
+.idc-top{display:flex;align-items:center;gap:14px;margin-bottom:18px;position:relative;z-index:1}
+.idc-av{width:52px;height:52px;flex-shrink:0;border:2px solid var(--cyan);display:flex;align-items:center;justify-content:center;font-family:var(--display);font-weight:800;font-size:.95rem;color:var(--cyan);background:rgba(0,229,255,.1)}
+.idc-nm{font-family:var(--display);font-weight:700;font-size:.85rem;color:var(--cyan);letter-spacing:.08em}
+.idc-sb{font-family:var(--mono);font-size:.68rem;color:var(--txt3);margin-top:2px}
+.idc-div{height:1px;background:linear-gradient(90deg,var(--cyan),transparent);margin-bottom:16px;box-shadow:0 0 8px var(--cyan-glow)}
+.idc-row{display:flex;align-items:center;gap:10px;font-family:var(--mono);font-size:.72rem;color:var(--txt2);margin-bottom:8px}
+.idc-dot{width:6px;height:6px;background:var(--green);box-shadow:0 0 8px var(--green);animation:blink 2s infinite;flex-shrink:0}
 .idc-chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:16px}
-.idc-chip{font-size:.65rem;padding:3px 9px;border-radius:20px;background:var(--blue-dim);color:var(--blue);border:1px solid rgba(79,142,255,.25)}
+.idc-chip{font-family:var(--mono);font-size:.62rem;padding:2px 8px;border:1px solid rgba(0,229,255,.3);color:var(--cyan);background:rgba(0,229,255,.05)}
 @media(max-width:900px){.hero-wrap{grid-template-columns:1fr}.id-card{display:none}}
+
+/* ABOUT */
 .about-grid{display:grid;grid-template-columns:230px 1fr;gap:56px;align-items:start}
-.about-av{width:130px;height:130px;border-radius:50%;background:linear-gradient(135deg,var(--blue),var(--purple));display:flex;align-items:center;justify-content:center;font-weight:800;font-size:2.4rem;color:#fff;margin:0 auto 22px;box-shadow:0 0 40px var(--blue-glow)}
+.about-av{width:130px;height:130px;border:2px solid var(--cyan);display:flex;align-items:center;justify-content:center;font-family:var(--display);font-weight:800;font-size:2rem;color:var(--cyan);margin:0 auto 22px;box-shadow:0 0 30px var(--cyan-glow)}
 .about-meta{display:flex;flex-direction:column;gap:10px}
-.meta-row{display:flex;align-items:center;gap:10px;font-size:.84rem;color:var(--txt2)}
-.meta-ico{width:30px;height:30px;border-radius:7px;background:var(--blue-dim);border:1px solid rgba(79,142,255,.2);display:flex;align-items:center;justify-content:center;font-size:.8rem;flex-shrink:0}
+.meta-row{display:flex;align-items:center;gap:10px;font-family:var(--mono);font-size:.78rem;color:var(--txt2)}
+.meta-ico{width:28px;height:28px;border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:.75rem;flex-shrink:0}
 .about-text p{color:var(--txt2);font-size:.95rem;margin-bottom:14px}
-.about-text strong{color:var(--txt)}
-.blk-lbl{font-family:var(--mono);font-size:.72rem;color:var(--blue);text-transform:uppercase;letter-spacing:.1em;margin:28px 0 16px;display:flex;align-items:center;gap:8px}
-.blk-lbl::before{content:'';display:inline-block;width:20px;height:1.5px;background:var(--blue)}
-.tl-wrap{border-left:2px solid var(--border);padding-left:4px}
+.about-text strong{color:var(--cyan)}
+.blk-lbl{font-family:var(--mono);font-size:.72rem;color:var(--cyan);text-transform:uppercase;letter-spacing:.15em;margin:28px 0 16px;display:flex;align-items:center;gap:10px}
+.blk-lbl::before{content:'';display:inline-block;width:24px;height:1px;background:var(--cyan);box-shadow:0 0 8px var(--cyan-glow)}
+.tl-wrap{border-left:1px solid var(--border);padding-left:4px}
 .tl-item{display:flex;gap:16px;padding-left:16px;padding-bottom:18px;position:relative}
-.tl-item:last-child{padding-bottom:0}
-.tl-item::before{content:'';position:absolute;left:-5px;top:7px;width:8px;height:8px;border-radius:50%;background:var(--blue);box-shadow:0 0 8px var(--blue-glow)}
-.tl-yr{font-family:var(--mono);font-size:.7rem;color:var(--blue);white-space:nowrap;flex-shrink:0;margin-top:3px}
-.tl-body strong{display:block;font-size:.87rem;color:var(--txt)}
-.tl-body span{font-size:.76rem;color:var(--txt3)}
+.tl-item::before{content:'';position:absolute;left:-4px;top:7px;width:7px;height:7px;background:var(--cyan);box-shadow:0 0 10px var(--cyan-glow)}
+.tl-yr{font-family:var(--mono);font-size:.7rem;color:var(--cyan);white-space:nowrap;flex-shrink:0;margin-top:3px}
+.tl-body strong{display:block;font-size:.87rem;color:var(--txt);font-family:var(--display);letter-spacing:.05em}
+.tl-body span{font-family:var(--mono);font-size:.72rem;color:var(--txt3)}
 .goals{display:flex;flex-direction:column;gap:9px}
 .goals li{display:flex;align-items:flex-start;gap:10px;font-size:.9rem;color:var(--txt2)}
-.goals li::before{content:'▹';color:var(--blue);flex-shrink:0}
+.goals li::before{content:'▹';color:var(--cyan);flex-shrink:0;text-shadow:0 0 8px var(--cyan-glow)}
 @media(max-width:760px){.about-grid{grid-template-columns:1fr}}
+
+/* SKILLS */
 .skills-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:20px}
-.sk-card{background:var(--card);border:1px solid var(--border);border-radius:var(--r-lg);padding:26px;transition:.3s}
-.sk-card:hover{border-color:var(--border-h);box-shadow:0 0 20px var(--blue-glow)}
+.sk-card{background:var(--card);border:1px solid var(--border);padding:26px;transition:.3s;position:relative;overflow:hidden}
+.sk-card::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--cyan),transparent);opacity:0;transition:.3s}
+.sk-card:hover{border-color:var(--cyan);box-shadow:0 0 30px var(--cyan-glow)}
+.sk-card:hover::before{opacity:1}
 .sk-head{display:flex;align-items:center;gap:10px;margin-bottom:22px}
-.sk-ico{width:36px;height:36px;border-radius:9px;background:var(--blue-dim);border:1px solid rgba(79,142,255,.2);display:flex;align-items:center;justify-content:center;font-size:.95rem}
-.sk-head h3{font-family:var(--mono);font-size:.8rem;font-weight:500;color:var(--txt2);text-transform:uppercase;letter-spacing:.07em}
+.sk-ico{width:36px;height:36px;border:1px solid rgba(0,229,255,.3);display:flex;align-items:center;justify-content:center;font-size:.95rem;background:rgba(0,229,255,.05)}
+.sk-head h3{font-family:var(--mono);font-size:.75rem;font-weight:500;color:var(--cyan);text-transform:uppercase;letter-spacing:.12em}
 .bar-row{margin-bottom:13px}
-.bar-top{display:flex;justify-content:space-between;font-size:.8rem;color:var(--txt2);margin-bottom:6px}
-.bar-pct{font-family:var(--mono);font-size:.7rem;color:var(--blue)}
-.bar-track{height:5px;background:rgba(255,255,255,.06);border-radius:3px;overflow:hidden}
-.bar-fill{height:100%;width:0;background:linear-gradient(90deg,var(--blue),var(--purple));border-radius:3px;transition:width 1.3s cubic-bezier(.4,0,.2,1)}
+.bar-top{display:flex;justify-content:space-between;font-family:var(--mono);font-size:.73rem;color:var(--txt2);margin-bottom:6px}
+.bar-pct{color:var(--cyan)}
+.bar-track{height:3px;background:rgba(0,229,255,.08);overflow:hidden}
+.bar-fill{height:100%;width:0;background:linear-gradient(90deg,var(--cyan),var(--magenta));transition:width 1.3s cubic-bezier(.4,0,.2,1);box-shadow:0 0 8px var(--cyan-glow)}
 .tag-cloud{display:flex;flex-wrap:wrap;gap:7px}
-.sk-tag{font-size:.7rem;padding:4px 11px;border-radius:20px;background:rgba(255,255,255,.04);border:1px solid var(--border);color:var(--txt2);transition:.2s}
-.sk-tag:hover{border-color:var(--blue);color:var(--blue)}
-.exp-list{display:flex;flex-direction:column;gap:18px;max-width:800px}
-.exp-card{background:var(--card);border:1px solid var(--border);border-radius:var(--r-lg);padding:28px 32px;transition:.3s}
-.exp-card:hover{border-color:var(--border-h)}
-.exp-top{display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;margin-bottom:6px}
-.exp-date{font-family:var(--mono);font-size:.73rem;color:var(--blue);font-weight:500}
-.exp-badge{font-size:.68rem;padding:3px 12px;border-radius:20px;background:var(--blue-dim);color:var(--blue);border:1px solid rgba(79,142,255,.25)}
-.exp-title{font-weight:700;font-size:.98rem;margin-bottom:4px}
-.exp-co{font-size:.82rem;color:var(--txt2);margin-bottom:12px}
-.exp-info{background:rgba(79,142,255,.05);border:1px solid rgba(79,142,255,.12);border-radius:9px;padding:12px 16px;margin-bottom:14px;display:flex;flex-direction:column;gap:7px}
-.exp-irow{display:flex;gap:12px;font-size:.8rem}
-.exp-ilbl{color:var(--blue);font-family:var(--mono);font-size:.68rem;text-transform:uppercase;letter-spacing:.06em;min-width:80px;flex-shrink:0}
-.exp-irow span:last-child{color:var(--txt2)}
-.exp-desc{font-size:.87rem;color:var(--txt2);line-height:1.7;margin-bottom:14px}
-.exp-sl{font-size:.7rem;color:var(--txt3);text-transform:uppercase;letter-spacing:.08em;margin-bottom:7px}
-.exp-tags{display:flex;flex-wrap:wrap;gap:6px}
-.e-tag{font-size:.7rem;padding:3px 10px;border-radius:20px;background:rgba(255,255,255,.04);border:1px solid var(--border);color:var(--txt2)}
+.sk-tag{font-family:var(--mono);font-size:.67rem;padding:3px 10px;border:1px solid var(--border);color:var(--txt2);transition:.2s;background:transparent}
+.sk-tag:hover{border-color:var(--cyan);color:var(--cyan);box-shadow:0 0 8px var(--cyan-glow)}
+
+/* CONTACT */
 .contact-wrap{display:grid;grid-template-columns:1fr 1.2fr;gap:48px}
 .c-links{display:flex;flex-direction:column;gap:14px}
-.c-link{display:flex;align-items:center;gap:16px;padding:18px 20px;background:var(--card);border:1px solid var(--border);border-radius:var(--r);transition:.3s}
-.c-link:hover{border-color:var(--border-h);transform:translateX(4px)}
-.c-ico{width:42px;height:42px;border-radius:10px;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:1.1rem;background:var(--blue-dim);border:1px solid rgba(79,142,255,.2)}
+.c-link{display:flex;align-items:center;gap:16px;padding:18px 20px;background:var(--card);border:1px solid var(--border);transition:.3s;position:relative;overflow:hidden}
+.c-link::before{content:'';position:absolute;left:0;top:0;bottom:0;width:2px;background:var(--cyan);transform:scaleY(0);transition:.3s}
+.c-link:hover{border-color:var(--cyan);transform:translateX(4px);box-shadow:0 0 20px var(--cyan-glow)}
+.c-link:hover::before{transform:scaleY(1)}
+.c-ico{width:40px;height:40px;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:1rem;border:1px solid rgba(0,229,255,.3);background:rgba(0,229,255,.05)}
 .c-info{flex:1}
-.c-lbl{font-family:var(--mono);font-size:.66rem;color:var(--txt3);text-transform:uppercase;letter-spacing:.1em;display:block;margin-bottom:3px}
-.c-val{font-size:.87rem;color:var(--txt)}
-.c-arr{color:var(--blue);opacity:0;transition:.2s}
+.c-lbl{font-family:var(--mono);font-size:.62rem;color:var(--txt3);text-transform:uppercase;letter-spacing:.12em;display:block;margin-bottom:3px}
+.c-val{font-size:.87rem;color:var(--txt);font-family:var(--mono)}
+.c-arr{color:var(--cyan);opacity:0;transition:.2s;font-size:1.2rem}
 .c-link:hover .c-arr{opacity:1}
 .c-form{display:flex;flex-direction:column;gap:16px}
 .fg{display:flex;flex-direction:column;gap:6px}
-.fg label{font-size:.73rem;color:var(--txt3);text-transform:uppercase;letter-spacing:.08em}
-.fg input,.fg textarea{background:rgba(255,255,255,.03);border:1px solid var(--border);border-radius:9px;padding:11px 15px;font-size:.9rem;color:var(--txt);transition:.2s;resize:vertical;font-family:var(--font)}
+.fg label{font-family:var(--mono);font-size:.65rem;color:var(--txt3);text-transform:uppercase;letter-spacing:.1em}
+.fg input,.fg textarea{background:rgba(0,229,255,.03);border:1px solid var(--border);padding:11px 15px;font-size:.87rem;color:var(--txt);transition:.2s;resize:vertical;font-family:var(--mono)}
 .fg input::placeholder,.fg textarea::placeholder{color:var(--txt3)}
-.fg input:focus,.fg textarea:focus{outline:none;border-color:var(--blue);box-shadow:0 0 0 3px var(--blue-dim)}
-.form-ok{display:flex;align-items:center;gap:10px;padding:13px;border-radius:9px;background:rgba(52,211,153,.1);border:1px solid rgba(52,211,153,.3);color:var(--green);font-size:.87rem}
+.fg input:focus,.fg textarea:focus{outline:none;border-color:var(--cyan);box-shadow:0 0 20px var(--cyan-glow),inset 0 0 10px rgba(0,229,255,.03)}
+.form-ok{display:flex;align-items:center;gap:10px;padding:13px;background:rgba(0,255,157,.08);border:1px solid rgba(0,255,157,.3);color:var(--green);font-family:var(--mono);font-size:.8rem}
 .form-ok.hidden{display:none}
 @media(max-width:760px){.contact-wrap{grid-template-columns:1fr}}
-footer{border-top:1px solid var(--border);padding:32px 0;text-align:center;color:var(--txt3);font-size:.82rem}
-footer span{color:var(--txt2)}
-.footer-sub{margin-top:6px;font-size:.75rem}
-#btt{position:fixed;bottom:24px;right:24px;width:42px;height:42px;border-radius:50%;background:var(--blue);color:#fff;font-size:1rem;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 16px var(--blue-glow);opacity:0;pointer-events:none;transform:translateY(10px);transition:.3s;z-index:99}
+footer{border-top:1px solid var(--border);padding:32px 0;text-align:center;color:var(--txt3);font-family:var(--mono);font-size:.78rem}
+footer span{color:var(--cyan)}
+.footer-sub{margin-top:6px;font-size:.72rem}
+#btt{position:fixed;bottom:80px;right:24px;width:44px;height:44px;border:1px solid var(--cyan);color:var(--cyan);font-size:.9rem;display:flex;align-items:center;justify-content:center;box-shadow:0 0 20px var(--cyan-glow);opacity:0;pointer-events:none;transform:translateY(10px);transition:.3s;z-index:99;background:transparent;font-family:var(--display)}
 #btt.show{opacity:1;pointer-events:all;transform:none}
-#btt:hover{background:var(--blue2);transform:translateY(-3px)}
+#btt:hover{background:var(--cyan);color:#000;transform:translateY(-3px)}
 
 /* ENTREPRISE */
-.ent-hero{display:flex;align-items:center;gap:28px;padding:28px 32px;background:var(--card);border:1px solid var(--border);border-radius:var(--r-lg);margin-bottom:32px}
-.ent-logo{width:72px;height:72px;border-radius:16px;background:linear-gradient(135deg,var(--blue),var(--purple));display:flex;align-items:center;justify-content:center;font-weight:800;font-size:1.4rem;color:#fff;flex-shrink:0;box-shadow:0 0 24px var(--blue-glow)}
-.ent-name{font-size:1.4rem;font-weight:800;letter-spacing:-.02em;margin-bottom:4px}
-.ent-tagline{font-size:.9rem;color:var(--txt2);margin-bottom:14px}
+.ent-hero{display:flex;align-items:center;gap:28px;padding:28px 32px;background:var(--card);border:1px solid var(--border);margin-bottom:32px;position:relative;overflow:hidden}
+.ent-hero::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,var(--cyan),var(--magenta),var(--cyan))}
+.ent-logo{width:72px;height:72px;border:2px solid var(--cyan);display:flex;align-items:center;justify-content:center;font-family:var(--display);font-weight:900;font-size:1.2rem;color:var(--cyan);flex-shrink:0;box-shadow:0 0 30px var(--cyan-glow)}
+.ent-name{font-family:var(--display);font-size:1.4rem;font-weight:800;letter-spacing:.08em;margin-bottom:4px;text-transform:uppercase;color:var(--txt)}
+.ent-tagline{font-family:var(--mono);font-size:.8rem;color:var(--txt2);margin-bottom:14px}
 .ent-badges{display:flex;flex-wrap:wrap;gap:8px}
-.ent-badge{font-size:.75rem;padding:4px 12px;border-radius:20px;background:var(--blue-dim);color:var(--blue);border:1px solid rgba(79,142,255,.25)}
-.ent-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:18px;margin-bottom:40px}
-.ent-card{background:var(--card);border:1px solid var(--border);border-radius:var(--r-lg);padding:24px;transition:.3s}
-.ent-card:hover{border-color:var(--border-h);box-shadow:0 0 20px var(--blue-glow)}
-.ent-card-ico{font-size:1.5rem;margin-bottom:12px}
-.ent-card h4{font-size:.95rem;font-weight:700;margin-bottom:8px}
-.ent-card p{font-size:.85rem;color:var(--txt2);line-height:1.65}
-.ent-team{}
-.team-grid{display:flex;gap:16px;flex-wrap:wrap;margin-top:4px}
-.team-card{display:flex;flex-direction:column;align-items:center;gap:8px;padding:20px 24px;background:var(--card);border:1px solid var(--border);border-radius:var(--r-lg);min-width:140px;transition:.3s}
-.team-card:hover{border-color:var(--border-h);transform:translateY(-3px)}
-.team-av{width:52px;height:52px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:1rem;color:#fff}
-.team-name{font-size:.87rem;font-weight:700;text-align:center}
-.team-role{font-size:.72rem;color:var(--blue);font-family:var(--mono);text-align:center}
-@media(max-width:600px){.ent-hero{flex-direction:column;text-align:center}.ent-badges{justify-content:center}}
-
-/* ENTREPRISE ÉTENDUE */
+.ent-badge{font-family:var(--mono);font-size:.68rem;padding:3px 10px;background:var(--cyan-dim);color:var(--cyan);border:1px solid rgba(0,229,255,.25)}
 .ent-block{margin-bottom:36px}
-.etl-item{display:flex;gap:16px;padding-left:16px;padding-bottom:20px;border-left:2px solid var(--border);position:relative}
-.etl-item::before{content:'';position:absolute;left:-5px;top:8px;width:8px;height:8px;border-radius:50%;background:var(--blue);box-shadow:0 0 8px var(--blue-glow)}
-.etl-yr{font-family:var(--mono);font-size:.7rem;color:var(--blue);white-space:nowrap;flex-shrink:0;margin-top:4px;min-width:60px}
-.etl-body strong{display:block;font-size:.9rem;font-weight:700;color:var(--txt);margin-bottom:4px}
-.etl-body span{font-size:.83rem;color:var(--txt2);line-height:1.65}
-.ent-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:16px;margin-top:16px}
-.reveal3 .ent-card{opacity:0;transform:translateY(20px);transition:opacity .6s,transform .6s}
+.ent-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:16px;margin-top:16px}
+.ent-card{background:var(--card);border:1px solid var(--border);padding:22px;transition:.3s}
+.ent-card:hover{border-color:var(--cyan);box-shadow:0 0 20px var(--cyan-glow)}
+.ent-card-ico{font-size:1.4rem;margin-bottom:12px}
+.ent-card h4{font-family:var(--display);font-size:.85rem;font-weight:700;margin-bottom:8px;letter-spacing:.06em;color:var(--txt)}
+.ent-card p{font-size:.83rem;color:var(--txt2);line-height:1.65}
+.etl-item{display:flex;gap:16px;padding-left:16px;padding-bottom:20px;border-left:1px solid var(--border);position:relative}
+.etl-item::before{content:'';position:absolute;left:-3px;top:8px;width:5px;height:5px;background:var(--cyan);box-shadow:0 0 8px var(--cyan-glow)}
+.etl-yr{font-family:var(--mono);font-size:.7rem;color:var(--cyan);white-space:nowrap;flex-shrink:0;margin-top:4px;min-width:60px}
+.etl-body strong{display:block;font-family:var(--display);font-size:.88rem;font-weight:700;color:var(--txt);margin-bottom:4px;letter-spacing:.04em}
+.etl-body span{font-family:var(--mono);font-size:.78rem;color:var(--txt2);line-height:1.65}
 .services-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:16px;margin-top:16px}
-.srv-card{background:var(--card);border:1px solid var(--border);border-radius:var(--r-lg);padding:22px;transition:.3s}
-.srv-card:hover{border-color:var(--border-h);transform:translateY(-3px)}
-.srv-ico{width:44px;height:44px;border-radius:11px;display:flex;align-items:center;justify-content:center;font-size:1.2rem;margin-bottom:14px;border:1px solid transparent}
-.srv-card h4{font-size:.9rem;font-weight:700;margin-bottom:8px}
+.srv-card{background:var(--card);border:1px solid var(--border);padding:22px;transition:.3s}
+.srv-card:hover{border-color:var(--cyan);transform:translateY(-3px);box-shadow:0 0 20px var(--cyan-glow)}
+.srv-ico{width:44px;height:44px;border:1px solid rgba(0,229,255,.3);display:flex;align-items:center;justify-content:center;font-size:1.2rem;margin-bottom:14px;background:rgba(0,229,255,.05)}
+.srv-card h4{font-family:var(--display);font-size:.85rem;font-weight:700;margin-bottom:8px;letter-spacing:.05em}
 .srv-card p{font-size:.82rem;color:var(--txt2);line-height:1.6;margin-bottom:12px}
 .srv-tags{display:flex;flex-wrap:wrap;gap:5px}
-.srv-tags span{font-size:.65rem;padding:2px 8px;border-radius:20px;background:var(--blue-dim);color:var(--blue);border:1px solid rgba(79,142,255,.2)}
+.srv-tags span{font-family:var(--mono);font-size:.62rem;padding:2px 8px;background:var(--cyan-dim);color:var(--cyan);border:1px solid rgba(0,229,255,.2)}
 .org-chart{margin-top:16px}
 .org-top{display:flex;justify-content:center;margin-bottom:0}
-.org-node.org-ceo{display:flex;align-items:center;gap:14px;padding:16px 24px;background:var(--card);border:1px solid var(--border-h);border-radius:var(--r-lg);min-width:280px}
-.org-line{width:2px;height:32px;background:var(--border);margin:0 auto}
-.org-nm{font-weight:700;font-size:.9rem;color:var(--txt)}
-.org-rl{font-size:.72rem;color:var(--blue);font-family:var(--mono)}
+.org-node.org-ceo{display:flex;align-items:center;gap:14px;padding:16px 24px;background:var(--card);border:1px solid var(--cyan);min-width:280px;box-shadow:0 0 20px var(--cyan-glow)}
+.org-line{width:1px;height:32px;background:var(--cyan);margin:0 auto;box-shadow:0 0 8px var(--cyan-glow)}
+.org-nm{font-family:var(--display);font-weight:700;font-size:.85rem;color:var(--txt);letter-spacing:.05em}
+.org-rl{font-family:var(--mono);font-size:.65rem;color:var(--cyan)}
 .org-depts{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:14px}
-.org-dept{background:var(--card);border:1px solid var(--border);border-radius:var(--r-lg);padding:16px}
-.org-dept-lbl{font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;padding-bottom:10px;margin-bottom:12px;border-bottom:1px solid var(--border)}
+.org-dept{background:var(--card);border:1px solid var(--border);padding:16px}
+.org-dept-lbl{font-family:var(--mono);font-size:.65rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;padding-bottom:10px;margin-bottom:12px;border-bottom:1px solid var(--border)}
 .org-members{display:flex;flex-direction:column;gap:10px}
 .org-member{display:flex;align-items:center;gap:10px}
-.org-av{width:34px;height:34px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:.7rem;color:#fff;flex-shrink:0}
+.org-av{width:34px;height:34px;border:1px solid rgba(0,229,255,.3);display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-weight:700;font-size:.65rem;color:var(--cyan);background:rgba(0,229,255,.05);flex-shrink:0}
 .proj-ent-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:18px;margin-top:16px}
-.proj-ent-card{background:var(--card);border:1px solid var(--border);border-radius:var(--r-lg);padding:22px;display:flex;flex-direction:column;gap:12px;transition:.3s}
-.proj-ent-card:hover{border-color:var(--border-h);transform:translateY(-3px);box-shadow:var(--shadow)}
+.proj-ent-card{background:var(--card);border:1px solid var(--border);padding:22px;display:flex;flex-direction:column;gap:12px;transition:.3s}
+.proj-ent-card:hover{border-color:var(--cyan);transform:translateY(-3px);box-shadow:0 0 20px var(--cyan-glow)}
 .pec-header{display:flex;align-items:flex-start;gap:14px}
-.pec-ico{width:44px;height:44px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1.2rem;flex-shrink:0}
-.pec-title{font-weight:700;font-size:.9rem;color:var(--txt);margin-bottom:3px}
-.pec-client{font-size:.75rem;color:var(--txt2)}
+.pec-ico{width:44px;height:44px;border:1px solid rgba(0,229,255,.3);display:flex;align-items:center;justify-content:center;font-size:1.2rem;flex-shrink:0;background:rgba(0,229,255,.05)}
+.pec-title{font-family:var(--display);font-weight:700;font-size:.85rem;color:var(--txt);margin-bottom:3px;letter-spacing:.04em}
+.pec-client{font-family:var(--mono);font-size:.7rem;color:var(--txt2)}
 .pec-desc{font-size:.83rem;color:var(--txt2);line-height:1.65;flex:1}
 .pec-tech{display:flex;flex-wrap:wrap;gap:5px}
-.pec-tech span{font-size:.65rem;padding:2px 8px;border-radius:20px;background:var(--blue-dim);color:var(--blue);border:1px solid rgba(79,142,255,.2)}
+.pec-tech span{font-family:var(--mono);font-size:.62rem;padding:2px 8px;background:var(--cyan-dim);color:var(--cyan);border:1px solid rgba(0,229,255,.2)}
 .pec-footer{display:flex;gap:10px;flex-wrap:wrap;padding-top:8px;border-top:1px solid var(--border)}
-.pec-status,.pec-dur,.pec-team{font-size:.72rem;color:var(--txt2)}
-.pec-ok{color:var(--green)}
-.pec-wip{color:var(--amber,#f59e0b)}
+.pec-status,.pec-dur,.pec-team{font-family:var(--mono);font-size:.68rem;color:var(--txt2)}
+.pec-ok{color:var(--green)}.pec-wip{color:var(--yellow)}
 .tech-cats{display:flex;flex-direction:column;gap:14px;margin-top:16px}
-.tech-cat{display:flex;gap:16px;align-items:flex-start;padding:14px 18px;background:var(--card);border:1px solid var(--border);border-radius:var(--r)}
-.tech-cat-title{font-family:var(--mono);font-size:.7rem;color:var(--blue);text-transform:uppercase;letter-spacing:.07em;min-width:120px;flex-shrink:0;padding-top:3px}
+.tech-cat{display:flex;gap:16px;align-items:flex-start;padding:14px 18px;background:var(--card);border:1px solid var(--border)}
+.tech-cat-title{font-family:var(--mono);font-size:.68rem;color:var(--cyan);text-transform:uppercase;letter-spacing:.1em;min-width:120px;flex-shrink:0;padding-top:3px}
 .tech-tags{display:flex;flex-wrap:wrap;gap:6px}
-.tech-tags span{font-size:.72rem;padding:3px 10px;border-radius:20px;background:rgba(255,255,255,.04);border:1px solid var(--border);color:var(--txt2)}
+.tech-tags span{font-family:var(--mono);font-size:.68rem;padding:2px 9px;border:1px solid var(--border);color:var(--txt2)}
 .day-timeline{display:flex;flex-direction:column;gap:0;margin-top:16px}
-.day-item{display:flex;gap:16px;padding-left:16px;padding-bottom:18px;border-left:2px solid var(--border);position:relative}
-.day-item::before{content:'';position:absolute;left:-5px;top:8px;width:8px;height:8px;border-radius:50%;background:var(--purple);box-shadow:0 0 8px rgba(167,139,250,.4)}
-.day-time{font-family:var(--mono);font-size:.72rem;color:var(--purple);white-space:nowrap;flex-shrink:0;margin-top:3px;min-width:52px}
-.day-body strong{display:block;font-size:.88rem;font-weight:700;color:var(--txt);margin-bottom:3px}
-.day-body span{font-size:.82rem;color:var(--txt2);line-height:1.6}
+.day-item{display:flex;gap:16px;padding-left:16px;padding-bottom:18px;border-left:1px solid var(--border);position:relative}
+.day-item::before{content:'';position:absolute;left:-3px;top:8px;width:5px;height:5px;background:var(--magenta);box-shadow:0 0 8px var(--magenta-glow)}
+.day-time{font-family:var(--mono);font-size:.7rem;color:var(--magenta);white-space:nowrap;flex-shrink:0;margin-top:3px;min-width:52px}
+.day-body strong{font-family:var(--display);display:block;font-size:.83rem;font-weight:700;color:var(--txt);margin-bottom:3px;letter-spacing:.04em}
+.day-body span{font-family:var(--mono);font-size:.78rem;color:var(--txt2);line-height:1.6}
 
+/* HERO IMAGE */
+#hero-img-section{padding:80px 0;position:relative;overflow:hidden;background:var(--bg2)}
+#hero-img-section::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(0,229,255,.04),transparent 50%,rgba(255,0,144,.03))}
+.hero-img-wrap{display:flex;justify-content:center;align-items:center;flex-direction:column;gap:20px}
+.hero-img-frame{position:relative;display:inline-block;padding:6px;border:1px solid var(--cyan);box-shadow:0 0 40px var(--cyan-glow),0 0 80px rgba(0,229,255,.1)}
+.hero-img-frame::before{content:'';position:absolute;top:-3px;left:-3px;right:-3px;bottom:-3px;border:1px solid var(--magenta);opacity:.4;animation:pulseBorder 3s infinite}
+@keyframes pulseBorder{0%,100%{opacity:.4;transform:scale(1)}50%{opacity:.15;transform:scale(1.005)}}
+.hero-img-frame img{display:block;max-width:100%;max-height:500px;filter:saturate(1.3) contrast(1.1) brightness(1.05)}
+.img-overlay{position:absolute;inset:0;pointer-events:none;background:repeating-linear-gradient(0deg,transparent,transparent 3px,rgba(0,0,0,.1) 3px,rgba(0,0,0,.1) 4px)}
+.img-corner{position:absolute;width:20px;height:20px}
+.img-corner-tl{top:0;left:0;border-top:2px solid var(--cyan);border-left:2px solid var(--cyan)}
+.img-corner-tr{top:0;right:0;border-top:2px solid var(--cyan);border-right:2px solid var(--cyan)}
+.img-corner-bl{bottom:0;left:0;border-bottom:2px solid var(--magenta);border-left:2px solid var(--magenta)}
+.img-corner-br{bottom:0;right:0;border-bottom:2px solid var(--magenta);border-right:2px solid var(--magenta)}
+.img-caption{font-family:var(--mono);font-size:.72rem;color:var(--txt3);letter-spacing:.15em;text-transform:uppercase;text-align:center}
+.img-caption span{color:var(--cyan)}
+
+/* MUSIC PLAYER */
+#music-player{position:fixed;bottom:24px;right:80px;background:rgba(3,7,18,.95);border:1px solid var(--cyan);padding:10px 14px;z-index:100;display:flex;align-items:center;gap:10px;box-shadow:0 0 20px var(--cyan-glow);clip-path:polygon(0 0,calc(100% - 10px) 0,100% 10px,100% 100%,10px 100%,0 calc(100% - 10px));min-width:200px}
+.music-ico{font-size:.9rem;color:var(--cyan)}
+.music-info{flex:1}
+.music-title{font-family:var(--display);font-size:.6rem;color:var(--cyan);letter-spacing:.1em;text-transform:uppercase;display:block}
+.music-sub{font-family:var(--mono);font-size:.56rem;color:var(--txt3);display:block;margin-top:1px}
+.music-wave{display:flex;align-items:center;gap:2px;height:14px}
+.music-wave span{display:block;width:2px;background:var(--cyan);border-radius:1px;animation:wave 1s ease-in-out infinite}
+.music-wave span:nth-child(2){animation-delay:.1s}.music-wave span:nth-child(3){animation-delay:.2s}.music-wave span:nth-child(4){animation-delay:.3s}.music-wave span:nth-child(5){animation-delay:.4s}
+.music-wave.paused span{animation-play-state:paused;height:2px!important}
+@keyframes wave{0%,100%{height:3px}50%{height:12px}}
+.music-play{background:none;border:none;cursor:pointer;color:var(--cyan);font-size:1rem;padding:0 4px;transition:.2s;font-family:var(--mono)}
+.music-play:hover{text-shadow:0 0 10px var(--cyan-glow)}
+@media(max-width:600px){.ent-hero{flex-direction:column;text-align:center}.ent-badges{justify-content:center}}
 </style>
 </head>
-<body style="background:#f8faff;color:#0f172a">
+<body>
+
+<div id="music-player">
+  <div class="music-ico">♫</div>
+  <div class="music-info">
+    <span class="music-title">Cyberpunk 2077 OST</span>
+    <span class="music-sub">Ambient // Night City</span>
+  </div>
+  <div class="music-wave" id="musicWave">
+    <span></span><span></span><span></span><span></span><span></span>
+  </div>
+  <button class="music-play" id="musicBtn">▶</button>
+</div>
 
 <nav id="nav">
   <div class="nav-in">
-    <a href="#hero" class="nav-logo">julien.dev</a>
+    <a href="#hero" class="nav-logo">// julien.dev</a>
     <ul class="nav-links" id="navLinks">
       <li><a href="#about">À propos</a></li>
-      <li><a href="#skills">Compétences</a></li>
+      <li><a href="#skills">Skills</a></li>
       <li><a href="#projects">Projets</a></li>
-      <li><a href="#entreprise">Mon Entreprise</a></li>
+      <li><a href="#entreprise">Entreprise</a></li>
+      <li><a href="#hero-img-section">// SYS</a></li>
       <li><a href="#contact">Contact</a></li>
     </ul>
-    <div class="nav-right">
-      <button class="nav-burger" id="burger"><span></span><span></span><span></span></button>
-    </div>
+    <button class="nav-burger" id="burger"><span></span><span></span><span></span></button>
   </div>
 </nav>
 
 <section id="hero">
-  <div class="hero-bg"><div class="orb orb1"></div><div class="orb orb2"></div><div class="grid-bg"></div></div>
+  <div class="hero-bg">
+    <div class="orb1"></div><div class="orb2"></div>
+    <div class="grid-bg"></div><div class="scanline-h"></div>
+    <div class="corner corner-tl"></div><div class="corner corner-tr"></div>
+    <div class="corner corner-bl"></div><div class="corner corner-br"></div>
+  </div>
   <div class="wrap hero-wrap">
     <div class="hero-left reveal">
-      <div class="hero-badge">🟢 Disponible pour une alternance dès septembre 2025</div>
+      <div class="hero-badge">● DISPONIBLE — ALTERNANCE SEP. 2025</div>
       <h1 class="hero-name">
-        <span class="hero-greet">Bonjour, je suis</span><br>
-        <span class="name-w">Julien</span><span class="name-b"> Jegu</span>
+        <span class="hero-greet">// INITIALIZE USER:</span><br>
+        <span class="name-w">JULIEN</span><span class="name-b"> JEGU</span>
       </h1>
-      <p class="hero-title">Étudiant BTS SIO · Option SISR</p>
+      <p class="hero-title">BTS SIO — OPTION SISR</p>
       <p class="hero-desc">Passionné par le développement web et les nouvelles technologies, je construis mes compétences jour après jour à l'École Pratique.</p>
       <div class="hero-actions">
-        <a href="#projects" class="btn-p">Voir mes projets →</a>
-        <a href="#contact" class="btn-s">Me contacter</a>
+        <a href="#projects" class="btn-p">VOIR MES PROJETS ▶</a>
+        <a href="#contact" class="btn-s">ME CONTACTER</a>
       </div>
       <div class="hero-stats">
-        <div><span class="stat-val">0</span><span class="stat-lbl">Projets réalisés</span></div>
-        <div><span class="stat-val">2</span><span class="stat-lbl">Entreprises</span></div>
-        <div><span class="stat-val">2026</span><span class="stat-lbl">Diplôme prévu</span></div>
+        <div><span class="stat-val">0</span><span class="stat-lbl">// PROJETS</span></div>
+        <div><span class="stat-val">2</span><span class="stat-lbl">// ENTREPRISES</span></div>
+        <div><span class="stat-val">2026</span><span class="stat-lbl">// DIPLÔME</span></div>
       </div>
     </div>
     <div class="hero-right">
       <div class="id-card reveal">
-        <div class="idc-shine"></div>
+        <div class="idc-scan"></div>
         <div class="idc-top">
           <div class="idc-av">JJ</div>
-          <div><div class="idc-nm">Julien Jegu</div><div class="idc-sb">Option SISR</div></div>
+          <div><div class="idc-nm">JULIEN JEGU</div><div class="idc-sb">// OPTION SISR</div></div>
         </div>
         <div class="idc-div"></div>
-        <div class="idc-row"><div class="idc-dot"></div>Disponible — alternance</div>
-        <div class="idc-row">📍 France</div>
-        <div class="idc-row">🎓 École Pratique</div>
+        <div class="idc-row"><div class="idc-dot"></div>ONLINE — ALTERNANCE</div>
+        <div class="idc-row">📍 FRANCE</div>
+        <div class="idc-row">🎓 ÉCOLE PRATIQUE</div>
         <div class="idc-row">📅 BTS SIO 2024 – 2026</div>
         <div class="idc-chips">
-          <span class="idc-chip">HTML</span><span class="idc-chip">Python</span>
-          <span class="idc-chip">MySQL</span><span class="idc-chip">Linux</span>
-          <span class="idc-chip">JavaScript</span><span class="idc-chip">Java</span>
+          <span class="idc-chip">HTML</span><span class="idc-chip">PYTHON</span>
+          <span class="idc-chip">MYSQL</span><span class="idc-chip">LINUX</span>
+          <span class="idc-chip">JS</span><span class="idc-chip">JAVA</span>
         </div>
       </div>
     </div>
@@ -323,20 +368,20 @@ footer span{color:var(--txt2)}
       </div>
       <div>
         <div class="about-text reveal">
-          <p>Bonjour ! Je suis <strong>Julien Jegu</strong>, étudiant en <strong>BTS SIO option SISR</strong> à l'École Pratique. Je suis passionné par l'informatique et le développement.</p>
-          <p>Je cherche à développer mes compétences techniques et à les mettre en pratique à travers des projets concrets et une <strong>alternance</strong>.</p>
+          <p>Bonjour ! Je suis <strong>Julien Jegu</strong>, étudiant en <strong>BTS SIO option SISR</strong> à l'École Pratique. Passionné par l'informatique et le développement.</p>
+          <p>Je cherche à développer mes compétences techniques à travers des projets concrets et une <strong>alternance</strong>.</p>
         </div>
         <div class="reveal">
-          <div class="blk-lbl">📅 Parcours scolaire</div>
+          <div class="blk-lbl">📅 PARCOURS SCOLAIRE</div>
           <div class="tl-wrap">
             <div class="tl-item">
               <span class="tl-yr">2024 →</span>
-              <div class="tl-body"><strong>BTS SIO — Option SISR</strong><span>École Pratique</span></div>
+              <div class="tl-body"><strong>BTS SIO — OPTION SISR</strong><span>École Pratique</span></div>
             </div>
           </div>
         </div>
         <div class="reveal">
-          <div class="blk-lbl">🎯 Objectifs</div>
+          <div class="blk-lbl">🎯 OBJECTIFS</div>
           <ul class="goals">
             <li>Trouver une alternance en développement web</li>
             <li>Maîtriser des frameworks modernes (React, Vue.js)</li>
@@ -358,346 +403,146 @@ footer span{color:var(--txt2)}
 
 <section id="projects">
   <div class="wrap">
-    <div class="sec-head reveal"><div class="sec-num">03</div><h2 class="sec-title">Mes projets</h2>
-      <p class="sec-desc">Projets académiques et personnels qui illustrent mes compétences.</p>
-    </div>
-    <p class="reveal" style="color:var(--txt2);font-size:.9rem;margin-top:8px">Aucun projet pour le moment — revenez bientôt !</p>
+    <div class="sec-head reveal"><div class="sec-num">03</div><h2 class="sec-title">Mes Projets</h2><p class="sec-desc">Projets académiques et personnels qui illustrent mes compétences.</p></div>
+    <p class="reveal" style="color:var(--txt3);font-family:var(--mono);font-size:.83rem;margin-top:8px">// NULL — Aucun projet pour le moment — revenez bientôt !</p>
   </div>
 </section>
 
-
-
 <section id="entreprise">
   <div class="wrap">
-    <div class="sec-head reveal">
-      <div class="sec-num">05</div>
-      <h2 class="sec-title">Mon Entreprise</h2>
-      <p class="sec-desc">NexaTech Solutions — PME spécialisée en développement logiciel et cybersécurité, fondée et dirigée par Julien Jegu.</p>
-    </div>
-
-    <!-- HERO ENTREPRISE -->
+    <div class="sec-head reveal"><div class="sec-num">04</div><h2 class="sec-title">Mon Entreprise</h2><p class="sec-desc">NexaTech Solutions — PME spécialisée en développement logiciel et cybersécurité.</p></div>
     <div class="ent-hero reveal">
       <div class="ent-logo">NT</div>
-      <div class="ent-intro">
+      <div>
         <h3 class="ent-name">NexaTech Solutions</h3>
-        <p class="ent-tagline">Développement logiciel · Cybersécurité · Conseil IT</p>
+        <p class="ent-tagline">// Développement logiciel · Cybersécurité · Conseil IT</p>
         <div class="ent-badges">
-          <span class="ent-badge">🟢 Active</span>
-          <span class="ent-badge">📍 Lyon, France</span>
-          <span class="ent-badge">📅 Fondée en 2024</span>
-          <span class="ent-badge">👥 12 employés</span>
-          <span class="ent-badge">🏭 PME</span>
-          <span class="ent-badge">💼 SAS</span>
+          <span class="ent-badge">● ACTIVE</span><span class="ent-badge">📍 Lyon, FR</span>
+          <span class="ent-badge">📅 2024</span><span class="ent-badge">👥 12 EMP.</span>
+          <span class="ent-badge">🏭 PME</span><span class="ent-badge">💼 SAS</span>
         </div>
       </div>
     </div>
-
-    <!-- HISTOIRE -->
     <div class="ent-block reveal">
-      <div class="blk-lbl">📖 Histoire de l'entreprise</div>
-      <div class="ent-timeline">
-        <div class="etl-item">
-          <span class="etl-yr">2024</span>
-          <div class="etl-body">
-            <strong>Création de NexaTech Solutions</strong>
-            <span>Julien Jegu fonde l'entreprise à Lyon avec une vision claire : rendre le numérique accessible aux TPE/PME de la région Auvergne-Rhône-Alpes. Les premiers clients sont des commerces locaux ayant besoin de sites web et d'outils de gestion.</span>
-          </div>
-        </div>
-        <div class="etl-item">
-          <span class="etl-yr">2024 T3</span>
-          <div class="etl-body">
-            <strong>Première équipe & premiers projets</strong>
-            <span>Recrutement des premiers développeurs et d'une designer UX. Livraison de 3 projets clients majeurs dont une plateforme e-commerce et un ERP sur-mesure pour une PME industrielle.</span>
-          </div>
-        </div>
-        <div class="etl-item">
-          <span class="etl-yr">2025</span>
-          <div class="etl-body">
-            <strong>Ouverture du pôle Cybersécurité</strong>
-            <span>Face à la montée des cybermenaces, NexaTech crée un département dédié à la sécurité informatique. L'entreprise propose désormais des audits de sécurité, de la supervision réseau et de la formation des équipes.</span>
-          </div>
-        </div>
-        <div class="etl-item">
-          <span class="etl-yr">2025 →</span>
-          <div class="etl-body">
-            <strong>Objectif : 25 clients actifs</strong>
-            <span>NexaTech vise l'expansion régionale avec l'ouverture d'une antenne à Grenoble et le recrutement de 4 nouveaux talents d'ici fin 2025.</span>
-          </div>
-        </div>
+      <div class="blk-lbl">📖 HISTOIRE</div>
+      <div>
+        <div class="etl-item"><span class="etl-yr">2024</span><div class="etl-body"><strong>Création NexaTech</strong><span>Fondée à Lyon pour rendre le numérique accessible aux TPE/PME de la région Auvergne-Rhône-Alpes.</span></div></div>
+        <div class="etl-item"><span class="etl-yr">2024 T3</span><div class="etl-body"><strong>Première équipe</strong><span>Recrutement des premiers développeurs. Livraison de 3 projets majeurs : e-commerce, ERP sur-mesure.</span></div></div>
+        <div class="etl-item"><span class="etl-yr">2025</span><div class="etl-body"><strong>Pôle Cybersécurité</strong><span>Nouveau département dédié à la sécurité informatique. Audits, supervision réseau et formation.</span></div></div>
+        <div class="etl-item"><span class="etl-yr">2025 →</span><div class="etl-body"><strong>Objectif : 25 clients</strong><span>Expansion régionale avec antenne à Grenoble et 4 nouveaux talents d'ici fin 2025.</span></div></div>
       </div>
     </div>
-
-    <!-- MISSION & VALEURS -->
     <div class="ent-block reveal">
-      <div class="blk-lbl">🎯 Mission & Valeurs</div>
-    <div class="ent-grid">
-      <div class="ent-card">
-        <div class="ent-card-ico">🎯</div>
-        <h4>Mission</h4>
-        <p>Accompagner les entreprises dans leur transformation numérique avec des solutions fiables, sécurisées et adaptées à leurs besoins réels.</p>
-      </div>
-      <div class="ent-card">
-        <div class="ent-card-ico">🔒</div>
-        <h4>Vision</h4>
-        <p>Devenir la référence régionale en solutions IT pour les PME, en combinant expertise technique et proximité client.</p>
-      </div>
-      <div class="ent-card">
-        <div class="ent-card-ico">💡</div>
-        <h4>Valeurs</h4>
-        <p>Transparence, innovation, rigueur technique et engagement fort envers la sécurité des données de nos clients.</p>
-      </div>
-      <div class="ent-card">
-        <div class="ent-card-ico">🤝</div>
-        <h4>Clients</h4>
-        <p>TPE, PME, artisans, collectivités locales et associations en région Auvergne-Rhône-Alpes cherchant à digitaliser leurs activités.</p>
+      <div class="blk-lbl">🎯 MISSION & VALEURS</div>
+      <div class="ent-grid">
+        <div class="ent-card"><div class="ent-card-ico">🎯</div><h4>Mission</h4><p>Accompagner les entreprises dans leur transformation numérique avec des solutions fiables et sécurisées.</p></div>
+        <div class="ent-card"><div class="ent-card-ico">🔒</div><h4>Vision</h4><p>Référence régionale IT pour les PME, combinant expertise technique et proximité client.</p></div>
+        <div class="ent-card"><div class="ent-card-ico">💡</div><h4>Valeurs</h4><p>Transparence, innovation, rigueur technique et engagement envers la sécurité des données.</p></div>
+        <div class="ent-card"><div class="ent-card-ico">🤝</div><h4>Clients</h4><p>TPE, PME, artisans, collectivités en Auvergne-Rhône-Alpes cherchant à digitaliser leurs activités.</p></div>
       </div>
     </div>
-    </div>
-
-    <!-- SERVICES -->
     <div class="ent-block reveal">
-      <div class="blk-lbl">⚙️ Nos services</div>
+      <div class="blk-lbl">⚙️ NOS SERVICES</div>
       <div class="services-grid">
-        <div class="srv-card">
-          <div class="srv-ico" style="background:rgba(79,142,255,.15);border-color:rgba(79,142,255,.3)">🌐</div>
-          <h4>Développement Web</h4>
-          <p>Sites vitrines, e-commerce, applications web métier, API REST, intégrations tierces.</p>
-          <div class="srv-tags"><span>React</span><span>PHP</span><span>Node.js</span><span>MySQL</span></div>
-        </div>
-        <div class="srv-card">
-          <div class="srv-ico" style="background:rgba(239,68,68,.12);border-color:rgba(239,68,68,.3)">🔐</div>
-          <h4>Cybersécurité</h4>
-          <p>Audits de sécurité, tests de pénétration, mise en conformité RGPD, formation des équipes.</p>
-          <div class="srv-tags"><span>Pentest</span><span>RGPD</span><span>SIEM</span><span>VPN</span></div>
-        </div>
-        <div class="srv-card">
-          <div class="srv-ico" style="background:rgba(52,211,153,.12);border-color:rgba(52,211,153,.3)">🖥️</div>
-          <h4>Infrastructure & Réseau</h4>
-          <p>Installation de serveurs, configuration réseau, VLAN, VPN, supervision et maintenance.</p>
-          <div class="srv-tags"><span>Linux</span><span>Windows Server</span><span>Cisco</span><span>Docker</span></div>
-        </div>
-        <div class="srv-card">
-          <div class="srv-ico" style="background:rgba(167,139,250,.12);border-color:rgba(167,139,250,.3)">🎧</div>
-          <h4>Support Utilisateurs</h4>
-          <p>Helpdesk N1/N2, gestion des incidents, maintenance du parc informatique, Active Directory.</p>
-          <div class="srv-tags"><span>GLPI</span><span>AD</span><span>TeamViewer</span><span>ITSM</span></div>
-        </div>
+        <div class="srv-card"><div class="srv-ico">🌐</div><h4>Développement Web</h4><p>Sites vitrines, e-commerce, apps web métier, API REST, intégrations tierces.</p><div class="srv-tags"><span>React</span><span>PHP</span><span>Node.js</span><span>MySQL</span></div></div>
+        <div class="srv-card"><div class="srv-ico">🔐</div><h4>Cybersécurité</h4><p>Audits, tests de pénétration, conformité RGPD, formation des équipes.</p><div class="srv-tags"><span>Pentest</span><span>RGPD</span><span>SIEM</span><span>VPN</span></div></div>
+        <div class="srv-card"><div class="srv-ico">🖥️</div><h4>Infrastructure</h4><p>Serveurs, réseau, VLAN, VPN, supervision et maintenance continue.</p><div class="srv-tags"><span>Linux</span><span>Windows Server</span><span>Docker</span></div></div>
+        <div class="srv-card"><div class="srv-ico">🎧</div><h4>Support Users</h4><p>Helpdesk N1/N2, incidents, maintenance parc, Active Directory.</p><div class="srv-tags"><span>GLPI</span><span>AD</span><span>TeamViewer</span></div></div>
       </div>
     </div>
-
-    <!-- ORGANIGRAMME & ÉQUIPE -->
     <div class="ent-block reveal">
-      <div class="blk-lbl">👥 Organisation & Équipe</div>
+      <div class="blk-lbl">👥 ORGANISATION</div>
       <div class="org-chart">
         <div class="org-top">
           <div class="org-node org-ceo">
-            <div class="team-av" style="background:linear-gradient(135deg,var(--blue),var(--purple));width:48px;height:48px;font-size:.95rem">JJ</div>
-            <div>
-              <div class="org-nm">Julien Jegu</div>
-              <div class="org-rl">Directeur Général & Fondateur</div>
-            </div>
+            <div class="org-av" style="width:48px;height:48px;font-size:.88rem;border:1px solid var(--cyan);box-shadow:0 0 15px var(--cyan-glow)">JJ</div>
+            <div><div class="org-nm">Julien Jegu</div><div class="org-rl">// DG & Fondateur</div></div>
           </div>
         </div>
         <div class="org-line"></div>
         <div class="org-depts">
-          <div class="org-dept">
-            <div class="org-dept-lbl" style="border-color:rgba(79,142,255,.4);color:var(--blue)">💻 Pôle Développement</div>
-            <div class="org-members">
-              <div class="org-member"><span class="org-av" style="background:linear-gradient(135deg,#10b981,#4f8eff)">KB</span><div><div class="org-nm">Kevin Blanc</div><div class="org-rl">Lead Developer Backend</div></div></div>
-              <div class="org-member"><span class="org-av" style="background:linear-gradient(135deg,#ec4899,#a78bfa)">SM</span><div><div class="org-nm">Sarah Morel</div><div class="org-rl">Développeuse Frontend & UX</div></div></div>
-              <div class="org-member"><span class="org-av" style="background:linear-gradient(135deg,#4f8eff,#06b6d4)">TL</span><div><div class="org-nm">Thomas Laurent</div><div class="org-rl">Développeur Full Stack</div></div></div>
-              <div class="org-member"><span class="org-av" style="background:linear-gradient(135deg,#f59e0b,#10b981)">AN</span><div><div class="org-nm">Amélie Noel</div><div class="org-rl">Développeuse Web Junior</div></div></div>
-            </div>
-          </div>
-          <div class="org-dept">
-            <div class="org-dept-lbl" style="border-color:rgba(239,68,68,.4);color:#f87171">🔐 Pôle Cybersécurité</div>
-            <div class="org-members">
-              <div class="org-member"><span class="org-av" style="background:linear-gradient(135deg,#ef4444,#a78bfa)">MC</span><div><div class="org-nm">Marc Chauvet</div><div class="org-rl">Responsable Sécurité (RSSI)</div></div></div>
-              <div class="org-member"><span class="org-av" style="background:linear-gradient(135deg,#ef4444,#f59e0b)">EB</span><div><div class="org-nm">Emma Bourdin</div><div class="org-rl">Analyste SOC / Pentest</div></div></div>
-            </div>
-          </div>
-          <div class="org-dept">
-            <div class="org-dept-lbl" style="border-color:rgba(52,211,153,.4);color:var(--green)">🖥️ Pôle Infra & Réseau</div>
-            <div class="org-members">
-              <div class="org-member"><span class="org-av" style="background:linear-gradient(135deg,#f59e0b,#ef4444)">LF</span><div><div class="org-nm">Lucie Faure</div><div class="org-rl">Ingénieure DevOps</div></div></div>
-              <div class="org-member"><span class="org-av" style="background:linear-gradient(135deg,#34d399,#4f8eff)">RD</span><div><div class="org-nm">Romain Denis</div><div class="org-rl">Administrateur Systèmes & Réseaux</div></div></div>
-            </div>
-          </div>
-          <div class="org-dept">
-            <div class="org-dept-lbl" style="border-color:rgba(167,139,250,.4);color:var(--purple)">🎧 Support & Admin</div>
-            <div class="org-members">
-              <div class="org-member"><span class="org-av" style="background:linear-gradient(135deg,#a78bfa,#ec4899)">CP</span><div><div class="org-nm">Clara Petit</div><div class="org-rl">Technicienne Support N1/N2</div></div></div>
-              <div class="org-member"><span class="org-av" style="background:linear-gradient(135deg,#6e7d9f,#a78bfa)">PG</span><div><div class="org-nm">Paul Garnier</div><div class="org-rl">Office Manager & Commercial</div></div></div>
-            </div>
-          </div>
+          <div class="org-dept"><div class="org-dept-lbl" style="color:var(--cyan)">💻 DÉVELOPPEMENT</div><div class="org-members"><div class="org-member"><span class="org-av">KB</span><div><div style="font-family:var(--display);font-size:.78rem;color:var(--txt)">Kevin Blanc</div><div style="font-family:var(--mono);font-size:.65rem;color:var(--txt2)">Lead Backend</div></div></div><div class="org-member"><span class="org-av">SM</span><div><div style="font-family:var(--display);font-size:.78rem;color:var(--txt)">Sarah Morel</div><div style="font-family:var(--mono);font-size:.65rem;color:var(--txt2)">Frontend & UX</div></div></div><div class="org-member"><span class="org-av">TL</span><div><div style="font-family:var(--display);font-size:.78rem;color:var(--txt)">Thomas Laurent</div><div style="font-family:var(--mono);font-size:.65rem;color:var(--txt2)">Full Stack</div></div></div><div class="org-member"><span class="org-av">AN</span><div><div style="font-family:var(--display);font-size:.78rem;color:var(--txt)">Amélie Noel</div><div style="font-family:var(--mono);font-size:.65rem;color:var(--txt2)">Dev Junior</div></div></div></div></div>
+          <div class="org-dept"><div class="org-dept-lbl" style="color:#f87171">🔐 CYBERSÉCURITÉ</div><div class="org-members"><div class="org-member"><span class="org-av" style="border-color:rgba(248,113,113,.3);color:#f87171">MC</span><div><div style="font-family:var(--display);font-size:.78rem;color:var(--txt)">Marc Chauvet</div><div style="font-family:var(--mono);font-size:.65rem;color:var(--txt2)">RSSI</div></div></div><div class="org-member"><span class="org-av" style="border-color:rgba(248,113,113,.3);color:#f87171">EB</span><div><div style="font-family:var(--display);font-size:.78rem;color:var(--txt)">Emma Bourdin</div><div style="font-family:var(--mono);font-size:.65rem;color:var(--txt2)">SOC / Pentest</div></div></div></div></div>
+          <div class="org-dept"><div class="org-dept-lbl" style="color:var(--green)">🖥️ INFRA & RÉSEAU</div><div class="org-members"><div class="org-member"><span class="org-av" style="border-color:rgba(0,255,157,.3);color:var(--green)">LF</span><div><div style="font-family:var(--display);font-size:.78rem;color:var(--txt)">Lucie Faure</div><div style="font-family:var(--mono);font-size:.65rem;color:var(--txt2)">DevOps</div></div></div><div class="org-member"><span class="org-av" style="border-color:rgba(0,255,157,.3);color:var(--green)">RD</span><div><div style="font-family:var(--display);font-size:.78rem;color:var(--txt)">Romain Denis</div><div style="font-family:var(--mono);font-size:.65rem;color:var(--txt2)">Admin Sys & Réseau</div></div></div></div></div>
+          <div class="org-dept"><div class="org-dept-lbl" style="color:var(--magenta)">🎧 SUPPORT</div><div class="org-members"><div class="org-member"><span class="org-av" style="border-color:rgba(255,0,144,.3);color:var(--magenta)">CP</span><div><div style="font-family:var(--display);font-size:.78rem;color:var(--txt)">Clara Petit</div><div style="font-family:var(--mono);font-size:.65rem;color:var(--txt2)">Support N1/N2</div></div></div><div class="org-member"><span class="org-av" style="border-color:rgba(255,0,144,.3);color:var(--magenta)">PG</span><div><div style="font-family:var(--display);font-size:.78rem;color:var(--txt)">Paul Garnier</div><div style="font-family:var(--mono);font-size:.65rem;color:var(--txt2)">Office Manager</div></div></div></div></div>
         </div>
       </div>
     </div>
-
-    <!-- PROJETS -->
     <div class="ent-block reveal">
-      <div class="blk-lbl">🗂️ Projets réalisés</div>
+      <div class="blk-lbl">🗂️ PROJETS RÉALISÉS</div>
       <div class="proj-ent-grid">
-        <div class="proj-ent-card">
-          <div class="pec-header">
-            <div class="pec-ico" style="background:rgba(79,142,255,.15)">🛒</div>
-            <div>
-              <div class="pec-title">EcoShop — Plateforme e-commerce</div>
-              <div class="pec-client">Client : Coopérative Bio Rhône-Alpes</div>
-            </div>
-          </div>
-          <p class="pec-desc">Développement complet d'une boutique en ligne pour une coopérative de produits biologiques. Gestion des stocks, paiement en ligne sécurisé (Stripe), espace client, tableau de bord admin et système de fidélité.</p>
-          <div class="pec-tech"><span>React</span><span>Node.js</span><span>MySQL</span><span>Stripe API</span><span>Docker</span></div>
-          <div class="pec-footer">
-            <span class="pec-status pec-ok">✅ Livré</span>
-            <span class="pec-dur">⏱ 4 mois</span>
-            <span class="pec-team">👥 3 devs</span>
-          </div>
-        </div>
-        <div class="proj-ent-card">
-          <div class="pec-header">
-            <div class="pec-ico" style="background:rgba(239,68,68,.12)">🔐</div>
-            <div>
-              <div class="pec-title">SecureAudit — Audit sécurité PME</div>
-              <div class="pec-client">Client : Cabinet comptable Duchêne &amp; Associés</div>
-            </div>
-          </div>
-          <p class="pec-desc">Audit complet de l'infrastructure informatique du cabinet (40 postes). Identification de 14 vulnérabilités critiques, mise en conformité RGPD, déploiement d'un pare-feu nouvelle génération et formation du personnel.</p>
-          <div class="pec-tech"><span>Nmap</span><span>Metasploit</span><span>Wireshark</span><span>pfSense</span><span>RGPD</span></div>
-          <div class="pec-footer">
-            <span class="pec-status pec-ok">✅ Livré</span>
-            <span class="pec-dur">⏱ 6 semaines</span>
-            <span class="pec-team">👥 2 experts</span>
-          </div>
-        </div>
-        <div class="proj-ent-card">
-          <div class="pec-header">
-            <div class="pec-ico" style="background:rgba(52,211,153,.12)">🏭</div>
-            <div>
-              <div class="pec-title">GestiProd — ERP industriel sur-mesure</div>
-              <div class="pec-client">Client : Menuiserie Bertrand SAS</div>
-            </div>
-          </div>
-          <p class="pec-desc">Développement d'un ERP complet pour une menuiserie industrielle : gestion des commandes, suivi de production, planning des ateliers, gestion des stocks de matières premières et facturation automatique.</p>
-          <div class="pec-tech"><span>PHP</span><span>MySQL</span><span>JavaScript</span><span>Chart.js</span><span>PDF.js</span></div>
-          <div class="pec-footer">
-            <span class="pec-status pec-ok">✅ Livré</span>
-            <span class="pec-dur">⏱ 5 mois</span>
-            <span class="pec-team">👥 4 devs</span>
-          </div>
-        </div>
-        <div class="proj-ent-card">
-          <div class="pec-header">
-            <div class="pec-ico" style="background:rgba(167,139,250,.12)">🏥</div>
-            <div>
-              <div class="pec-title">MédiConnect — Portail patient</div>
-              <div class="pec-client">Client : Cabinet médical Dr. Fontaine</div>
-            </div>
-          </div>
-          <p class="pec-desc">Application web de prise de rendez-vous en ligne, dossier patient numérique, messagerie sécurisée médecin-patient et rappels automatiques par SMS. Hébergement HDS (données de santé).</p>
-          <div class="pec-tech"><span>React</span><span>Node.js</span><span>PostgreSQL</span><span>Twilio</span><span>HDS</span></div>
-          <div class="pec-footer">
-            <span class="pec-status pec-wip">🔄 En cours</span>
-            <span class="pec-dur">⏱ 3 mois</span>
-            <span class="pec-team">👥 3 devs</span>
-          </div>
-        </div>
+        <div class="proj-ent-card"><div class="pec-header"><div class="pec-ico">🛒</div><div><div class="pec-title">EcoShop — E-commerce</div><div class="pec-client">Coopérative Bio Rhône-Alpes</div></div></div><p class="pec-desc">Boutique en ligne : gestion stocks, paiement Stripe, espace client, tableau de bord admin.</p><div class="pec-tech"><span>React</span><span>Node.js</span><span>MySQL</span><span>Stripe</span><span>Docker</span></div><div class="pec-footer"><span class="pec-status pec-ok">✅ Livré</span><span class="pec-dur">⏱ 4 mois</span><span class="pec-team">👥 3 devs</span></div></div>
+        <div class="proj-ent-card"><div class="pec-header"><div class="pec-ico">🔐</div><div><div class="pec-title">SecureAudit — Sécurité</div><div class="pec-client">Cabinet Duchêne & Associés</div></div></div><p class="pec-desc">Audit 40 postes, 14 vulnérabilités critiques, conformité RGPD, firewall nouvelle génération.</p><div class="pec-tech"><span>Nmap</span><span>Metasploit</span><span>Wireshark</span><span>pfSense</span></div><div class="pec-footer"><span class="pec-status pec-ok">✅ Livré</span><span class="pec-dur">⏱ 6 sem.</span><span class="pec-team">👥 2 experts</span></div></div>
+        <div class="proj-ent-card"><div class="pec-header"><div class="pec-ico">🏭</div><div><div class="pec-title">GestiProd — ERP</div><div class="pec-client">Menuiserie Bertrand SAS</div></div></div><p class="pec-desc">ERP complet : commandes, production, planning ateliers, stocks et facturation automatique.</p><div class="pec-tech"><span>PHP</span><span>MySQL</span><span>JS</span><span>Chart.js</span></div><div class="pec-footer"><span class="pec-status pec-ok">✅ Livré</span><span class="pec-dur">⏱ 5 mois</span><span class="pec-team">👥 4 devs</span></div></div>
+        <div class="proj-ent-card"><div class="pec-header"><div class="pec-ico">🏥</div><div><div class="pec-title">MédiConnect — Portail</div><div class="pec-client">Cabinet Dr. Fontaine</div></div></div><p class="pec-desc">RDV en ligne, dossier patient numérique, messagerie sécurisée, rappels SMS. Hébergement HDS.</p><div class="pec-tech"><span>React</span><span>Node.js</span><span>PostgreSQL</span><span>Twilio</span></div><div class="pec-footer"><span class="pec-status pec-wip">🔄 En cours</span><span class="pec-dur">⏱ 3 mois</span><span class="pec-team">👥 3 devs</span></div></div>
       </div>
     </div>
-
-    <!-- TECHNOLOGIES -->
     <div class="ent-block reveal">
-      <div class="blk-lbl">🛠️ Technologies utilisées</div>
+      <div class="blk-lbl">🛠️ TECHNOLOGIES</div>
       <div class="tech-cats">
-        <div class="tech-cat">
-          <div class="tech-cat-title">Frontend</div>
-          <div class="tech-tags"><span>HTML5</span><span>CSS3</span><span>JavaScript ES6+</span><span>React</span><span>Vue.js</span><span>Figma</span></div>
-        </div>
-        <div class="tech-cat">
-          <div class="tech-cat-title">Backend</div>
-          <div class="tech-tags"><span>PHP 8</span><span>Node.js</span><span>Python</span><span>REST API</span><span>GraphQL</span></div>
-        </div>
-        <div class="tech-cat">
-          <div class="tech-cat-title">Bases de données</div>
-          <div class="tech-tags"><span>MySQL</span><span>PostgreSQL</span><span>MongoDB</span><span>Redis</span></div>
-        </div>
-        <div class="tech-cat">
-          <div class="tech-cat-title">Infra & DevOps</div>
-          <div class="tech-tags"><span>Docker</span><span>Linux (Debian/Ubuntu)</span><span>Git / GitHub</span><span>CI/CD</span><span>Nginx</span></div>
-        </div>
-        <div class="tech-cat">
-          <div class="tech-cat-title">Cybersécurité</div>
-          <div class="tech-tags"><span>Nmap</span><span>Wireshark</span><span>Metasploit</span><span>pfSense</span><span>OpenVPN</span><span>SIEM</span></div>
-        </div>
-        <div class="tech-cat">
-          <div class="tech-cat-title">Outils métier</div>
-          <div class="tech-tags"><span>GLPI</span><span>Jira</span><span>Trello</span><span>Slack</span><span>VS Code</span><span>Postman</span></div>
-        </div>
+        <div class="tech-cat"><div class="tech-cat-title">Frontend</div><div class="tech-tags"><span>HTML5</span><span>CSS3</span><span>JS ES6+</span><span>React</span><span>Vue.js</span><span>Figma</span></div></div>
+        <div class="tech-cat"><div class="tech-cat-title">Backend</div><div class="tech-tags"><span>PHP 8</span><span>Node.js</span><span>Python</span><span>REST API</span><span>GraphQL</span></div></div>
+        <div class="tech-cat"><div class="tech-cat-title">Bases de données</div><div class="tech-tags"><span>MySQL</span><span>PostgreSQL</span><span>MongoDB</span><span>Redis</span></div></div>
+        <div class="tech-cat"><div class="tech-cat-title">Infra & DevOps</div><div class="tech-tags"><span>Docker</span><span>Linux</span><span>Git / GitHub</span><span>CI/CD</span><span>Nginx</span></div></div>
+        <div class="tech-cat"><div class="tech-cat-title">Cybersécurité</div><div class="tech-tags"><span>Nmap</span><span>Wireshark</span><span>Metasploit</span><span>pfSense</span><span>OpenVPN</span></div></div>
       </div>
     </div>
-
-    <!-- JOURNÉE TYPE -->
     <div class="ent-block reveal">
-      <div class="blk-lbl">🕐 Journée type chez NexaTech</div>
+      <div class="blk-lbl">🕐 JOURNÉE TYPE</div>
       <div class="day-timeline">
-        <div class="day-item"><span class="day-time">08h30</span><div class="day-body"><strong>Stand-up meeting</strong><span>Réunion quotidienne de 15 min avec toute l'équipe. Chacun présente ses avancées, ses blocages et ses objectifs du jour.</span></div></div>
-        <div class="day-item"><span class="day-time">09h00</span><div class="day-body"><strong>Sessions de développement</strong><span>Travail en profondeur sur les projets clients. Les développeurs travaillent en sprints Agile de 2 semaines avec des revues de code quotidiennes.</span></div></div>
-        <div class="day-item"><span class="day-time">12h30</span><div class="day-body"><strong>Pause déjeuner</strong><span>Moment convivial en équipe. Des déjeuners thématiques "Tech Talk" sont organisés deux fois par mois pour partager des veilles technologiques.</span></div></div>
-        <div class="day-item"><span class="day-time">13h30</span><div class="day-body"><strong>Support & tickets clients</strong><span>Traitement des incidents remontés par les clients, mise à jour de la documentation et déploiements en recette.</span></div></div>
-        <div class="day-item"><span class="day-time">15h00</span><div class="day-body"><strong>Réunion clients ou sprints</strong><span>Démonstrations de fonctionnalités aux clients, recueil de feedback, ajustements et planification des prochaines itérations.</span></div></div>
-        <div class="day-item"><span class="day-time">17h30</span><div class="day-body"><strong>Veille & fin de journée</strong><span>30 minutes de veille technologique (cybersécurité, nouvelles frameworks, actualités IT) avant de clôturer les tickets du jour.</span></div></div>
+        <div class="day-item"><span class="day-time">08h30</span><div class="day-body"><strong>Stand-up Meeting</strong><span>15 min quotidiennes : avancées, blocages, objectifs du jour.</span></div></div>
+        <div class="day-item"><span class="day-time">09h00</span><div class="day-body"><strong>Sessions Dev</strong><span>Sprints Agile 2 semaines avec revues de code quotidiennes.</span></div></div>
+        <div class="day-item"><span class="day-time">12h30</span><div class="day-body"><strong>Déjeuner + Tech Talk</strong><span>Bimensuels pour partager les veilles technologiques.</span></div></div>
+        <div class="day-item"><span class="day-time">13h30</span><div class="day-body"><strong>Support & Tickets</strong><span>Incidents clients, documentation, déploiements recette.</span></div></div>
+        <div class="day-item"><span class="day-time">15h00</span><div class="day-body"><strong>Réunions Clients</strong><span>Démos, feedback, planification des prochaines itérations.</span></div></div>
+        <div class="day-item"><span class="day-time">17h30</span><div class="day-body"><strong>Veille & Clôture</strong><span>30 min veille tech cybersécurité, frameworks, actualités IT.</span></div></div>
       </div>
     </div>
+  </div>
+</section>
 
-    <!-- OBJECTIFS FUTURS -->
-    <div class="ent-block reveal">
-      <div class="blk-lbl">🚀 Objectifs futurs</div>
-      <div class="ent-grid">
-        <div class="ent-card">
-          <div class="ent-card-ico">📍</div>
-          <h4>Expansion régionale</h4>
-          <p>Ouverture d'une antenne à Grenoble d'ici fin 2025 pour couvrir l'ensemble du bassin Auvergne-Rhône-Alpes.</p>
-        </div>
-        <div class="ent-card">
-          <div class="ent-card-ico">🎓</div>
-          <h4>Centre de formation</h4>
-          <p>Lancement d'un programme de formation certifié pour accompagner les entreprises clientes dans la montée en compétences IT de leurs équipes.</p>
-        </div>
-        <div class="ent-card">
-          <div class="ent-card-ico">🤖</div>
-          <h4>Pôle IA & Data</h4>
-          <p>Création d'un nouveau département dédié à l'intelligence artificielle et à l'analyse de données pour les clients grands comptes.</p>
-        </div>
-        <div class="ent-card">
-          <div class="ent-card-ico">🏆</div>
-          <h4>Certification ISO 27001</h4>
-          <p>Obtention de la certification ISO 27001 en sécurité de l'information pour renforcer la crédibilité du pôle cybersécurité.</p>
-        </div>
-      </div>
+<section id="hero-img-section">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="sec-num">05</div>
+      <h2 class="sec-title">System Override</h2>
+      <p class="sec-desc">// Combat protocol initiated — Neural link established</p>
     </div>
+    <div class="hero-img-wrap reveal">
+      <div class="hero-img-frame">
+        <img src="''')
 
+html_parts.append(img_data)
+
+html_parts.append('''" alt="Cyberpunk Combat Sequence" />
+        <div class="img-overlay"></div>
+        <div class="img-corner img-corner-tl"></div>
+        <div class="img-corner img-corner-tr"></div>
+        <div class="img-corner img-corner-bl"></div>
+        <div class="img-corner img-corner-br"></div>
+      </div>
+      <p class="img-caption">// <span>NEURAL.JACK</span> — Combat_Sequence.exe — Status: <span>ACTIVE</span></p>
+    </div>
   </div>
 </section>
 
 <section id="contact">
   <div class="wrap">
-    <div class="sec-head reveal"><div class="sec-num">05</div><h2 class="sec-title">Contact</h2>
-      <p class="sec-desc">Une proposition d'alternance ou de stage ? Écrivez-moi !</p>
-    </div>
+    <div class="sec-head reveal"><div class="sec-num">06</div><h2 class="sec-title">Contact</h2><p class="sec-desc">// Proposition d'alternance ? Initiez la connexion.</p></div>
     <div class="contact-wrap">
       <div class="c-links reveal">
-        <a href="/cdn-cgi/l/email-protection#d8b2adb4b1bdb6f6b2bdbfad98bdb5b9b1b4f6bbb7b5" class="c-link">
+        <a href="mailto:julien.jegu@example.fr" class="c-link">
           <div class="c-ico">✉️</div>
-          <div class="c-info"><span class="c-lbl">Email</span><span class="c-val"><span class="__cf_email__" data-cfemail="4f253a23262a2161252a283a0f2a222e2623612c2022">[email&#160;protected]</span></span></div>
+          <div class="c-info"><span class="c-lbl">Email</span><span class="c-val">julien.jegu@example.fr</span></div>
           <span class="c-arr">→</span>
         </a>
         <a href="https://linkedin.com/in/julien-jegu" target="_blank" class="c-link">
-          <div class="c-ico" style="background:rgba(0,119,181,.12);border-color:rgba(0,119,181,.25)">💼</div>
+          <div class="c-ico">💼</div>
           <div class="c-info"><span class="c-lbl">LinkedIn</span><span class="c-val">linkedin.com/in/julien-jegu</span></div>
           <span class="c-arr">→</span>
         </a>
         <a href="https://github.com/julien-jegu" target="_blank" class="c-link">
-          <div class="c-ico" style="background:rgba(255,255,255,.05);border-color:rgba(255,255,255,.12)">🐙</div>
+          <div class="c-ico">🐙</div>
           <div class="c-info"><span class="c-lbl">GitHub</span><span class="c-val">github.com/julien-jegu</span></div>
           <span class="c-arr">→</span>
         </a>
@@ -706,9 +551,9 @@ footer span{color:var(--txt2)}
         <div class="fg"><label>Nom</label><input type="text" id="fn" placeholder="Jean Dupont" required/></div>
         <div class="fg"><label>Email</label><input type="email" id="fe" placeholder="jean@email.fr" required/></div>
         <div class="fg"><label>Sujet</label><input type="text" id="fs" placeholder="Proposition d'alternance"/></div>
-        <div class="fg"><label>Message</label><textarea id="fm" rows="5" placeholder="Bonjour..." required></textarea></div>
-        <button type="submit" class="btn-p" style="width:100%;justify-content:center">Envoyer ✉️</button>
-        <div class="form-ok hidden" id="fOk">✅ Message envoyé ! Je vous réponds très vite.</div>
+        <div class="fg"><label>Message</label><textarea id="fm" rows="5" placeholder="// Initier contact..." required></textarea></div>
+        <button type="submit" class="btn-p" style="width:100%;justify-content:center">ENVOYER ▶</button>
+        <div class="form-ok hidden" id="fOk">✅ // TRANSMISSION OK — Réponse imminente.</div>
       </form>
     </div>
   </div>
@@ -716,15 +561,80 @@ footer span{color:var(--txt2)}
 
 <footer>
   <div class="wrap">
-    <p>© <span id="yr"></span> <span>Julien Jegu</span> · BTS SIO</p>
-    <p class="footer-sub">Fait avec ❤️ et ☕ · BTS SIO SISR</p>
+    <p>© <span id="yr"></span> <span>JULIEN JEGU</span> · BTS SIO</p>
+    <p class="footer-sub">// BUILT WITH PASSION & CAFFEINE · BTS SIO SISR · NIGHT CITY 2077</p>
   </div>
 </footer>
 <button id="btt">↑</button>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+<script>
 'use strict';
-const SKILLS=[{category:"Développement Web",icon:"🌐",bars:[{name:"HTML / CSS",level:90},{name:"JavaScript",level:70},{name:"PHP",level:60},{name:"React",level:40}]},{category:"Langages & Scripts",icon:"💻",bars:[{name:"Python",level:75},{name:"Java",level:55},{name:"Bash",level:50}]},{category:"Bases de données",icon:"🗄️",bars:[{name:"MySQL / MariaDB",level:80},{name:"PostgreSQL",level:60},{name:"MongoDB",level:40}]},{category:"Réseaux & Systèmes",icon:"🔌",bars:[{name:"Linux (Ubuntu)",level:70},{name:"Windows Server",level:60},{name:"TCP/IP · VLAN",level:65}]},{category:"Outils & Méthodes",icon:"🛠️",tags:["Git / GitHub","VS Code","Docker","Figma","Trello","Merise","UML","Agile / Scrum","WAMP / LAMP"]},{category:"Langues",icon:"🗣️",bars:[{name:"Français",level:100},{name:"Anglais (B2)",level:72},{name:"Espagnol (A2)",level:32}]}];
+const SKILLS=[
+  {category:"Développement Web",icon:"🌐",bars:[{name:"HTML / CSS",level:90},{name:"JavaScript",level:70},{name:"PHP",level:60},{name:"React",level:40}]},
+  {category:"Langages & Scripts",icon:"💻",bars:[{name:"Python",level:75},{name:"Java",level:55},{name:"Bash",level:50}]},
+  {category:"Bases de données",icon:"🗄️",bars:[{name:"MySQL / MariaDB",level:80},{name:"PostgreSQL",level:60},{name:"MongoDB",level:40}]},
+  {category:"Réseaux & Systèmes",icon:"🔌",bars:[{name:"Linux (Ubuntu)",level:70},{name:"Windows Server",level:60},{name:"TCP/IP · VLAN",level:65}]},
+  {category:"Outils & Méthodes",icon:"🛠️",tags:["Git/GitHub","VS Code","Docker","Figma","Trello","Merise","UML","Agile/Scrum","WAMP/LAMP"]},
+  {category:"Langues",icon:"🗣️",bars:[{name:"Français",level:100},{name:"Anglais (B2)",level:72},{name:"Espagnol (A2)",level:32}]}
+];
+
+// MUSIC — Web Audio API cyberpunk ambience
+let audioCtx=null,isPlaying=false,oscillators=[],masterGainNode=null;
+
+function startAudio(){
+  audioCtx=new(window.AudioContext||window.webkitAudioContext)();
+  masterGainNode=audioCtx.createGain();
+  masterGainNode.gain.value=0.07;
+  masterGainNode.connect(audioCtx.destination);
+
+  function osc(type,freq,gainVal){
+    const o=audioCtx.createOscillator(),g=audioCtx.createGain();
+    o.type=type;o.frequency.value=freq;g.gain.value=gainVal;
+    o.connect(g);g.connect(masterGainNode);o.start();
+    oscillators.push(o);return{o,g};
+  }
+  function lfo(target,rate,depth){
+    const l=audioCtx.createOscillator(),lg=audioCtx.createGain();
+    l.frequency.value=rate;lg.gain.value=depth;
+    l.connect(lg);lg.connect(target);l.start();oscillators.push(l);
+  }
+
+  const bass=osc('sine',55,0.5);
+  const sub=osc('sine',27.5,0.3);
+  const mid=osc('triangle',220,0.12);
+  const high=osc('sine',880,0.03);
+  const fifth=osc('sine',82.5,0.15);
+
+  // Reverb-like effect with delays
+  const delay=audioCtx.createDelay(2);
+  delay.delayTime.value=0.8;
+  const delayGain=audioCtx.createGain();
+  delayGain.gain.value=0.3;
+  masterGainNode.connect(delay);
+  delay.connect(delayGain);
+  delayGain.connect(delay);
+  delayGain.connect(audioCtx.destination);
+
+  lfo(bass.o.frequency,0.07,10);
+  lfo(mid.g.gain,0.13,0.06);
+  lfo(high.g.gain,0.3,0.02);
+  lfo(fifth.o.frequency,0.05,3);
+}
+
+function stopAudio(){
+  oscillators.forEach(o=>{try{o.stop()}catch(e){}});
+  oscillators=[];
+  if(audioCtx){audioCtx.close();audioCtx=null;}
+  masterGainNode=null;
+}
+
+const musicBtn=document.getElementById('musicBtn');
+const musicWave=document.getElementById('musicWave');
+musicBtn.addEventListener('click',()=>{
+  if(!isPlaying){startAudio();isPlaying=true;musicBtn.textContent='⏸';musicWave.classList.remove('paused');}
+  else{stopAudio();isPlaying=false;musicBtn.textContent='▶';musicWave.classList.add('paused');}
+});
+
 document.addEventListener('DOMContentLoaded',()=>{
   document.getElementById('yr').textContent=new Date().getFullYear();
   const g=document.getElementById('skGrid');
@@ -745,8 +655,19 @@ document.addEventListener('DOMContentLoaded',()=>{
   document.getElementById('cForm').onsubmit=e=>{
     e.preventDefault();
     if(!document.getElementById('fn').value.trim()||!document.getElementById('fe').value.trim()||!document.getElementById('fm').value.trim())return;
-    const btn=e.target.querySelector('button[type=submit]');btn.disabled=true;btn.textContent='Envoi…';
-    setTimeout(()=>{e.target.reset();document.getElementById('fOk').classList.remove('hidden');btn.disabled=false;btn.textContent='Envoyer ✉️';setTimeout(()=>document.getElementById('fOk').classList.add('hidden'),5000);},1000);
+    const btn=e.target.querySelector('button[type=submit]');btn.disabled=true;btn.textContent='// ENVOI...';
+    setTimeout(()=>{e.target.reset();document.getElementById('fOk').classList.remove('hidden');btn.disabled=false;btn.textContent='ENVOYER ▶';setTimeout(()=>document.getElementById('fOk').classList.add('hidden'),5000);},1000);
   };
 });
-const RO=new IntersectionObserver(entries=>{entries.forEach((e,i)=>{if(e.isIntersecting){setTimeout(()=>e.target.classList.add('in'),i*60);
+const RO=new IntersectionObserver(entries=>{entries.forEach((e,i)=>{if(e.isIntersecting){setTimeout(()=>e.target.classList.add('in'),i*60);RO.unobserve(e.target);}});},{threshold:0.1});
+const BO=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){const v=parseInt(e.target.dataset.v)||0;e.target.style.width=v+'%';BO.unobserve(e.target);}});},{threshold:0.1});
+</script>
+</body>
+</html>''')
+
+html = ''.join(html_parts)
+
+with open('/mnt/user-data/outputs/portfolio_cyberpunk.html', 'w', encoding='utf-8') as f:
+    f.write(html)
+
+print(f"Done! Total size: {len(html):,} bytes")
