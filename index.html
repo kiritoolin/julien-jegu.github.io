@@ -1,171 +1,98 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-<meta charset="UTF-8"/>
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>JULIEN JEGU // NEURAL INTERFACE</title>
-<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Share+Tech+Mono&display=swap" rel="stylesheet"/>
-<style>
-:root {
-  --cyan: #00e5ff;
-  --magenta: #ff003c;
-  --yellow: #ffe135;
-  --bg: #020b14;
-  --card: rgba(0, 15, 40, 0.85);
-  --border: 2px solid var(--cyan);
-}
+    <meta charset="UTF-8">
+    <title>JULIEN JEGU // NEURAL FOLDER</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --cyan: #00e5ff; --magenta: #ff003c; --yellow: #ffe135;
+            --bg: #020b14; --card: rgba(0, 15, 40, 0.9);
+        }
+        body { background-color: var(--bg); color: var(--cyan); font-family: 'Share Tech Mono', monospace; margin: 0; }
+        .container { max-width: 1000px; margin: 0 auto; padding: 50px 20px; }
+        
+        /* Style des Sections */
+        .neon-border { border: 1px solid var(--cyan); box-shadow: 0 0 10px var(--cyan); padding: 20px; margin-bottom: 30px; background: var(--card); }
+        .glitch-text { font-family: 'Orbitron'; color: var(--magenta); text-transform: uppercase; letter-spacing: 2px; }
+        
+        /* Liste de Contact Cyber */
+        .contact-list { list-style: none; padding: 0; }
+        .contact-list li { margin: 10px 0; border-bottom: 1px solid rgba(0, 229, 255, 0.2); padding-bottom: 5px; }
+        .contact-list a { color: var(--yellow); text-decoration: none; }
 
-body {
-  background-color: var(--bg);
-  color: var(--cyan);
-  font-family: 'Share Tech Mono', monospace;
-  margin: 0;
-  overflow-x: hidden;
-  background-image: radial-gradient(circle, rgba(0, 229, 255, 0.05) 1px, transparent 1px);
-  background-size: 30px 30px;
-}
-
-/* Effet Scanline */
-body::before {
-  content: " ";
-  position: fixed;
-  top: 0; left: 0; bottom: 0; right: 0;
-  background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), 
-              linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0,255, 0.06));
-  background-size: 100% 4px, 3px 100%;
-  z-index: 100;
-  pointer-events: none;
-}
-
-header {
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  border-bottom: var(--border);
-  background: linear-gradient(to bottom, transparent, rgba(0, 229, 255, 0.1));
-}
-
-.glitch {
-  font-family: 'Orbitron', sans-serif;
-  font-size: 5rem;
-  font-weight: 900;
-  text-transform: uppercase;
-  position: relative;
-  text-shadow: 0.05em 0 0 var(--magenta), -0.025em -0.05em 0 var(--cyan),
-               0.025em 0.05em 0 var(--yellow);
-  animation: glitch 1s infinite;
-}
-
-@keyframes glitch {
-  0% { text-shadow: 0.05em 0 0 var(--magenta), -0.05em -0.025em 0 var(--cyan); }
-  15% { text-shadow: -0.05em -0.025em 0 var(--magenta), 0.025em 0.025em 0 var(--cyan); }
-  100% { text-shadow: 0.05em 0 0 var(--magenta), -0.05em -0.025em 0 var(--cyan); }
-}
-
-.video-container {
-  width: 80%;
-  max-width: 900px;
-  margin: 50px auto;
-  border: var(--border);
-  box-shadow: 0 0 20px var(--cyan);
-  position: relative;
-}
-
-video { width: 100%; display: block; }
-
-.section {
-  padding: 100px 20px;
-  max-width: 1000px;
-  margin: 0 auto;
-}
-
-.terminal-card {
-  background: var(--card);
-  border-left: 5px solid var(--magenta);
-  padding: 30px;
-  margin-bottom: 30px;
-  clip-path: polygon(0 0, 100% 0, 100% 90%, 95% 100%, 0 100%);
-}
-
-.btn-cyber {
-  background: transparent;
-  color: var(--yellow);
-  border: 1px solid var(--yellow);
-  padding: 15px 30px;
-  font-family: 'Orbitron', sans-serif;
-  cursor: pointer;
-  transition: 0.3s;
-  text-transform: uppercase;
-  font-weight: bold;
-}
-
-.btn-cyber:hover {
-  background: var(--yellow);
-  color: black;
-  box-shadow: 0 0 15px var(--yellow);
-}
-
-#remember-section {
-  text-align: center;
-  padding: 150px 0;
-  background: linear-gradient(to top, var(--magenta), transparent);
-}
-
-.hidden { display: none; }
-</style>
+        .btn-action { background: var(--magenta); color: #fff; border: none; padding: 10px 20px; cursor: pointer; font-family: 'Orbitron'; }
+        .hidden { display: none; }
+    </style>
 </head>
 <body>
 
-<audio id="bgMusic" loop>
-  <source src="music.mp3" type="audio/mpeg">
-</audio>
+<div class="container">
+    <header style="text-align:center; padding: 50px 0;">
+        <h1 class="glitch-text" style="font-size: 3rem;">JULIEN JEGU</h1>
+        <p>[TON SLOGAN : ex: Développeur Fullstack & Explorateur de Matrix]</p>
+        <button class="btn-action" onclick="showContent()">DÉCRYPTER LES DONNÉES</button>
+    </header>
 
-<header>
-  <h1 class="glitch">JULIEN JEGU</h1>
-  <p>>>> SYSTEM_STATUS: ONLINE</p>
-  <button class="btn-cyber" onclick="startInterface()">INITIALISER L'INTERFACE</button>
-</header>
+    <div id="content" class="hidden">
+        
+        <!-- VIDEO SECTION -->
+        <div class="neon-border">
+            <h2 class="glitch-text">// TRANSMISSION_VIDEO</h2>
+            <video controls style="width:100%; border: 1px solid var(--magenta);">
+                <source src="Cyberpunk Edgerunners  “I Really Want to Stay At Your House” by Rosa Walton  Music Video.mp4" type="video/mp4">
+            </video>
+        </div>
 
-<div id="main-content" class="hidden">
-  <section class="section">
-    <div class="terminal-card">
-      <h2>// TRANSMISSION_VISUELLE</h2>
-      <div class="video-container">
-        <video controls autoplay muted loop>
-          <source src="Cyberpunk Edgerunners  “I Really Want to Stay At Your House” by Rosa Walton  Music Video.mp4" type="video/mp4">
-        </video>
-      </div>
+        <!-- BIO SECTION -->
+        <div class="neon-border">
+            <h2 class="glitch-text">// DOSSIER_PERSONNEL</h2>
+            <p><strong>ÂGE :</strong> [Ton Âge] ans</p>
+            <p><strong>LOCALISATION :</strong> [Ta Ville], Secteur [Ton Département]</p>
+            <p><strong>FORMATION :</strong> [Ton École / Ton diplôme]</p>
+            <p><strong>BIO :</strong> [Raconte ton parcours ici. Exemple : Passionné par le code depuis que j'ai hacké ma première calculatrice, je crée aujourd'hui des solutions web innovantes.]</p>
+        </div>
+
+        <!-- PROJETS SECTION -->
+        <div class="neon-border">
+            <h2 class="glitch-text">// PROJETS_ACTUALISÉS</h2>
+            <ul>
+                <li><strong>[Nom Projet 1] :</strong> [Description courte du projet] - <a href="[Lien GitHub]">Voir le Repo</a></li>
+                <li><strong>[Nom Projet 2] :</strong> [Description courte du projet] - <a href="[Lien GitHub]">Voir le Repo</a></li>
+            </ul>
+        </div>
+
+        <!-- SKILLS SECTION -->
+        <div class="neon-border">
+            <h2 class="glitch-text">// CAPACITÉS_CYBER</h2>
+            <p>LANGAGES : HTML, CSS, JavaScript, [Ajoute tes langages]</p>
+            <p>OUTILS : Git, VS Code, [Ajoute tes outils]</p>
+        </div>
+
+        <!-- CONTACT SECTION -->
+        <div class="neon-border">
+            <h2 class="glitch-text">// TERMINAL_COMMUNICATION</h2>
+            <ul class="contact-list">
+                <li>EMAIL : <a href="mailto:[ton-email@gmail.com]">[ton-email@gmail.com]</a></li>
+                <li>LINKEDIN : <a href="[Lien-Linkedin]">Julien Jegu</a></li>
+                <li>GITHUB : <a href="[Lien-GitHub]">@JulienJegu</a></li>
+            </ul>
+        </div>
+
+        <!-- TON BOUTON FINAL -->
+        <div style="text-align: center; padding: 40px;">
+            <button class="btn-action" style="font-size: 1.5rem; background: transparent; border: 2px solid var(--magenta); color: var(--magenta);" onclick="alert('NEVER FADE AWAY.')">
+                RAPPELLE-TOI
+            </button>
+        </div>
     </div>
-
-    <div class="terminal-card">
-      <h2>// BIO_LOG</h2>
-      <p>Extraction des données en cours... [OK]</p>
-      <p>Julien Jegu. Développeur spécialisé dans les interfaces neuronales et le design de Night City.</p>
-    </div>
-  </section>
-
-  <section id="remember-section">
-    <button class="btn-cyber" style="font-size: 2rem; border-color: var(--magenta); color: var(--magenta);" onclick="alert('NEVER FADE AWAY.')">
-      RAPPELLE-TOI
-    </button>
-  </section>
 </div>
 
 <script>
-function startInterface() {
-  const music = document.getElementById('bgMusic');
-  music.play().catch(e => console.log("L'audio nécessite une interaction"));
-  
-  document.querySelector('header').style.height = '30vh';
-  document.querySelector('.glitch').style.fontSize = '2rem';
-  document.querySelector('header button').classList.add('hidden');
-  document.getElementById('main-content').classList.remove('hidden');
-  
-  window.scrollTo({ top: 500, behavior: 'smooth' });
-}
+    function showContent() {
+        document.getElementById('content').classList.remove('hidden');
+        window.scrollTo({ top: document.getElementById('content').offsetTop, behavior: 'smooth' });
+    }
 </script>
 
 </body>
