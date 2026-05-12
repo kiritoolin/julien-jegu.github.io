@@ -519,9 +519,93 @@ footer span{color:var(--cyan);text-shadow:0 0 6px var(--cyan)}
 }
 #btt.show{opacity:1;pointer-events:all;transform:scale(1)}
 #btt:hover{background:var(--pink);box-shadow:0 0 20px var(--pink)}
+
+/* =============================================
+   MUSIC PLAYER
+   ============================================= */
+#music-player{
+  position:fixed;bottom:24px;left:24px;z-index:300;
+  display:flex;align-items:center;gap:10px;
+  background:rgba(5,1,15,.92);backdrop-filter:blur(20px);
+  border:1px solid var(--border);
+  box-shadow:0 0 16px var(--glow-c),inset 0 0 8px rgba(0,245,255,.03);
+  padding:8px 14px;
+  clip-path:polygon(6px 0%,100% 0%,calc(100% - 6px) 100%,0% 100%);
+  transition:.3s;
+  min-width:200px;
+}
+#music-player:hover{
+  border-color:rgba(0,245,255,.5);
+  box-shadow:0 0 24px var(--glow-c),0 0 48px var(--glow-c);
+}
+#music-player .mp-btn{
+  width:30px;height:30px;flex-shrink:0;
+  display:flex;align-items:center;justify-content:center;
+  background:var(--cyan);color:#000;font-size:.6rem;font-family:var(--mono);
+  clip-path:polygon(4px 0%,100% 0%,calc(100% - 4px) 100%,0% 100%);
+  cursor:pointer;transition:.2s;border:none;font-weight:700;
+  letter-spacing:.05em;
+}
+#music-player .mp-btn:hover{background:var(--pink);color:#fff;box-shadow:0 0 12px var(--glow-p)}
+#music-player .mp-info{flex:1;overflow:hidden}
+#music-player .mp-title{
+  font-family:var(--mono);font-size:.58rem;color:var(--cyan);
+  text-transform:uppercase;letter-spacing:.08em;
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+  text-shadow:0 0 6px var(--cyan);
+}
+#music-player .mp-sub{
+  font-family:var(--mono);font-size:.52rem;color:var(--txt3);
+  text-transform:uppercase;letter-spacing:.06em;margin-top:2px;
+}
+#music-player .mp-viz{
+  display:flex;align-items:flex-end;gap:2px;height:16px;flex-shrink:0;
+}
+#music-player .mp-viz span{
+  width:3px;background:var(--cyan);border-radius:1px;
+  box-shadow:0 0 4px var(--cyan);
+  animation:viz-bar .6s ease-in-out infinite alternate;
+  transform-origin:bottom;
+}
+#music-player .mp-viz span:nth-child(1){height:6px;animation-delay:0s}
+#music-player .mp-viz span:nth-child(2){height:12px;animation-delay:.1s}
+#music-player .mp-viz span:nth-child(3){height:8px;animation-delay:.2s}
+#music-player .mp-viz span:nth-child(4){height:14px;animation-delay:.15s}
+#music-player .mp-viz span:nth-child(5){height:5px;animation-delay:.05s}
+#music-player .mp-viz.paused span{animation-play-state:paused}
+#music-player .mp-mute{
+  width:24px;height:24px;flex-shrink:0;
+  display:flex;align-items:center;justify-content:center;
+  border:1px solid var(--border);cursor:pointer;transition:.2s;
+  font-size:.65rem;background:transparent;color:var(--txt2);
+  clip-path:polygon(3px 0%,100% 0%,calc(100% - 3px) 100%,0% 100%);
+}
+#music-player .mp-mute:hover{border-color:var(--cyan);color:var(--cyan);box-shadow:0 0 8px var(--glow-c)}
+#music-player .mp-mute.muted{color:var(--pink);border-color:rgba(255,45,120,.4)}
+@keyframes viz-bar{from{transform:scaleY(.4)}to{transform:scaleY(1)}}
+@media(max-width:500px){
+  #music-player{min-width:0;left:12px;bottom:12px}
+  #music-player .mp-title{max-width:100px}
+}
 </style>
 </head>
 <body>
+
+<!-- MUSIC PLAYER -->
+<audio id="bgMusic" loop>
+  <source src="music.mp3" type="audio/mpeg">
+</audio>
+<div id="music-player">
+  <button class="mp-btn" id="mpPlayBtn" title="Play / Pause">▶</button>
+  <div class="mp-info">
+    <div class="mp-title">I Really Want To Stay At Your House</div>
+    <div class="mp-sub">// Rosa Walton · Cyberpunk Edgerunners</div>
+  </div>
+  <div class="mp-viz paused" id="mpViz">
+    <span></span><span></span><span></span><span></span><span></span>
+  </div>
+  <button class="mp-mute muted" id="mpMuteBtn" title="Son">🔇</button>
+</div>
 
 <nav id="nav">
   <div class="nav-in">
@@ -917,6 +1001,57 @@ document.addEventListener('DOMContentLoaded',()=>{
   burger.onclick=()=>nl.classList.toggle('open');
   nl.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>nl.classList.remove('open')));
   btt.onclick=()=>window.scrollTo({top:0,behavior:'smooth'});
+
+  // Music player
+  const audio = document.getElementById('bgMusic');
+  const playBtn = document.getElementById('mpPlayBtn');
+  const muteBtn = document.getElementById('mpMuteBtn');
+  const viz = document.getElementById('mpViz');
+  let playing = false;
+
+  audio.volume = 0.5;
+  audio.muted = true;
+
+  // Try autoplay
+  audio.play().then(() => {
+    playing = true;
+    playBtn.textContent = '⏸';
+    viz.classList.remove('paused');
+  }).catch(() => {
+    playing = false;
+  });
+
+  playBtn.onclick = () => {
+    if (playing) {
+      audio.pause();
+      playing = false;
+      playBtn.textContent = '▶';
+      viz.classList.add('paused');
+    } else {
+      audio.play();
+      playing = true;
+      playBtn.textContent = '⏸';
+      viz.classList.remove('paused');
+    }
+  };
+
+  muteBtn.onclick = () => {
+    audio.muted = !audio.muted;
+    if (audio.muted) {
+      muteBtn.textContent = '🔇';
+      muteBtn.classList.add('muted');
+    } else {
+      muteBtn.textContent = '🔊';
+      muteBtn.classList.remove('muted');
+      // Start playing if not already
+      if (!playing) {
+        audio.play();
+        playing = true;
+        playBtn.textContent = '⏸';
+        viz.classList.remove('paused');
+      }
+    }
+  };
 
   document.getElementById('cForm').onsubmit=e=>{
     e.preventDefault();
