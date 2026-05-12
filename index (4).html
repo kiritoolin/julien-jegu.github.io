@@ -1,0 +1,1406 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>JULIEN JEGU // PORTFOLIO</title>
+<link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Rajdhani:wght@400;500;600;700&family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet"/>
+<style>
+/* =============================================
+   CYBERPUNK THEME — JULIEN JEGU
+   Inspired by: Edgerunners / Ghost in the Shell
+   ============================================= */
+:root {
+  --bg:       #05010f;
+  --bg2:      #08021a;
+  --bg3:      #0c0324;
+  --panel:    rgba(8,2,26,.85);
+  --cyan:     #00f5ff;
+  --pink:     #ff2d78;
+  --purple:   #b44fff;
+  --yellow:   #f5e642;
+  --green:    #39ff14;
+  --txt:      #e8e0ff;
+  --txt2:     #7a6d9a;
+  --txt3:     #3a2d5a;
+  --border:   rgba(0,245,255,.15);
+  --border-h: rgba(0,245,255,.6);
+  --glow-c:   rgba(0,245,255,.25);
+  --glow-p:   rgba(255,45,120,.25);
+  --glow-v:   rgba(180,79,255,.25);
+  --font:     'Rajdhani', sans-serif;
+  --mono:     'Share Tech Mono', monospace;
+  --title:    'Orbitron', sans-serif;
+  --r:        4px;
+  --r-lg:     6px;
+}
+
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:var(--font);background:var(--bg);color:var(--txt);line-height:1.7;overflow-x:hidden;font-size:16px}
+a{color:inherit;text-decoration:none}
+ul{list-style:none}
+button{font-family:var(--font);cursor:pointer;border:none;background:none}
+::selection{background:var(--cyan);color:#000}
+::-webkit-scrollbar{width:4px}
+::-webkit-scrollbar-track{background:var(--bg2)}
+::-webkit-scrollbar-thumb{background:var(--cyan);box-shadow:0 0 8px var(--cyan)}
+
+/* ── Scanlines overlay ── */
+body::before{
+  content:'';position:fixed;inset:0;z-index:9999;pointer-events:none;
+  background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,0,0,.08) 2px,rgba(0,0,0,.08) 4px);
+}
+
+/* ── Layout ── */
+.wrap{max-width:1140px;margin:0 auto;padding:0 28px}
+section{padding:100px 0}
+.bg-alt{background:var(--bg2)}
+
+/* ── Glitch text effect ── */
+@keyframes glitch1{0%,100%{clip-path:inset(0 0 95% 0);transform:translate(-3px,0)}50%{clip-path:inset(30% 0 50% 0);transform:translate(3px,0)}}
+@keyframes glitch2{0%,100%{clip-path:inset(60% 0 20% 0);transform:translate(3px,0)}50%{clip-path:inset(5% 0 80% 0);transform:translate(-3px,0)}}
+.glitch{position:relative}
+.glitch::before,.glitch::after{content:attr(data-text);position:absolute;top:0;left:0;width:100%;height:100%}
+.glitch::before{color:var(--cyan);animation:glitch1 3s infinite;opacity:.7}
+.glitch::after{color:var(--pink);animation:glitch2 3s infinite;opacity:.7}
+
+/* ── Neon border ── */
+.neon-box{
+  border:1px solid var(--border);
+  box-shadow:0 0 8px var(--glow-c),inset 0 0 8px rgba(0,245,255,.03);
+  transition:.3s;
+}
+.neon-box:hover{
+  border-color:rgba(0,245,255,.5);
+  box-shadow:0 0 16px var(--glow-c),0 0 32px var(--glow-c),inset 0 0 12px rgba(0,245,255,.05);
+}
+
+/* ── Buttons ── */
+.btn-p{
+  display:inline-flex;align-items:center;gap:10px;
+  padding:12px 28px;font-family:var(--title);font-size:.75rem;
+  font-weight:700;letter-spacing:.15em;text-transform:uppercase;
+  color:#000;background:var(--cyan);
+  clip-path:polygon(8px 0%,100% 0%,calc(100% - 8px) 100%,0% 100%);
+  transition:.25s;cursor:pointer;border:none;
+}
+.btn-p:hover{background:var(--pink);color:#fff;box-shadow:0 0 24px var(--glow-p)}
+.btn-s{
+  display:inline-flex;align-items:center;gap:10px;
+  padding:12px 28px;font-family:var(--title);font-size:.75rem;
+  font-weight:700;letter-spacing:.15em;text-transform:uppercase;
+  color:var(--cyan);background:transparent;
+  border:1px solid var(--cyan);
+  clip-path:polygon(8px 0%,100% 0%,calc(100% - 8px) 100%,0% 100%);
+  transition:.25s;
+}
+.btn-s:hover{color:var(--pink);border-color:var(--pink);box-shadow:0 0 20px var(--glow-p)}
+
+/* ── Section header ── */
+.sec-head{margin-bottom:56px}
+.sec-num{
+  font-family:var(--mono);font-size:.7rem;color:var(--cyan);
+  letter-spacing:.3em;text-transform:uppercase;margin-bottom:10px;
+  display:flex;align-items:center;gap:12px;
+}
+.sec-num::before{content:'';width:40px;height:1px;background:var(--cyan);box-shadow:0 0 8px var(--cyan)}
+.sec-num::after{content:'';flex:1;height:1px;background:linear-gradient(90deg,var(--border),transparent)}
+.sec-title{
+  font-family:var(--title);font-size:clamp(1.6rem,3.5vw,2.8rem);
+  font-weight:900;letter-spacing:.05em;text-transform:uppercase;
+  background:linear-gradient(135deg,var(--cyan),var(--purple),var(--pink));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  position:relative;display:inline-block;
+}
+.sec-desc{margin-top:16px;color:var(--txt2);font-size:.97rem;font-family:var(--mono)}
+
+/* ── Corner decoration ── */
+.corner-box{position:relative;padding:24px}
+.corner-box::before,.corner-box::after{content:'';position:absolute;width:16px;height:16px}
+.corner-box::before{top:0;left:0;border-top:2px solid var(--cyan);border-left:2px solid var(--cyan)}
+.corner-box::after{bottom:0;right:0;border-bottom:2px solid var(--pink);border-right:2px solid var(--pink)}
+
+/* =============================================
+   NAV
+   ============================================= */
+#nav{
+  position:fixed;top:0;left:0;right:0;z-index:200;height:60px;
+  background:rgba(5,1,15,.92);backdrop-filter:blur(20px);
+  border-bottom:1px solid var(--border);
+  box-shadow:0 0 20px rgba(0,245,255,.08);
+}
+.nav-in{max-width:1140px;margin:0 auto;padding:0 28px;height:60px;display:flex;align-items:center;gap:20px}
+.nav-logo{
+  font-family:var(--title);font-weight:900;font-size:.85rem;
+  letter-spacing:.15em;color:var(--cyan);
+  text-shadow:0 0 10px var(--cyan),0 0 20px var(--cyan);
+  text-transform:uppercase;
+}
+.nav-links{display:flex;gap:2px;margin-left:auto}
+.nav-links a{
+  font-family:var(--mono);font-size:.72rem;color:var(--txt2);
+  padding:6px 16px;letter-spacing:.1em;text-transform:uppercase;
+  border:1px solid transparent;transition:.2s;position:relative;
+}
+.nav-links a::before{content:'//';margin-right:4px;color:var(--txt3)}
+.nav-links a:hover,.nav-links a.on{
+  color:var(--cyan);border-color:var(--border);
+  text-shadow:0 0 8px var(--cyan);background:rgba(0,245,255,.04);
+}
+.nav-burger{display:none;flex-direction:column;gap:5px;width:36px;height:36px;align-items:center;justify-content:center;border:1px solid var(--border)}
+.nav-burger span{display:block;width:18px;height:1px;background:var(--cyan)}
+@media(max-width:700px){
+  .nav-burger{display:flex}
+  .nav-links{position:fixed;top:60px;left:0;right:0;background:rgba(5,1,15,.98);border-bottom:1px solid var(--border);flex-direction:column;padding:16px 28px 24px;transform:translateY(-110%);opacity:0;transition:.3s;pointer-events:none}
+  .nav-links.open{transform:none;opacity:1;pointer-events:all}
+  .nav-links a{padding:12px 4px;border-bottom:1px solid var(--border);border-left:none;border-right:none;border-top:none}
+}
+
+/* =============================================
+   HERO
+   ============================================= */
+#hero{
+  min-height:100vh;display:flex;align-items:center;
+  padding:80px 0 60px;position:relative;overflow:hidden;
+}
+.hero-bg{position:absolute;inset:0;pointer-events:none;z-index:0}
+
+/* City grid floor */
+.hero-grid{
+  position:absolute;bottom:0;left:0;right:0;height:55%;
+  background:
+    linear-gradient(transparent 0%,rgba(0,245,255,.03) 100%),
+    repeating-linear-gradient(90deg,transparent,transparent 80px,rgba(0,245,255,.04) 80px,rgba(0,245,255,.04) 81px),
+    repeating-linear-gradient(0deg,transparent,transparent 80px,rgba(0,245,255,.04) 80px,rgba(0,245,255,.04) 81px);
+  transform:perspective(400px) rotateX(55deg);
+  transform-origin:bottom center;
+}
+
+/* Neon orbs */
+.h-orb{position:absolute;border-radius:50%;filter:blur(80px);pointer-events:none}
+.h-orb1{width:400px;height:400px;background:rgba(0,245,255,.07);top:-80px;left:-80px}
+.h-orb2{width:350px;height:350px;background:rgba(255,45,120,.06);bottom:-60px;right:-60px}
+.h-orb3{width:250px;height:250px;background:rgba(180,79,255,.08);top:30%;right:20%}
+
+/* Floating data lines */
+@keyframes dataflow{0%{transform:translateY(100vh);opacity:0}10%{opacity:.6}90%{opacity:.6}100%{transform:translateY(-100vh);opacity:0}}
+.data-line{position:absolute;font-family:var(--mono);font-size:.6rem;color:var(--cyan);opacity:0;white-space:nowrap;pointer-events:none}
+.dl1{left:5%;animation:dataflow 8s 0s infinite linear}
+.dl2{left:15%;animation:dataflow 12s 2s infinite linear}
+.dl3{right:10%;animation:dataflow 10s 1s infinite linear}
+.dl4{right:25%;animation:dataflow 15s 3s infinite linear}
+
+.hero-wrap{position:relative;z-index:1;display:grid;grid-template-columns:1fr 300px;gap:60px;align-items:center}
+
+.hero-tag{
+  font-family:var(--mono);font-size:.72rem;color:var(--green);
+  letter-spacing:.2em;text-transform:uppercase;margin-bottom:20px;
+  display:flex;align-items:center;gap:10px;
+}
+.hero-tag::before{content:'▶';animation:pulse-g 1s infinite;font-size:.5rem}
+@keyframes pulse-g{0%,100%{opacity:1;text-shadow:0 0 6px var(--green)}50%{opacity:.3;text-shadow:none}}
+
+.hero-name{
+  font-family:var(--title);font-size:clamp(2.4rem,6vw,5rem);
+  font-weight:900;letter-spacing:.05em;text-transform:uppercase;
+  line-height:1;margin-bottom:8px;
+}
+.name-1{
+  display:block;
+  background:linear-gradient(90deg,var(--cyan),var(--purple));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  text-shadow:none;filter:drop-shadow(0 0 12px rgba(0,245,255,.5));
+}
+.name-2{
+  display:block;
+  background:linear-gradient(90deg,var(--pink),var(--purple));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  filter:drop-shadow(0 0 12px rgba(255,45,120,.5));
+}
+.hero-title{
+  font-family:var(--mono);font-size:.85rem;color:var(--purple);
+  letter-spacing:.15em;text-transform:uppercase;margin:16px 0 12px;
+  text-shadow:0 0 8px var(--purple);
+}
+.hero-desc{font-size:1rem;color:var(--txt2);max-width:460px;margin-bottom:36px;line-height:1.8;font-family:var(--font)}
+.hero-actions{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:48px}
+
+.hero-stats{display:flex;gap:0}
+.stat{
+  padding:14px 24px;border:1px solid var(--border);border-right:none;
+  background:rgba(0,245,255,.03);
+}
+.stat:last-child{border-right:1px solid var(--border)}
+.stat-val{font-family:var(--title);font-size:1.6rem;font-weight:900;color:var(--cyan);display:block;text-shadow:0 0 10px var(--cyan)}
+.stat-lbl{font-family:var(--mono);font-size:.62rem;color:var(--txt3);letter-spacing:.1em;text-transform:uppercase}
+
+/* ID CARD */
+.id-card{
+  border:1px solid var(--border);background:var(--panel);
+  clip-path:polygon(0 0,calc(100% - 20px) 0,100% 20px,100% 100%,20px 100%,0 calc(100% - 20px));
+  padding:28px 24px;position:relative;
+  box-shadow:0 0 20px var(--glow-c),0 0 40px rgba(0,245,255,.05);
+  animation:float 4s ease-in-out infinite;
+}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
+.idc-top{display:flex;align-items:center;gap:14px;margin-bottom:20px}
+.idc-av{
+  width:56px;height:56px;flex-shrink:0;
+  clip-path:polygon(50% 0%,100% 25%,100% 75%,50% 100%,0% 75%,0% 25%);
+  background:linear-gradient(135deg,var(--cyan),var(--purple));
+  display:flex;align-items:center;justify-content:center;
+  font-family:var(--title);font-weight:900;font-size:1rem;color:#000;
+}
+.idc-nm{font-family:var(--title);font-weight:700;font-size:.9rem;color:var(--cyan);text-shadow:0 0 8px var(--cyan);letter-spacing:.08em}
+.idc-sb{font-family:var(--mono);font-size:.65rem;color:var(--purple);margin-top:2px;letter-spacing:.1em}
+.idc-sep{height:1px;background:linear-gradient(90deg,var(--cyan),transparent);margin-bottom:16px;box-shadow:0 0 6px var(--cyan)}
+.idc-row{display:flex;align-items:center;gap:10px;font-family:var(--mono);font-size:.7rem;color:var(--txt2);margin-bottom:8px}
+.idc-row::before{content:'▸';color:var(--cyan);font-size:.6rem}
+.idc-chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:14px}
+.idc-chip{
+  font-family:var(--mono);font-size:.6rem;padding:3px 8px;
+  border:1px solid rgba(0,245,255,.3);color:var(--cyan);
+  background:rgba(0,245,255,.05);letter-spacing:.05em;
+}
+.status-dot{
+  width:8px;height:8px;border-radius:50%;background:var(--green);
+  box-shadow:0 0 6px var(--green),0 0 12px var(--green);
+  display:inline-block;margin-right:6px;animation:blink 1.5s infinite;
+}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.3}}
+@media(max-width:900px){.hero-wrap{grid-template-columns:1fr}.id-card{display:none}}
+
+/* =============================================
+   ABOUT
+   ============================================= */
+.about-grid{display:grid;grid-template-columns:260px 1fr;gap:48px;align-items:start}
+.about-av-wrap{text-align:center}
+.about-av{
+  width:140px;height:140px;margin:0 auto 20px;
+  clip-path:polygon(50% 0%,100% 25%,100% 75%,50% 100%,0% 75%,0% 25%);
+  background:linear-gradient(135deg,var(--cyan),var(--purple),var(--pink));
+  display:flex;align-items:center;justify-content:center;
+  font-family:var(--title);font-weight:900;font-size:2rem;color:#000;
+  box-shadow:0 0 30px var(--glow-c),0 0 60px var(--glow-v);
+}
+.about-meta{display:flex;flex-direction:column;gap:8px;margin-top:4px}
+.meta-row{
+  display:flex;align-items:center;gap:10px;
+  font-family:var(--mono);font-size:.72rem;color:var(--txt2);
+  padding:8px 12px;border:1px solid var(--border);background:rgba(0,245,255,.02);
+}
+.meta-row::before{content:'>';color:var(--cyan);flex-shrink:0}
+.about-text p{color:var(--txt2);font-size:.97rem;margin-bottom:14px;line-height:1.8}
+.about-text strong{color:var(--cyan)}
+.blk-lbl{
+  font-family:var(--mono);font-size:.7rem;color:var(--cyan);
+  text-transform:uppercase;letter-spacing:.2em;
+  margin:28px 0 16px;display:flex;align-items:center;gap:12px;
+  text-shadow:0 0 8px var(--cyan);
+}
+.blk-lbl::after{content:'';flex:1;height:1px;background:linear-gradient(90deg,var(--border),transparent)}
+.tl-wrap{border-left:1px solid var(--border);padding-left:0;position:relative}
+.tl-item{display:flex;gap:16px;padding:12px 0 12px 20px;position:relative;border-bottom:1px solid rgba(0,245,255,.05)}
+.tl-item::before{content:'◆';position:absolute;left:-7px;top:14px;color:var(--cyan);font-size:.5rem;text-shadow:0 0 6px var(--cyan)}
+.tl-yr{font-family:var(--mono);font-size:.65rem;color:var(--purple);white-space:nowrap;flex-shrink:0;margin-top:4px;min-width:60px;text-shadow:0 0 6px var(--purple)}
+.tl-body strong{display:block;font-size:.9rem;font-weight:700;color:var(--txt);font-family:var(--title);letter-spacing:.05em}
+.tl-body span{font-size:.75rem;color:var(--txt2);font-family:var(--mono)}
+.goals{display:flex;flex-direction:column;gap:8px}
+.goals li{
+  display:flex;align-items:flex-start;gap:12px;
+  font-size:.9rem;color:var(--txt2);
+  padding:8px 12px;border-left:2px solid var(--cyan);
+  background:rgba(0,245,255,.02);
+}
+.goals li::before{content:'//';color:var(--cyan);font-family:var(--mono);font-size:.7rem;flex-shrink:0;margin-top:2px}
+@media(max-width:760px){.about-grid{grid-template-columns:1fr}}
+
+/* =============================================
+   SKILLS
+   ============================================= */
+.skills-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:16px}
+.sk-card{
+  background:var(--panel);
+  border:1px solid var(--border);
+  padding:24px;position:relative;overflow:hidden;transition:.3s;
+  clip-path:polygon(0 0,calc(100% - 14px) 0,100% 14px,100% 100%,0 100%);
+}
+.sk-card::before{content:'';position:absolute;top:0;right:0;width:14px;height:14px;background:var(--cyan);clip-path:polygon(0 0,100% 100%,100% 0)}
+.sk-card:hover{border-color:rgba(0,245,255,.4);box-shadow:0 0 20px var(--glow-c)}
+.sk-head{display:flex;align-items:center;gap:12px;margin-bottom:20px}
+.sk-ico{font-size:1.1rem;width:36px;text-align:center}
+.sk-head h3{font-family:var(--mono);font-size:.72rem;color:var(--cyan);text-transform:uppercase;letter-spacing:.12em;text-shadow:0 0 6px var(--cyan)}
+.bar-row{margin-bottom:12px}
+.bar-top{display:flex;justify-content:space-between;font-family:var(--mono);font-size:.68rem;color:var(--txt2);margin-bottom:5px}
+.bar-pct{color:var(--cyan)}
+.bar-track{height:4px;background:rgba(255,255,255,.05);position:relative;overflow:hidden}
+.bar-track::before{content:'';position:absolute;inset:0;background:repeating-linear-gradient(90deg,transparent,transparent 8px,rgba(255,255,255,.03) 8px,rgba(255,255,255,.03) 9px)}
+.bar-fill{height:100%;width:0;background:linear-gradient(90deg,var(--cyan),var(--purple),var(--pink));transition:width 1.4s cubic-bezier(.4,0,.2,1);box-shadow:0 0 8px var(--glow-c)}
+.tag-cloud{display:flex;flex-wrap:wrap;gap:6px}
+.sk-tag{
+  font-family:var(--mono);font-size:.62rem;padding:3px 10px;
+  border:1px solid rgba(180,79,255,.3);color:var(--purple);
+  background:rgba(180,79,255,.05);transition:.2s;letter-spacing:.05em;
+}
+.sk-tag:hover{border-color:var(--purple);color:var(--cyan);box-shadow:0 0 8px var(--glow-v)}
+
+/* =============================================
+   PROJECTS
+   ============================================= */
+.proj-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:16px}
+.proj-card{
+  background:var(--panel);border:1px solid var(--border);
+  padding:24px;display:flex;flex-direction:column;gap:14px;transition:.3s;
+  clip-path:polygon(0 0,calc(100% - 16px) 0,100% 16px,100% 100%,16px 100%,0 calc(100% - 16px));
+  position:relative;
+}
+.proj-card::after{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(135deg,rgba(0,245,255,.03),transparent);
+  pointer-events:none;
+}
+.proj-card:hover{border-color:rgba(0,245,255,.4);box-shadow:0 0 24px var(--glow-c),0 0 48px rgba(0,245,255,.05)}
+.pc-top{display:flex;justify-content:space-between;align-items:flex-start}
+.pc-ico{width:44px;height:44px;display:flex;align-items:center;justify-content:center;font-size:1.3rem;border:1px solid var(--border);background:rgba(0,245,255,.05)}
+.pc-links{display:flex;gap:6px}
+.pc-lnk{
+  width:30px;height:30px;border:1px solid var(--border);
+  color:var(--txt2);display:flex;align-items:center;justify-content:center;
+  font-family:var(--mono);font-size:.75rem;transition:.2s;
+}
+.pc-lnk:hover{border-color:var(--cyan);color:var(--cyan);text-shadow:0 0 6px var(--cyan)}
+.proj-title{font-family:var(--title);font-weight:700;font-size:1rem;color:var(--txt);letter-spacing:.05em;text-transform:uppercase}
+.proj-desc{font-size:.85rem;color:var(--txt2);line-height:1.65;flex:1}
+.proj-tags{display:flex;flex-wrap:wrap;gap:5px}
+.p-tag{font-family:var(--mono);font-size:.62rem;padding:2px 8px;border:1px solid rgba(0,245,255,.25);color:var(--cyan);background:rgba(0,245,255,.05)}
+.proj-yr{font-family:var(--mono);font-size:.65rem;color:var(--txt3)}
+
+/* =============================================
+   ENTREPRISE
+   ============================================= */
+.ent-hero{
+  display:flex;align-items:center;gap:28px;padding:24px;
+  border:1px solid var(--border);background:var(--panel);
+  margin-bottom:40px;
+  clip-path:polygon(0 0,calc(100% - 24px) 0,100% 24px,100% 100%,0 100%);
+  box-shadow:0 0 20px var(--glow-c);
+}
+.ent-logo{
+  width:72px;height:72px;flex-shrink:0;
+  clip-path:polygon(50% 0%,100% 25%,100% 75%,50% 100%,0% 75%,0% 25%);
+  background:linear-gradient(135deg,var(--cyan),var(--purple));
+  display:flex;align-items:center;justify-content:center;
+  font-family:var(--title);font-weight:900;font-size:1.3rem;color:#000;
+  box-shadow:0 0 20px var(--glow-c);
+}
+.ent-name{font-family:var(--title);font-size:1.4rem;font-weight:900;letter-spacing:.1em;text-transform:uppercase;background:linear-gradient(90deg,var(--cyan),var(--purple));-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:6px}
+.ent-tagline{font-family:var(--mono);font-size:.75rem;color:var(--txt2);letter-spacing:.1em;margin-bottom:14px}
+.ent-badges{display:flex;flex-wrap:wrap;gap:8px}
+.ent-badge{font-family:var(--mono);font-size:.65rem;padding:4px 12px;border:1px solid var(--border);color:var(--cyan);background:rgba(0,245,255,.05);letter-spacing:.05em}
+.ent-block{margin-bottom:48px}
+.etl-item{display:flex;gap:16px;padding:14px 0 14px 20px;border-left:1px solid var(--border);position:relative;border-bottom:1px solid rgba(0,245,255,.05)}
+.etl-item::before{content:'◆';position:absolute;left:-6px;top:18px;color:var(--cyan);font-size:.45rem;text-shadow:0 0 6px var(--cyan)}
+.etl-yr{font-family:var(--mono);font-size:.68rem;color:var(--purple);white-space:nowrap;flex-shrink:0;margin-top:4px;min-width:72px;text-shadow:0 0 6px var(--purple)}
+.etl-body strong{display:block;font-family:var(--title);font-size:.9rem;font-weight:700;color:var(--cyan);letter-spacing:.05em;margin-bottom:4px}
+.etl-body span{font-size:.82rem;color:var(--txt2);line-height:1.6}
+.ent-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:14px;margin-top:16px}
+.ent-card{
+  background:var(--panel);border:1px solid var(--border);padding:20px;transition:.3s;
+  clip-path:polygon(0 0,calc(100% - 10px) 0,100% 10px,100% 100%,0 100%);
+}
+.ent-card:hover{border-color:rgba(0,245,255,.35);box-shadow:0 0 16px var(--glow-c)}
+.ent-card-ico{font-size:1.4rem;margin-bottom:12px}
+.ent-card h4{font-family:var(--title);font-size:.85rem;font-weight:700;color:var(--cyan);letter-spacing:.08em;text-transform:uppercase;margin-bottom:8px}
+.ent-card p{font-size:.83rem;color:var(--txt2);line-height:1.6}
+.services-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:14px;margin-top:16px}
+.srv-card{background:var(--panel);border:1px solid var(--border);padding:20px;transition:.3s;position:relative;overflow:hidden}
+.srv-card:hover{transform:translateY(-3px);box-shadow:0 0 20px var(--glow-c)}
+.srv-ico{width:42px;height:42px;display:flex;align-items:center;justify-content:center;font-size:1.1rem;margin-bottom:14px;border:1px solid var(--border)}
+.srv-card h4{font-family:var(--title);font-size:.82rem;font-weight:700;color:var(--txt);letter-spacing:.08em;text-transform:uppercase;margin-bottom:8px}
+.srv-card p{font-size:.8rem;color:var(--txt2);line-height:1.6;margin-bottom:12px}
+.srv-tags{display:flex;flex-wrap:wrap;gap:5px}
+.srv-tags span{font-family:var(--mono);font-size:.6rem;padding:2px 7px;border:1px solid var(--border);color:var(--txt2)}
+.org-top{display:flex;justify-content:center;margin-bottom:0}
+.org-node.org-ceo{
+  display:flex;align-items:center;gap:14px;padding:16px 28px;
+  border:1px solid var(--cyan);background:rgba(0,245,255,.05);
+  box-shadow:0 0 16px var(--glow-c);min-width:280px;
+}
+.org-line{width:1px;height:28px;background:var(--cyan);margin:0 auto;box-shadow:0 0 6px var(--cyan)}
+.org-nm{font-family:var(--title);font-weight:700;font-size:.88rem;color:var(--cyan);letter-spacing:.06em}
+.org-rl{font-family:var(--mono);font-size:.65rem;color:var(--purple);margin-top:2px}
+.org-depts{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:12px}
+.org-dept{background:var(--panel);border:1px solid var(--border);padding:14px}
+.org-dept-lbl{font-family:var(--mono);font-size:.65rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;padding-bottom:10px;margin-bottom:12px;border-bottom:1px solid var(--border)}
+.org-members{display:flex;flex-direction:column;gap:10px}
+.org-member{display:flex;align-items:center;gap:10px}
+.org-av{width:32px;height:32px;display:flex;align-items:center;justify-content:center;font-family:var(--title);font-weight:700;font-size:.65rem;color:#000;flex-shrink:0;clip-path:polygon(50% 0%,100% 25%,100% 75%,50% 100%,0% 75%,0% 25%)}
+.org-nm-sm{font-family:var(--title);font-size:.8rem;font-weight:700;color:var(--txt);display:block}
+.org-rl-sm{font-family:var(--mono);font-size:.62rem;color:var(--txt2)}
+.proj-ent-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:16px;margin-top:16px}
+.proj-ent-card{
+  background:var(--panel);border:1px solid var(--border);padding:20px;
+  display:flex;flex-direction:column;gap:12px;transition:.3s;
+  clip-path:polygon(0 0,calc(100% - 12px) 0,100% 12px,100% 100%,0 100%);
+}
+.proj-ent-card:hover{border-color:rgba(0,245,255,.4);box-shadow:0 0 20px var(--glow-c)}
+.pec-header{display:flex;align-items:flex-start;gap:14px}
+.pec-ico{width:42px;height:42px;display:flex;align-items:center;justify-content:center;font-size:1.1rem;flex-shrink:0;border:1px solid var(--border)}
+.pec-title{font-family:var(--title);font-weight:700;font-size:.88rem;color:var(--cyan);letter-spacing:.05em;text-transform:uppercase;margin-bottom:3px}
+.pec-client{font-family:var(--mono);font-size:.68rem;color:var(--txt2)}
+.pec-desc{font-size:.82rem;color:var(--txt2);line-height:1.65;flex:1}
+.pec-tech{display:flex;flex-wrap:wrap;gap:5px}
+.pec-tech span{font-family:var(--mono);font-size:.6rem;padding:2px 7px;border:1px solid rgba(0,245,255,.2);color:var(--cyan);background:rgba(0,245,255,.04)}
+.pec-footer{display:flex;gap:12px;flex-wrap:wrap;padding-top:10px;border-top:1px solid var(--border)}
+.pec-status,.pec-dur,.pec-team{font-family:var(--mono);font-size:.65rem;color:var(--txt2)}
+.pec-ok{color:var(--green);text-shadow:0 0 6px var(--green)}
+.pec-wip{color:var(--yellow)}
+.tech-cats{display:flex;flex-direction:column;gap:10px;margin-top:16px}
+.tech-cat{display:flex;gap:16px;align-items:flex-start;padding:12px 16px;background:var(--panel);border:1px solid var(--border)}
+.tech-cat-title{font-family:var(--mono);font-size:.65rem;color:var(--cyan);text-transform:uppercase;letter-spacing:.1em;min-width:130px;flex-shrink:0;padding-top:3px;text-shadow:0 0 6px var(--cyan)}
+.tech-tags{display:flex;flex-wrap:wrap;gap:6px}
+.tech-tags span{font-family:var(--mono);font-size:.65rem;padding:3px 9px;border:1px solid var(--border);color:var(--txt2)}
+.day-timeline{display:flex;flex-direction:column;gap:0;margin-top:16px}
+.day-item{display:flex;gap:16px;padding:12px 0 12px 20px;border-left:1px solid var(--border);position:relative;border-bottom:1px solid rgba(180,79,255,.06)}
+.day-item::before{content:'◆';position:absolute;left:-6px;top:16px;color:var(--purple);font-size:.45rem;text-shadow:0 0 6px var(--purple)}
+.day-time{font-family:var(--mono);font-size:.68rem;color:var(--purple);white-space:nowrap;flex-shrink:0;margin-top:3px;min-width:52px;text-shadow:0 0 6px var(--purple)}
+.day-body strong{display:block;font-family:var(--title);font-size:.88rem;font-weight:700;color:var(--txt);letter-spacing:.05em;margin-bottom:3px}
+.day-body span{font-size:.8rem;color:var(--txt2);line-height:1.6}
+
+/* =============================================
+   CONTACT
+   ============================================= */
+.contact-wrap{display:grid;grid-template-columns:1fr 1.2fr;gap:48px}
+.c-links{display:flex;flex-direction:column;gap:12px}
+.c-link{
+  display:flex;align-items:center;gap:16px;padding:16px 20px;
+  background:var(--panel);border:1px solid var(--border);transition:.3s;
+  clip-path:polygon(8px 0%,100% 0%,100% calc(100% - 8px),calc(100% - 8px) 100%,0% 100%,0% 8px);
+}
+.c-link:hover{border-color:rgba(0,245,255,.4);box-shadow:0 0 16px var(--glow-c);transform:translateX(4px)}
+.c-ico{width:40px;height:40px;display:flex;align-items:center;justify-content:center;font-size:1rem;border:1px solid var(--border);flex-shrink:0}
+.c-info{flex:1}
+.c-lbl{font-family:var(--mono);font-size:.6rem;color:var(--txt3);text-transform:uppercase;letter-spacing:.12em;display:block;margin-bottom:3px}
+.c-val{font-family:var(--mono);font-size:.78rem;color:var(--cyan)}
+.c-arr{color:var(--cyan);opacity:0;transition:.2s;font-family:var(--mono)}
+.c-link:hover .c-arr{opacity:1;text-shadow:0 0 8px var(--cyan)}
+.c-form{display:flex;flex-direction:column;gap:14px}
+.fg{display:flex;flex-direction:column;gap:5px}
+.fg label{font-family:var(--mono);font-size:.65rem;color:var(--txt3);text-transform:uppercase;letter-spacing:.1em}
+.fg input,.fg textarea{
+  background:rgba(0,245,255,.02);border:1px solid var(--border);
+  padding:11px 14px;font-size:.88rem;color:var(--txt);transition:.2s;
+  resize:vertical;font-family:var(--mono);
+}
+.fg input::placeholder,.fg textarea::placeholder{color:var(--txt3)}
+.fg input:focus,.fg textarea:focus{outline:none;border-color:var(--cyan);box-shadow:0 0 0 1px var(--cyan),0 0 12px var(--glow-c)}
+.form-ok{display:flex;align-items:center;gap:10px;padding:12px;border:1px solid var(--green);color:var(--green);font-family:var(--mono);font-size:.8rem;text-shadow:0 0 6px var(--green)}
+.form-ok.hidden{display:none}
+@media(max-width:760px){.contact-wrap{grid-template-columns:1fr}}
+
+/* =============================================
+   FOOTER + BTT
+   ============================================= */
+footer{
+  border-top:1px solid var(--border);padding:28px 0;text-align:center;
+  font-family:var(--mono);font-size:.72rem;color:var(--txt3);
+  background:var(--bg2);
+}
+footer span{color:var(--cyan);text-shadow:0 0 6px var(--cyan)}
+.footer-sub{margin-top:6px;font-size:.65rem;color:var(--txt3)}
+#btt{
+  position:fixed;bottom:24px;right:24px;width:40px;height:40px;
+  background:var(--cyan);color:#000;font-family:var(--mono);font-size:.9rem;
+  display:flex;align-items:center;justify-content:center;
+  clip-path:polygon(50% 0%,100% 25%,100% 75%,50% 100%,0% 75%,0% 25%);
+  box-shadow:0 0 16px var(--cyan);
+  opacity:0;pointer-events:none;transform:scale(.8);transition:.3s;z-index:99;
+}
+#btt.show{opacity:1;pointer-events:all;transform:scale(1)}
+#btt:hover{background:var(--pink);box-shadow:0 0 20px var(--pink)}
+
+/* =============================================
+   MUSIC PLAYER
+   ============================================= */
+#music-player{
+  position:fixed;bottom:24px;left:24px;z-index:300;
+  display:flex;align-items:center;gap:10px;
+  background:rgba(5,1,15,.92);backdrop-filter:blur(20px);
+  border:1px solid var(--border);
+  box-shadow:0 0 16px var(--glow-c),inset 0 0 8px rgba(0,245,255,.03);
+  padding:8px 14px;
+  clip-path:polygon(6px 0%,100% 0%,calc(100% - 6px) 100%,0% 100%);
+  transition:.3s;
+  min-width:200px;
+}
+#music-player:hover{
+  border-color:rgba(0,245,255,.5);
+  box-shadow:0 0 24px var(--glow-c),0 0 48px var(--glow-c);
+}
+#music-player .mp-btn{
+  width:30px;height:30px;flex-shrink:0;
+  display:flex;align-items:center;justify-content:center;
+  background:var(--cyan);color:#000;font-size:.6rem;font-family:var(--mono);
+  clip-path:polygon(4px 0%,100% 0%,calc(100% - 4px) 100%,0% 100%);
+  cursor:pointer;transition:.2s;border:none;font-weight:700;
+  letter-spacing:.05em;
+}
+#music-player .mp-btn:hover{background:var(--pink);color:#fff;box-shadow:0 0 12px var(--glow-p)}
+#music-player .mp-info{flex:1;overflow:hidden}
+#music-player .mp-title{
+  font-family:var(--mono);font-size:.58rem;color:var(--cyan);
+  text-transform:uppercase;letter-spacing:.08em;
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+  text-shadow:0 0 6px var(--cyan);
+}
+#music-player .mp-sub{
+  font-family:var(--mono);font-size:.52rem;color:var(--txt3);
+  text-transform:uppercase;letter-spacing:.06em;margin-top:2px;
+}
+#music-player .mp-viz{
+  display:flex;align-items:flex-end;gap:2px;height:16px;flex-shrink:0;
+}
+#music-player .mp-viz span{
+  width:3px;background:var(--cyan);border-radius:1px;
+  box-shadow:0 0 4px var(--cyan);
+  animation:viz-bar .6s ease-in-out infinite alternate;
+  transform-origin:bottom;
+}
+#music-player .mp-viz span:nth-child(1){height:6px;animation-delay:0s}
+#music-player .mp-viz span:nth-child(2){height:12px;animation-delay:.1s}
+#music-player .mp-viz span:nth-child(3){height:8px;animation-delay:.2s}
+#music-player .mp-viz span:nth-child(4){height:14px;animation-delay:.15s}
+#music-player .mp-viz span:nth-child(5){height:5px;animation-delay:.05s}
+#music-player .mp-viz.paused span{animation-play-state:paused}
+#music-player .mp-mute{
+  width:24px;height:24px;flex-shrink:0;
+  display:flex;align-items:center;justify-content:center;
+  border:1px solid var(--border);cursor:pointer;transition:.2s;
+  font-size:.65rem;background:transparent;color:var(--txt2);
+  clip-path:polygon(3px 0%,100% 0%,calc(100% - 3px) 100%,0% 100%);
+}
+#music-player .mp-mute:hover{border-color:var(--cyan);color:var(--cyan);box-shadow:0 0 8px var(--glow-c)}
+#music-player .mp-mute.muted{color:var(--pink);border-color:rgba(255,45,120,.4)}
+@keyframes viz-bar{from{transform:scaleY(.4)}to{transform:scaleY(1)}}
+@media(max-width:500px){
+  #music-player{min-width:0;left:12px;bottom:12px}
+  #music-player .mp-title{max-width:100px}
+}
+
+/* =============================================
+   PROGRESS BAR ON MUSIC PLAYER
+   ============================================= */
+#music-player{flex-wrap:wrap}
+.mp-progress{
+  width:100%;height:2px;background:rgba(0,245,255,.1);
+  cursor:pointer;position:relative;margin-top:4px;
+}
+.mp-progress-fill{
+  height:100%;background:var(--cyan);width:0%;
+  box-shadow:0 0 6px var(--cyan);transition:width .1s linear;
+  position:relative;
+}
+.mp-progress-fill::after{
+  content:'';position:absolute;right:-3px;top:-3px;
+  width:8px;height:8px;background:var(--cyan);border-radius:50%;
+  box-shadow:0 0 8px var(--cyan);
+}
+.mp-time{
+  font-family:var(--mono);font-size:.48rem;color:var(--txt3);
+  width:100%;display:flex;justify-content:space-between;margin-top:2px;
+}
+
+/* =============================================
+   CUSTOM CURSOR
+   ============================================= */
+*{cursor:none!important}
+#cursor{
+  position:fixed;z-index:99999;pointer-events:none;
+  width:20px;height:20px;
+  border:1px solid var(--cyan);
+  clip-path:polygon(50% 0%,100% 50%,50% 100%,0% 50%);
+  transform:translate(-50%,-50%);
+  transition:transform .08s,border-color .2s;
+  box-shadow:0 0 8px var(--cyan);
+}
+#cursor-dot{
+  position:fixed;z-index:99999;pointer-events:none;
+  width:4px;height:4px;background:var(--cyan);border-radius:50%;
+  transform:translate(-50%,-50%);
+  box-shadow:0 0 6px var(--cyan),0 0 12px var(--cyan);
+  transition:none;
+}
+#cursor-line-h,#cursor-line-v{
+  position:fixed;z-index:99998;pointer-events:none;
+  background:rgba(0,245,255,.12);
+}
+#cursor-line-h{height:1px;width:100vw;left:0;transform:translateY(-50%)}
+#cursor-line-v{width:1px;height:100vh;top:0;transform:translateX(-50%)}
+body.cursor-click #cursor{
+  transform:translate(-50%,-50%) scale(1.6);
+  border-color:var(--pink);box-shadow:0 0 16px var(--pink);
+}
+
+/* =============================================
+   BOOT SCREEN
+   ============================================= */
+#boot-screen{
+  position:fixed;inset:0;z-index:9998;background:var(--bg);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:24px;font-family:var(--mono);
+}
+#boot-screen.hidden{
+  opacity:0;pointer-events:none;transition:opacity .6s ease;
+  visibility:hidden;
+}
+.boot-logo{
+  font-family:var(--title);font-size:clamp(1.4rem,4vw,2.4rem);
+  font-weight:900;letter-spacing:.15em;
+  background:linear-gradient(135deg,var(--cyan),var(--purple),var(--pink));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  text-transform:uppercase;
+}
+.boot-lines{
+  width:min(500px,90vw);display:flex;flex-direction:column;gap:4px;
+}
+.boot-line{
+  font-size:.65rem;color:var(--txt2);letter-spacing:.08em;
+  opacity:0;transform:translateX(-8px);
+  transition:opacity .3s,transform .3s;
+}
+.boot-line.on{opacity:1;transform:none}
+.boot-line .ok{color:var(--green);margin-left:8px}
+.boot-line .warn{color:var(--yellow);margin-left:8px}
+.boot-bar-wrap{width:min(500px,90vw);margin-top:8px}
+.boot-bar-label{font-size:.6rem;color:var(--txt3);letter-spacing:.1em;margin-bottom:6px}
+.boot-bar-track{height:3px;background:rgba(0,245,255,.1);position:relative}
+.boot-bar-fill{
+  height:100%;width:0%;background:linear-gradient(90deg,var(--cyan),var(--purple));
+  box-shadow:0 0 10px var(--cyan);transition:width .05s linear;
+}
+.boot-skip{
+  font-size:.6rem;color:var(--txt3);letter-spacing:.1em;cursor:none;
+  border:1px solid var(--txt3);padding:4px 12px;
+  clip-path:polygon(4px 0%,100% 0%,calc(100% - 4px) 100%,0% 100%);
+  transition:.2s;margin-top:8px;
+}
+.boot-skip:hover{color:var(--cyan);border-color:var(--cyan)}
+
+/* =============================================
+   MATRIX CANVAS
+   ============================================= */
+#matrix-canvas{
+  position:fixed;inset:0;z-index:0;pointer-events:none;
+  opacity:.13;
+}
+
+/* =============================================
+   PARTICLES CANVAS
+   ============================================= */
+#particles-canvas{
+  position:fixed;inset:0;z-index:1;pointer-events:none;
+  opacity:.6;
+}
+
+/* body needs z-index context */
+#nav{z-index:200}
+section,footer{position:relative;z-index:2}
+#music-player{z-index:300}
+#btt{z-index:99}
+</style>
+</head>
+<body>
+
+<!-- BOOT SCREEN -->
+<div id="boot-screen">
+  <div class="boot-logo">JULIEN_JEGU.EXE</div>
+  <div class="boot-lines" id="bootLines">
+    <div class="boot-line">&gt; SANDEVISTAN_DRIVE: ONLINE<span class="ok">[ OK ]</span></div>
+    <div class="boot-line">&gt; NEURAL_LINK: SYNCED — MARTINEZ_PROTOCOL<span class="ok">[ OK ]</span></div>
+    <div class="boot-line">&gt; CHECKING CHROME IMPLANTS...<span class="ok">[ STABLE ]</span></div>
+    <div class="boot-line">&gt; CONNECTING TO NIGHT CITY NET<span class="ok">[ OK ]</span></div>
+    <div class="boot-line">&gt; LUCY_ENCRYPTION: ACTIVE<span class="ok">[ OK ]</span></div>
+    <div class="boot-line">&gt; CYBERPSYCHOSIS_THRESHOLD: <span style="color:var(--green)">LOW</span><span class="ok">[ SAFE ]</span></div>
+    <div class="boot-line">&gt; "I really want to stay at your house..."<span class="warn">[ BOOTING ]</span></div>
+  </div>
+  <div class="boot-bar-wrap">
+    <div class="boot-bar-label">// LOADING... <span id="bootPct">0</span>%</div>
+    <div class="boot-bar-track"><div class="boot-bar-fill" id="bootFill"></div></div>
+  </div>
+  <button class="boot-skip" id="bootSkip">[ SKIP &gt;&gt; ]</button>
+</div>
+
+<!-- CURSEUR -->
+<div id="cursor"></div>
+<div id="cursor-dot"></div>
+<div id="cursor-line-h"></div>
+<div id="cursor-line-v"></div>
+
+<!-- MATRIX -->
+<canvas id="matrix-canvas"></canvas>
+
+<!-- PARTICLES -->
+<canvas id="particles-canvas"></canvas>
+
+<!-- MUSIC PLAYER -->
+<audio id="bgMusic" loop>
+  <source src="music.mp3" type="audio/mpeg">
+</audio>
+<div id="music-player">
+  <button class="mp-btn" id="mpPlayBtn" title="Play / Pause">▶</button>
+  <div class="mp-info">
+    <div class="mp-title">I Really Want To Stay At Your House</div>
+    <div class="mp-sub">// Rosa Walton · Cyberpunk Edgerunners</div>
+  </div>
+  <div class="mp-viz paused" id="mpViz">
+    <span></span><span></span><span></span><span></span><span></span>
+  </div>
+  <button class="mp-mute muted" id="mpMuteBtn" title="Son">🔇</button>
+  <div class="mp-progress" id="mpProgress">
+    <div class="mp-progress-fill" id="mpFill"></div>
+  </div>
+  <div class="mp-time"><span id="mpCurrent">0:00</span><span id="mpTotal">0:00</span></div>
+</div>
+
+<nav id="nav">
+  <div class="nav-in">
+    <div class="nav-logo">JULIEN_JEGU.EXE</div>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#about">À propos</a></li>
+      <li><a href="#skills">Compétences</a></li>
+      <li><a href="#projects">Projets</a></li>
+      <li><a href="#entreprise">Entreprise</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <div class="nav-right">
+      <button class="nav-burger" id="burger"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-bg">
+    <div class="hero-grid"></div>
+    <div class="h-orb h-orb1"></div>
+    <div class="h-orb h-orb2"></div>
+    <div class="h-orb h-orb3"></div>
+    <div class="data-line dl1">01001010 01010101 01001100 01001001 01000101 01001110</div>
+    <div class="data-line dl2">// "THE CITY GIVES, AND THE CITY TAKES" — MAINE</div>
+    <div class="data-line dl3">SANDEVISTAN: ACTIVE // CHROME_LEVEL: STABLE</div>
+    <div class="data-line dl4">SYS_BOOT: JULIEN_JEGU.SISR // 2024-2026</div>
+  </div>
+  <div class="wrap hero-wrap">
+    <div class="hero-left">
+      <div class="hero-tag">// EDGERUNNER EN DEVENIR · BTS SIO SISR</div>
+      <h1 class="hero-name">
+        <span class="name-1" data-text="JULIEN">JULIEN</span>
+        <span class="name-2" data-text="JEGU">JEGU</span>
+      </h1>
+      <p class="hero-title">&gt; Étudiant BTS SIO · Option SISR · École Pratique_</p>
+      <p class="hero-desc">Comme David Martinez dans les rues de Night City, je construis mes compétences depuis zéro — réseaux, cybersécurité, infra IT — pour survivre et s'imposer dans un monde tech impitoyable.</p>
+      <div class="hero-actions">
+        <a href="#projects" class="btn-p">[ VOIR MES PROJETS ]</a>
+        <a href="#contact" class="btn-s">[ ME CONTACTER ]</a>
+      </div>
+      <div class="hero-stats">
+        <div class="stat"><span class="stat-val">0</span><span class="stat-lbl">Projets</span></div>
+        <div class="stat"><span class="stat-val">2</span><span class="stat-lbl">Entreprises</span></div>
+        <div class="stat"><span class="stat-val">2026</span><span class="stat-lbl">Diplôme</span></div>
+      </div>
+    </div>
+    <div class="hero-right">
+      <div class="id-card">
+        <div class="idc-top">
+          <div class="idc-av">JJ</div>
+          <div>
+            <div class="idc-nm">JULIEN JEGU</div>
+            <div class="idc-sb">// OPTION SISR</div>
+          </div>
+        </div>
+        <div class="idc-sep"></div>
+        <div class="idc-row"><span class="status-dot"></span>DISPONIBLE — ALTERNANCE</div>
+        <div class="idc-row">LOC: FRANCE // NIGHT CITY DISTRICT</div>
+        <div class="idc-row">SCHOOL: ÉCOLE PRATIQUE</div>
+        <div class="idc-row">CURSUS: BTS SIO 2024–2026</div>
+        <div class="idc-row" style="color:var(--cyan);font-size:.65rem">CHROME: <span style="color:var(--green)">SANDEVISTAN MK.I</span></div>
+        <div class="idc-chips">
+          <span class="idc-chip">LINUX</span><span class="idc-chip">CISCO</span>
+          <span class="idc-chip">PYTHON</span><span class="idc-chip">TCP/IP</span>
+          <span class="idc-chip">WINDOWS SERVER</span><span class="idc-chip">VLAN</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- À PROPOS -->
+<section id="about" class="bg-alt">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="sec-num">01 // À PROPOS</div>
+      <h2 class="sec-title">SYSTÈME_IDENTITÉ</h2>
+      <p class="sec-desc">// Qui suis-je ? — "Vous êtes ce que vous faites, pas ce qu'on vous a dit d'être." — Doc Ryder</p>
+    </div>
+    <div class="about-grid">
+      <div class="about-av-wrap">
+        <div class="about-av">JJ</div>
+        <div class="about-meta">
+          <div class="meta-row">LOC: France</div>
+          <div class="meta-row">SCHOOL: École Pratique</div>
+          <div class="meta-row">YEAR: BTS SIO 2024–2026</div>
+          <div class="meta-row">OPT: SISR</div>
+          <div class="meta-row">STATUS: Alternance recherchée</div>
+        </div>
+      </div>
+      <div>
+        <div class="about-text">
+          <p>Bonjour ! Je suis <strong>Julien Jegu</strong>, étudiant en <strong>BTS SIO option SISR</strong> à l'École Pratique. Comme <strong>Lucy</strong> qui a rêvé de la Lune depuis les bas-fonds de Night City, j'ai un objectif clair et je construis chaque jour les compétences pour l'atteindre.</p>
+          <p>Passionné par les réseaux, la cybersécurité et l'administration des systèmes — parce que dans un monde hyperconnecté, <strong>celui qui contrôle l'information contrôle tout</strong>. Je cherche une <strong>alternance</strong> pour mettre mes skills en pratique.</p>
+        </div>
+        <div class="blk-lbl">// PARCOURS SCOLAIRE</div>
+        <div class="tl-wrap">
+          <div class="tl-item">
+            <span class="tl-yr">2024 →</span>
+            <div class="tl-body"><strong>BTS SIO — Option SISR</strong><span>École Pratique</span></div>
+          </div>
+        </div>
+        <div class="blk-lbl">// OBJECTIFS — MISSION LOG</div>
+        <ul class="goals">
+          <li>🎯 Trouver une alternance en administration réseau / cybersécurité</li>
+          <li>⚡ Maîtriser les technologies Cisco, Linux et Windows Server</li>
+          <li>🏆 Obtenir mon BTS SIO avec mention</li>
+          <li>🌙 Poursuivre en Licence Pro RSSI ou Bachelor Cybersécurité — <span style="color:var(--cyan);font-family:var(--mono);font-size:.8em">// like Lucy reaching the Moon</span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- COMPÉTENCES -->
+<section id="skills">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="sec-num">02 // COMPÉTENCES</div>
+      <h2 class="sec-title">CAPACITÉS_SYSTÈME</h2>
+      <p class="sec-desc">// "Petite mais dangereuse" — <span style="color:var(--pink)">Rebecca</span> · Stack technique en cours d'upgrade</p>
+    </div>
+    <div class="skills-grid" id="skGrid"></div>
+  </div>
+</section>
+
+<!-- PROJETS -->
+<section id="projects" class="bg-alt">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="sec-num">03 // PROJETS</div>
+      <h2 class="sec-title">RÉALISATIONS_LOG</h2>
+      <p class="sec-desc">// "On ne devient pas un Edgerunner en restant dans son canapé." — Maine</p>
+    </div>
+    <p style="font-family:var(--mono);color:var(--txt2);font-size:.85rem">
+      &gt; LOADING projects... <span style="color:var(--yellow)">[ 0 ENTRIES FOUND ]</span><br>
+      &gt; <span style="color:var(--txt3)">// Revenez bientôt — projets en cours de développement</span>
+    </p>
+  </div>
+</section>
+
+<!-- ENTREPRISE -->
+<section id="entreprise">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="sec-num">04 // ENTREPRISE</div>
+      <h2 class="sec-title">NEXATECH_CORP</h2>
+      <p class="sec-desc">// PME spécialisée développement logiciel & cybersécurité</p>
+    </div>
+
+    <div class="ent-hero">
+      <div class="ent-logo">NT</div>
+      <div class="ent-intro">
+        <h3 class="ent-name">NEXATECH SOLUTIONS</h3>
+        <p class="ent-tagline">// Développement logiciel · Cybersécurité · Conseil IT</p>
+        <div class="ent-badges">
+          <span class="ent-badge">🟢 ACTIVE</span>
+          <span class="ent-badge">📍 LYON, FRANCE</span>
+          <span class="ent-badge">📅 FOUNDED: 2024</span>
+          <span class="ent-badge">👥 12 AGENTS</span>
+          <span class="ent-badge">🏭 PME · SAS</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="ent-block">
+      <div class="blk-lbl">// HISTORIQUE SYSTÈME</div>
+      <div>
+        <div class="etl-item"><span class="etl-yr">2024.Q1</span><div class="etl-body"><strong>INIT: CRÉATION DE NEXATECH</strong><span>Julien Jegu fonde NexaTech Solutions à Lyon avec une vision : rendre le numérique accessible aux TPE/PME de la région Auvergne-Rhône-Alpes.</span></div></div>
+        <div class="etl-item"><span class="etl-yr">2024.Q3</span><div class="etl-body"><strong>DEPLOY: PREMIÈRE ÉQUIPE</strong><span>Recrutement des premiers développeurs et d'une designer UX. Livraison de 3 projets clients majeurs dont un ERP sur-mesure.</span></div></div>
+        <div class="etl-item"><span class="etl-yr">2025.Q1</span><div class="etl-body"><strong>INSTALL: PÔLE CYBERSÉCURITÉ</strong><span>Face à la montée des cybermenaces, NexaTech crée un département dédié à la sécurité informatique, audits et supervision réseau.</span></div></div>
+        <div class="etl-item"><span class="etl-yr">2025 →</span><div class="etl-body"><strong>TARGET: 25 CLIENTS ACTIFS</strong><span>Objectif d'expansion régionale avec ouverture d'une antenne à Grenoble et recrutement de 4 nouveaux talents d'ici fin 2025.</span></div></div>
+      </div>
+    </div>
+
+    <div class="ent-block">
+      <div class="blk-lbl">// MISSION & VALEURS</div>
+      <div class="ent-grid">
+        <div class="ent-card"><div class="ent-card-ico">🎯</div><h4>MISSION</h4><p>Accompagner les entreprises dans leur transformation numérique avec des solutions fiables, sécurisées et adaptées.</p></div>
+        <div class="ent-card"><div class="ent-card-ico">🔒</div><h4>VISION</h4><p>Devenir la référence régionale en solutions IT pour PME, combinant expertise technique et proximité client.</p></div>
+        <div class="ent-card"><div class="ent-card-ico">💡</div><h4>VALEURS</h4><p>Transparence, innovation, rigueur technique et engagement fort envers la sécurité des données clients.</p></div>
+        <div class="ent-card"><div class="ent-card-ico">🤝</div><h4>CLIENTS</h4><p>TPE, PME, artisans, collectivités locales cherchant à digitaliser leurs activités en région AURA.</p></div>
+      </div>
+    </div>
+
+    <div class="ent-block">
+      <div class="blk-lbl">// SERVICES DISPONIBLES</div>
+      <div class="services-grid">
+        <div class="srv-card"><div class="srv-ico" style="border-color:rgba(0,245,255,.3)">🌐</div><h4>DÉVELOPPEMENT WEB</h4><p>Sites vitrines, e-commerce, applications web métier, API REST, intégrations tierces.</p><div class="srv-tags"><span>React</span><span>PHP</span><span>Node.js</span><span>MySQL</span></div></div>
+        <div class="srv-card"><div class="srv-ico" style="border-color:rgba(255,45,120,.3)">🔐</div><h4>CYBERSÉCURITÉ</h4><p>Audits de sécurité, tests de pénétration, mise en conformité RGPD, formation des équipes.</p><div class="srv-tags"><span>Pentest</span><span>RGPD</span><span>SIEM</span><span>VPN</span></div></div>
+        <div class="srv-card"><div class="srv-ico" style="border-color:rgba(57,255,20,.3)">🖥️</div><h4>INFRA & RÉSEAU</h4><p>Installation de serveurs, configuration réseau, VLAN, VPN, supervision et maintenance.</p><div class="srv-tags"><span>Linux</span><span>Windows Server</span><span>Cisco</span><span>Docker</span></div></div>
+        <div class="srv-card"><div class="srv-ico" style="border-color:rgba(180,79,255,.3)">🎧</div><h4>SUPPORT N1/N2</h4><p>Helpdesk, gestion des incidents, maintenance du parc informatique, Active Directory.</p><div class="srv-tags"><span>GLPI</span><span>AD</span><span>ITSM</span><span>TeamViewer</span></div></div>
+      </div>
+    </div>
+
+    <div class="ent-block">
+      <div class="blk-lbl">// ORGANIGRAMME SYSTÈME</div>
+      <div class="org-top" style="margin-bottom:0">
+        <div class="org-node org-ceo">
+          <div class="org-av" style="background:linear-gradient(135deg,var(--cyan),var(--purple));width:42px;height:42px">JJ</div>
+          <div><div class="org-nm">Julien Jegu</div><div class="org-rl">// Directeur Général & Fondateur</div></div>
+        </div>
+      </div>
+      <div class="org-line"></div>
+      <div class="org-depts">
+        <div class="org-dept" style="border-color:rgba(0,245,255,.2)">
+          <div class="org-dept-lbl" style="color:var(--cyan)">💻 PÔLE DEV</div>
+          <div class="org-members">
+            <div class="org-member"><span class="org-av" style="background:linear-gradient(135deg,#10b981,#4f8eff);width:32px;height:32px;font-size:.6rem">KB</span><div><span class="org-nm-sm">Kevin Blanc</span><span class="org-rl-sm">Lead Dev Backend</span></div></div>
+            <div class="org-member"><span class="org-av" style="background:linear-gradient(135deg,#ec4899,#a78bfa);width:32px;height:32px;font-size:.6rem">SM</span><div><span class="org-nm-sm">Sarah Morel</span><span class="org-rl-sm">Dev Frontend & UX</span></div></div>
+            <div class="org-member"><span class="org-av" style="background:linear-gradient(135deg,#4f8eff,#06b6d4);width:32px;height:32px;font-size:.6rem">TL</span><div><span class="org-nm-sm">Thomas Laurent</span><span class="org-rl-sm">Dev Full Stack</span></div></div>
+            <div class="org-member"><span class="org-av" style="background:linear-gradient(135deg,#f59e0b,#10b981);width:32px;height:32px;font-size:.6rem">AN</span><div><span class="org-nm-sm">Amélie Noel</span><span class="org-rl-sm">Dev Web Junior</span></div></div>
+          </div>
+        </div>
+        <div class="org-dept" style="border-color:rgba(255,45,120,.2)">
+          <div class="org-dept-lbl" style="color:var(--pink)">🔐 CYBERSEC</div>
+          <div class="org-members">
+            <div class="org-member"><span class="org-av" style="background:linear-gradient(135deg,#ef4444,#a78bfa);width:32px;height:32px;font-size:.6rem">MC</span><div><span class="org-nm-sm">Marc Chauvet</span><span class="org-rl-sm">RSSI</span></div></div>
+            <div class="org-member"><span class="org-av" style="background:linear-gradient(135deg,#ef4444,#f59e0b);width:32px;height:32px;font-size:.6rem">EB</span><div><span class="org-nm-sm">Emma Bourdin</span><span class="org-rl-sm">Analyste SOC / Pentest</span></div></div>
+          </div>
+        </div>
+        <div class="org-dept" style="border-color:rgba(57,255,20,.2)">
+          <div class="org-dept-lbl" style="color:var(--green)">🖥️ INFRA</div>
+          <div class="org-members">
+            <div class="org-member"><span class="org-av" style="background:linear-gradient(135deg,#f59e0b,#ef4444);width:32px;height:32px;font-size:.6rem">LF</span><div><span class="org-nm-sm">Lucie Faure</span><span class="org-rl-sm">Ingénieure DevOps</span></div></div>
+            <div class="org-member"><span class="org-av" style="background:linear-gradient(135deg,#34d399,#4f8eff);width:32px;height:32px;font-size:.6rem">RD</span><div><span class="org-nm-sm">Romain Denis</span><span class="org-rl-sm">Admin Sys & Réseau</span></div></div>
+          </div>
+        </div>
+        <div class="org-dept" style="border-color:rgba(180,79,255,.2)">
+          <div class="org-dept-lbl" style="color:var(--purple)">🎧 SUPPORT</div>
+          <div class="org-members">
+            <div class="org-member"><span class="org-av" style="background:linear-gradient(135deg,#a78bfa,#ec4899);width:32px;height:32px;font-size:.6rem">CP</span><div><span class="org-nm-sm">Clara Petit</span><span class="org-rl-sm">Support N1/N2</span></div></div>
+            <div class="org-member"><span class="org-av" style="background:linear-gradient(135deg,#6e7d9f,#a78bfa);width:32px;height:32px;font-size:.6rem">PG</span><div><span class="org-nm-sm">Paul Garnier</span><span class="org-rl-sm">Office & Commercial</span></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="ent-block">
+      <div class="blk-lbl">// PROJETS RÉALISÉS</div>
+      <div class="proj-ent-grid">
+        <div class="proj-ent-card">
+          <div class="pec-header"><div class="pec-ico" style="border-color:rgba(0,245,255,.3)">🛒</div><div><div class="pec-title">ECOSHOP</div><div class="pec-client">Coopérative Bio Rhône-Alpes</div></div></div>
+          <p class="pec-desc">Plateforme e-commerce complète avec gestion des stocks, paiement Stripe, espace client et tableau de bord admin.</p>
+          <div class="pec-tech"><span>React</span><span>Node.js</span><span>MySQL</span><span>Stripe API</span><span>Docker</span></div>
+          <div class="pec-footer"><span class="pec-status pec-ok">✅ LIVRÉ</span><span class="pec-dur">⏱ 4 MOIS</span><span class="pec-team">👥 3 DEVS</span></div>
+        </div>
+        <div class="proj-ent-card">
+          <div class="pec-header"><div class="pec-ico" style="border-color:rgba(255,45,120,.3)">🔐</div><div><div class="pec-title">SECUREAUDIT</div><div class="pec-client">Cabinet Duchêne & Associés</div></div></div>
+          <p class="pec-desc">Audit complet infrastructure 40 postes, 14 vulnérabilités critiques détectées, conformité RGPD et déploiement pare-feu NGF.</p>
+          <div class="pec-tech"><span>Nmap</span><span>Metasploit</span><span>Wireshark</span><span>pfSense</span><span>RGPD</span></div>
+          <div class="pec-footer"><span class="pec-status pec-ok">✅ LIVRÉ</span><span class="pec-dur">⏱ 6 SEM.</span><span class="pec-team">👥 2 EXPERTS</span></div>
+        </div>
+        <div class="proj-ent-card">
+          <div class="pec-header"><div class="pec-ico" style="border-color:rgba(57,255,20,.3)">🏭</div><div><div class="pec-title">GESTIPROD</div><div class="pec-client">Menuiserie Bertrand SAS</div></div></div>
+          <p class="pec-desc">ERP industriel sur-mesure : commandes, suivi de production, planning ateliers, stocks matières premières et facturation auto.</p>
+          <div class="pec-tech"><span>PHP</span><span>MySQL</span><span>JavaScript</span><span>Chart.js</span><span>PDF.js</span></div>
+          <div class="pec-footer"><span class="pec-status pec-ok">✅ LIVRÉ</span><span class="pec-dur">⏱ 5 MOIS</span><span class="pec-team">👥 4 DEVS</span></div>
+        </div>
+        <div class="proj-ent-card">
+          <div class="pec-header"><div class="pec-ico" style="border-color:rgba(180,79,255,.3)">🏥</div><div><div class="pec-title">MÉDICONNECT</div><div class="pec-client">Cabinet médical Dr. Fontaine</div></div></div>
+          <p class="pec-desc">Portail patient : prise de RDV, dossier numérique, messagerie sécurisée médecin-patient, rappels SMS. Hébergement HDS.</p>
+          <div class="pec-tech"><span>React</span><span>Node.js</span><span>PostgreSQL</span><span>Twilio</span><span>HDS</span></div>
+          <div class="pec-footer"><span class="pec-status pec-wip">🔄 EN COURS</span><span class="pec-dur">⏱ 3 MOIS</span><span class="pec-team">👥 3 DEVS</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="ent-block">
+      <div class="blk-lbl">// STACK TECHNOLOGIQUE</div>
+      <div class="tech-cats">
+        <div class="tech-cat"><div class="tech-cat-title">FRONTEND</div><div class="tech-tags"><span>HTML5</span><span>CSS3</span><span>JavaScript ES6+</span><span>React</span><span>Vue.js</span><span>Figma</span></div></div>
+        <div class="tech-cat"><div class="tech-cat-title">BACKEND</div><div class="tech-tags"><span>PHP 8</span><span>Node.js</span><span>Python</span><span>REST API</span><span>GraphQL</span></div></div>
+        <div class="tech-cat"><div class="tech-cat-title">DATABASES</div><div class="tech-tags"><span>MySQL</span><span>PostgreSQL</span><span>MongoDB</span><span>Redis</span></div></div>
+        <div class="tech-cat"><div class="tech-cat-title">INFRA / DEVOPS</div><div class="tech-tags"><span>Docker</span><span>Linux Debian/Ubuntu</span><span>Git / GitHub</span><span>CI/CD</span><span>Nginx</span></div></div>
+        <div class="tech-cat"><div class="tech-cat-title">CYBERSEC</div><div class="tech-tags"><span>Nmap</span><span>Wireshark</span><span>Metasploit</span><span>pfSense</span><span>OpenVPN</span><span>SIEM</span></div></div>
+        <div class="tech-cat"><div class="tech-cat-title">OUTILS MÉTIER</div><div class="tech-tags"><span>GLPI</span><span>Jira</span><span>Trello</span><span>Slack</span><span>VS Code</span><span>Postman</span></div></div>
+      </div>
+    </div>
+
+    <div class="ent-block">
+      <div class="blk-lbl">// JOURNÉE TYPE — LOG QUOTIDIEN</div>
+      <div class="day-timeline">
+        <div class="day-item"><span class="day-time">08:30</span><div class="day-body"><strong>STAND-UP MEETING</strong><span>Réunion 15 min avec toute l'équipe. Avancées, blocages, objectifs du jour. Format Agile / Scrum.</span></div></div>
+        <div class="day-item"><span class="day-time">09:00</span><div class="day-body"><strong>SPRINT DÉVELOPPEMENT</strong><span>Sessions de travail en profondeur sur les projets clients. Revues de code, pair programming, commits Git.</span></div></div>
+        <div class="day-item"><span class="day-time">12:30</span><div class="day-body"><strong>PAUSE — TECH TALK</strong><span>Déjeuner convivial. 2x/mois : sessions de veille technologique partagées en équipe.</span></div></div>
+        <div class="day-item"><span class="day-time">13:30</span><div class="day-body"><strong>SUPPORT & TICKETS</strong><span>Traitement des incidents clients, mise à jour documentation, déploiements en recette.</span></div></div>
+        <div class="day-item"><span class="day-time">15:00</span><div class="day-body"><strong>RÉUNIONS CLIENTS</strong><span>Démos de fonctionnalités, recueil de feedback, ajustements et planification des prochains sprints.</span></div></div>
+        <div class="day-item"><span class="day-time">17:30</span><div class="day-body"><strong>VEILLE & CLÔTURE</strong><span>30 min de veille cybersécurité / nouvelles frameworks avant clôture des tickets du jour.</span></div></div>
+      </div>
+    </div>
+
+    <div class="ent-block">
+      <div class="blk-lbl">// OBJECTIFS FUTURS</div>
+      <div class="ent-grid">
+        <div class="ent-card"><div class="ent-card-ico">📍</div><h4>EXPANSION</h4><p>Ouverture d'une antenne à Grenoble d'ici fin 2025 pour couvrir l'ensemble du bassin AURA.</p></div>
+        <div class="ent-card"><div class="ent-card-ico">🎓</div><h4>FORMATION</h4><p>Lancement d'un programme de formation certifié pour la montée en compétences IT des équipes clientes.</p></div>
+        <div class="ent-card"><div class="ent-card-ico">🤖</div><h4>PÔLE IA & DATA</h4><p>Nouveau département dédié à l'intelligence artificielle et à l'analyse de données pour les grands comptes.</p></div>
+        <div class="ent-card"><div class="ent-card-ico">🏆</div><h4>ISO 27001</h4><p>Certification ISO 27001 en sécurité de l'information pour renforcer la crédibilité du pôle cybersécurité.</p></div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact" class="bg-alt">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="sec-num">05 // CONTACT</div>
+      <h2 class="sec-title">ÉTABLIR_CONNEXION</h2>
+      <p class="sec-desc">// "Trouve-moi sur le Net." — Lucy · Alternance ou stage ? Initialisez le contact</p>
+    </div>
+    <div class="contact-wrap">
+      <div class="c-links">
+        <a href="mailto:julien.jegu@email.com" class="c-link">
+          <div class="c-ico">✉️</div>
+          <div class="c-info"><span class="c-lbl">Email</span><span class="c-val">julien.jegu@email.com</span></div>
+          <span class="c-arr">&gt;&gt;</span>
+        </a>
+        <a href="https://linkedin.com/in/julien-jegu" target="_blank" class="c-link">
+          <div class="c-ico" style="border-color:rgba(0,119,181,.3)">💼</div>
+          <div class="c-info"><span class="c-lbl">LinkedIn</span><span class="c-val">linkedin.com/in/julien-jegu</span></div>
+          <span class="c-arr">&gt;&gt;</span>
+        </a>
+        <a href="https://github.com/julien-jegu" target="_blank" class="c-link">
+          <div class="c-ico" style="border-color:rgba(255,255,255,.1)">🐙</div>
+          <div class="c-info"><span class="c-lbl">GitHub</span><span class="c-val">github.com/julien-jegu</span></div>
+          <span class="c-arr">&gt;&gt;</span>
+        </a>
+      </div>
+      <form class="c-form" id="cForm" novalidate>
+        <div class="fg"><label>&gt; Nom</label><input type="text" id="fn" placeholder="JEAN_DUPONT" required/></div>
+        <div class="fg"><label>&gt; Email</label><input type="email" id="fe" placeholder="jean@email.fr" required/></div>
+        <div class="fg"><label>&gt; Sujet</label><input type="text" id="fs" placeholder="Proposition d'alternance"/></div>
+        <div class="fg"><label>&gt; Message</label><textarea id="fm" rows="5" placeholder="// Votre message..." required></textarea></div>
+        <button type="submit" class="btn-p">[ ENVOYER MESSAGE ]</button>
+        <div class="form-ok hidden" id="fOk">&gt; MESSAGE_SENT: OK // Je vous réponds très vite.</div>
+      </form>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <p>&copy; <span id="yr"></span> — <span>JULIEN JEGU</span> // BTS SIO SISR</p>
+    <p class="footer-sub">// NIGHT CITY NEVER SLEEPS · ÉCOLE PRATIQUE · SYSTEM_ONLINE</p>
+    <p style="font-family:var(--mono);font-size:.58rem;color:var(--txt3);margin-top:6px;opacity:.5">// "I really want to stay at your house" — Rosa Walton · Inspired by Cyberpunk: Edgerunners</p>
+  </div>
+</footer>
+<button id="btt">▲</button>
+
+<script>
+'use strict';
+const SKILLS=[
+  {category:"Réseaux & Infra",icon:"🔌",bars:[{name:"TCP/IP · VLAN · DHCP",level:80},{name:"Cisco (Packet Tracer)",level:70},{name:"VPN · Firewall",level:65},{name:"Wi-Fi · WLAN",level:60}]},
+  {category:"Systèmes",icon:"🖥️",bars:[{name:"Linux (Ubuntu/Debian)",level:75},{name:"Windows Server 2022",level:70},{name:"Active Directory",level:65},{name:"Virtualisation (VBox/VMware)",level:60}]},
+  {category:"Cybersécurité",icon:"🔐",bars:[{name:"Analyse de vulnérabilités",level:55},{name:"RGPD & conformité",level:60},{name:"Supervision / SIEM",level:50},{name:"Cryptographie",level:45}]},
+  {category:"Développement",icon:"💻",bars:[{name:"Python",level:70},{name:"HTML / CSS",level:75},{name:"JavaScript",level:60},{name:"PHP / SQL",level:55}]},
+  {category:"Outils & Méthodes",icon:"🛠️",tags:["Git / GitHub","VS Code","Docker","Packet Tracer","GLPI","Wireshark","Nmap","VirtualBox","Merise","ITIL"]},
+  {category:"Langues",icon:"🗣️",bars:[{name:"Français",level:100},{name:"Anglais (B2)",level:72},{name:"Espagnol (A2)",level:32}]}
+];
+
+document.addEventListener('DOMContentLoaded',()=>{
+  document.getElementById('yr').textContent=new Date().getFullYear();
+  const g=document.getElementById('skGrid');
+  g.innerHTML=SKILLS.map(c=>{
+    const bars=(c.bars||[]).map(b=>`<div class="bar-row"><div class="bar-top"><span>${b.name}</span><span class="bar-pct">${b.level}%</span></div><div class="bar-track"><div class="bar-fill" data-v="${b.level}"></div></div></div>`).join('');
+    const tags=c.tags?`<div class="tag-cloud">${c.tags.map(t=>`<span class="sk-tag">${t}</span>`).join('')}</div>`:'';
+    return `<div class="sk-card"><div class="sk-head"><div class="sk-ico">${c.icon}</div><h3>${c.category}</h3></div>${bars}${tags}</div>`;
+  }).join('');
+
+  // Animate bars
+  document.querySelectorAll('.bar-fill').forEach(el=>{
+    setTimeout(()=>{el.style.width=el.dataset.v+'%';},300);
+  });
+
+  const nav=document.getElementById('nav'),btt=document.getElementById('btt');
+  window.addEventListener('scroll',()=>{
+    nav.classList.toggle('scrolled',scrollY>20);
+    btt.classList.toggle('show',scrollY>400);
+  },{passive:true});
+
+  document.querySelectorAll('section[id]').forEach(sec=>
+    new IntersectionObserver(([e])=>{
+      if(e.isIntersecting){
+        document.querySelectorAll('.nav-links a').forEach(a=>a.classList.remove('on'));
+        const a=document.querySelector(`.nav-links a[href="#${sec.id}"]`);
+        if(a)a.classList.add('on');
+      }
+    },{rootMargin:'-40% 0px -50% 0px'}).observe(sec)
+  );
+
+  const burger=document.getElementById('burger'),nl=document.getElementById('navLinks');
+  burger.onclick=()=>nl.classList.toggle('open');
+  nl.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>nl.classList.remove('open')));
+  btt.onclick=()=>window.scrollTo({top:0,behavior:'smooth'});
+
+  // Music player
+  const audio = document.getElementById('bgMusic');
+  const playBtn = document.getElementById('mpPlayBtn');
+  const muteBtn = document.getElementById('mpMuteBtn');
+  const viz = document.getElementById('mpViz');
+  const mpFill = document.getElementById('mpFill');
+  const mpProgress = document.getElementById('mpProgress');
+  const mpCurrent = document.getElementById('mpCurrent');
+  const mpTotal = document.getElementById('mpTotal');
+  let playing = false;
+
+  function fmtTime(s){
+    if(isNaN(s))return'0:00';
+    const m=Math.floor(s/60),sec=Math.floor(s%60);
+    return m+':'+(sec<10?'0':'')+sec;
+  }
+
+  audio.volume = 0.5;
+  audio.muted = true;
+
+  audio.addEventListener('timeupdate',()=>{
+    if(!audio.duration)return;
+    const pct=(audio.currentTime/audio.duration)*100;
+    mpFill.style.width=pct+'%';
+    mpCurrent.textContent=fmtTime(audio.currentTime);
+  });
+  audio.addEventListener('loadedmetadata',()=>{
+    mpTotal.textContent=fmtTime(audio.duration);
+  });
+  mpProgress.addEventListener('click',e=>{
+    const r=mpProgress.getBoundingClientRect();
+    const pct=(e.clientX-r.left)/r.width;
+    audio.currentTime=pct*audio.duration;
+  });
+
+  audio.play().then(() => {
+    playing = true;
+    playBtn.textContent = '⏸';
+    viz.classList.remove('paused');
+  }).catch(() => { playing = false; });
+
+  playBtn.onclick = () => {
+    if (playing) {
+      audio.pause(); playing = false;
+      playBtn.textContent = '▶';
+      viz.classList.add('paused');
+    } else {
+      audio.play(); playing = true;
+      playBtn.textContent = '⏸';
+      viz.classList.remove('paused');
+    }
+  };
+
+  muteBtn.onclick = () => {
+    audio.muted = !audio.muted;
+    if (audio.muted) {
+      muteBtn.textContent = '🔇'; muteBtn.classList.add('muted');
+    } else {
+      muteBtn.textContent = '🔊'; muteBtn.classList.remove('muted');
+      if (!playing) {
+        audio.play(); playing = true;
+        playBtn.textContent = '⏸';
+        viz.classList.remove('paused');
+      }
+    }
+  };
+
+  // ── Click sound ──
+  const AC = window.AudioContext || window.webkitAudioContext;
+  let ac;
+  function playClick(){
+    try{
+      if(!ac) ac = new AC();
+      const o=ac.createOscillator(), g=ac.createGain();
+      o.connect(g); g.connect(ac.destination);
+      o.type='square'; o.frequency.setValueAtTime(880,ac.currentTime);
+      o.frequency.exponentialRampToValueAtTime(220,ac.currentTime+0.08);
+      g.gain.setValueAtTime(0.08,ac.currentTime);
+      g.gain.exponentialRampToValueAtTime(0.001,ac.currentTime+0.08);
+      o.start(ac.currentTime); o.stop(ac.currentTime+0.08);
+    }catch(e){}
+  }
+  document.addEventListener('click', playClick);
+
+  // ── Custom cursor ──
+  const cur=document.getElementById('cursor');
+  const curDot=document.getElementById('cursor-dot');
+  const lineH=document.getElementById('cursor-line-h');
+  const lineV=document.getElementById('cursor-line-v');
+  let mx=0,my=0,cx=0,cy=0;
+  document.addEventListener('mousemove',e=>{
+    mx=e.clientX; my=e.clientY;
+    curDot.style.left=mx+'px'; curDot.style.top=my+'px';
+    lineH.style.top=my+'px'; lineV.style.left=mx+'px';
+  });
+  (function animCursor(){
+    cx+=(mx-cx)*0.12; cy+=(my-cy)*0.12;
+    cur.style.left=cx+'px'; cur.style.top=cy+'px';
+    requestAnimationFrame(animCursor);
+  })();
+  document.addEventListener('mousedown',()=>{
+    document.body.classList.add('cursor-click');
+    setTimeout(()=>document.body.classList.remove('cursor-click'),180);
+  });
+
+  // ── Matrix rain ──
+  const mCanvas=document.getElementById('matrix-canvas');
+  const mCtx=mCanvas.getContext('2d');
+  function resizeMatrix(){mCanvas.width=window.innerWidth;mCanvas.height=window.innerHeight;}
+  resizeMatrix(); window.addEventListener('resize',resizeMatrix);
+  const chars='アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲン0123456789ABCDEF';
+  const fs=14; let cols=Math.floor(window.innerWidth/fs);
+  let drops=Array(cols).fill(1);
+  setInterval(()=>{
+    cols=Math.floor(mCanvas.width/fs);
+    while(drops.length<cols)drops.push(Math.random()*mCanvas.height/fs|0);
+    mCtx.fillStyle='rgba(5,1,15,0.05)';
+    mCtx.fillRect(0,0,mCanvas.width,mCanvas.height);
+    mCtx.fillStyle='#00f5ff'; mCtx.font=fs+'px Share Tech Mono';
+    for(let i=0;i<drops.length;i++){
+      const c=chars[Math.floor(Math.random()*chars.length)];
+      mCtx.fillText(c,i*fs,drops[i]*fs);
+      if(drops[i]*fs>mCanvas.height&&Math.random()>.975) drops[i]=0;
+      drops[i]++;
+    }
+  },50);
+
+  // ── Particles ──
+  const pCanvas=document.getElementById('particles-canvas');
+  const pCtx=pCanvas.getContext('2d');
+  function resizeParticles(){pCanvas.width=window.innerWidth;pCanvas.height=window.innerHeight;}
+  resizeParticles(); window.addEventListener('resize',resizeParticles);
+  const COLORS=['#00f5ff','#ff2d78','#b44fff'];
+  const pts=Array.from({length:60},()=>({
+    x:Math.random()*window.innerWidth,
+    y:Math.random()*window.innerHeight,
+    r:Math.random()*1.5+.5,
+    vx:(Math.random()-.5)*.4,
+    vy:(Math.random()-.5)*.4,
+    col:COLORS[Math.floor(Math.random()*3)],
+    alpha:Math.random()*.6+.2
+  }));
+  (function animParticles(){
+    pCtx.clearRect(0,0,pCanvas.width,pCanvas.height);
+    pts.forEach(p=>{
+      p.x+=p.vx; p.y+=p.vy;
+      if(p.x<0)p.x=pCanvas.width; if(p.x>pCanvas.width)p.x=0;
+      if(p.y<0)p.y=pCanvas.height; if(p.y>pCanvas.height)p.y=0;
+      pCtx.beginPath();
+      pCtx.arc(p.x,p.y,p.r,0,Math.PI*2);
+      pCtx.fillStyle=p.col;
+      pCtx.globalAlpha=p.alpha;
+      pCtx.shadowBlur=8; pCtx.shadowColor=p.col;
+      pCtx.fill();
+    });
+    // Draw lines between close particles
+    pCtx.globalAlpha=1;
+    for(let i=0;i<pts.length;i++){
+      for(let j=i+1;j<pts.length;j++){
+        const dx=pts[i].x-pts[j].x, dy=pts[i].y-pts[j].y;
+        const dist=Math.sqrt(dx*dx+dy*dy);
+        if(dist<120){
+          pCtx.beginPath();
+          pCtx.strokeStyle=pts[i].col;
+          pCtx.globalAlpha=(1-dist/120)*.15;
+          pCtx.lineWidth=.5;
+          pCtx.moveTo(pts[i].x,pts[i].y);
+          pCtx.lineTo(pts[j].x,pts[j].y);
+          pCtx.stroke();
+        }
+      }
+    }
+    pCtx.globalAlpha=1; pCtx.shadowBlur=0;
+    requestAnimationFrame(animParticles);
+  })();
+
+  // ── Boot screen ──
+  const bootLines=document.querySelectorAll('.boot-line');
+  const bootFill=document.getElementById('bootFill');
+  const bootPct=document.getElementById('bootPct');
+  const bootSkip=document.getElementById('bootSkip');
+  const bootScreen=document.getElementById('boot-screen');
+  let bootDone=false;
+
+  function finishBoot(){
+    if(bootDone)return; bootDone=true;
+    bootScreen.classList.add('hidden');
+    setTimeout(()=>bootScreen.style.display='none',700);
+  }
+  bootSkip.addEventListener('click',finishBoot);
+
+  let li=0;
+  function showNextLine(){
+    if(li<bootLines.length){ bootLines[li].classList.add('on'); li++; }
+  }
+  let pct=0;
+  const bootInterval=setInterval(()=>{
+    pct+=Math.random()*4+1;
+    if(pct>=100){ pct=100; clearInterval(bootInterval); setTimeout(finishBoot,400); }
+    bootFill.style.width=pct+'%';
+    bootPct.textContent=Math.floor(pct);
+    if(pct>14*li) showNextLine();
+  },80);
+
+  // ── Easter egg : Konami code → message de David ──
+  const KONAMI=[38,38,40,40,37,39,37,39,66,65];
+  let ki=0;
+  document.addEventListener('keydown',e=>{
+    if(e.keyCode===KONAMI[ki]) ki++; else ki=0;
+    if(ki===KONAMI.length){
+      ki=0;
+      const toast=document.createElement('div');
+      toast.style.cssText=`position:fixed;top:80px;left:50%;transform:translateX(-50%);
+        background:rgba(5,1,15,.97);border:1px solid var(--pink);
+        padding:16px 28px;font-family:var(--mono);font-size:.75rem;color:var(--pink);
+        text-align:center;z-index:9999;box-shadow:0 0 30px rgba(255,45,120,.4);
+        clip-path:polygon(8px 0%,100% 0%,calc(100% - 8px) 100%,0% 100%);
+        max-width:400px;line-height:1.8;`;
+      toast.innerHTML=`<div style="color:var(--cyan);font-size:.6rem;letter-spacing:.2em;margin-bottom:8px">// SECRET UNLOCKED</div>
+        <div>"Il faut être prêt à tout perdre<br>pour mériter Night City."</div>
+        <div style="color:var(--txt3);font-size:.6rem;margin-top:8px">— David Martinez</div>`;
+      document.body.appendChild(toast);
+      setTimeout(()=>toast.remove(),5000);
+    }
+  });
+
+  document.getElementById('cForm').onsubmit=e=>{
+    e.preventDefault();
+    if(!document.getElementById('fn').value.trim()||!document.getElementById('fe').value.trim()||!document.getElementById('fm').value.trim())return;
+    const btn=e.target.querySelector('button[type=submit]');
+    btn.disabled=true;btn.textContent='[ SENDING... ]';
+    setTimeout(()=>{
+      e.target.reset();
+      document.getElementById('fOk').classList.remove('hidden');
+      btn.disabled=false;btn.textContent='[ ENVOYER MESSAGE ]';
+      setTimeout(()=>document.getElementById('fOk').classList.add('hidden'),5000);
+    },1000);
+  };
+});
+</script>
+</body>
+</html>
